@@ -36,4 +36,27 @@ Evidence from this repair:
 
 ## Deployment and remaining work
 
-The static deployment is triggered by pushing `main`; after the push, verify `/downloads/keep-the-sentence-extension.zip`, `/demo-sources/*.html`, and a missing route on `https://context-vocabulary-capture.sociobot.in` return the expected HTTP statuses. There are no known product gaps.
+Deployed the product build from repair commit `5d062be` with:
+
+```sh
+/opt/fleet/lib/deploy-static.sh context-vocabulary-capture dist/site
+```
+
+Live evidence at `https://context-vocabulary-capture.sociobot.in`:
+
+- `/`, `/demo`, `/privacy`, and `/terms`: HTTP 200.
+- `/downloads/keep-the-sentence-extension.zip`: HTTP 200, 1,415,948 bytes,
+  ZIP magic `PK`, and `unzip -t` passes.
+- `/demo-sources/harbour.html`: HTTP 200; `/repair-check-missing`: HTTP 404
+  with the product's 404 title.
+- The live root serves `index-CfwGwfZx.js`, the repair build asset.
+- Live desktop and 390px `/demo`: one `<h1>`, one `<main>`, `lang="en"`, no
+  images missing `alt`, no console/page errors, no horizontal overflow, and
+  zero axe serious/critical findings.
+- Live Lighthouse `/demo`: Performance **100**, Accessibility **100**, FCP
+  **0.8 s**, LCP **0.8 s**, CLS **0**, TBT **10 ms**.
+- Live CSP, `X-Content-Type-Options`, and strict-origin Referrer-Policy are
+  present. No identity, server, rate-limit, or update endpoint applies to this
+  local-first browser extension.
+
+There are no known product gaps.
