@@ -1,20 +1,18 @@
-# Keep the Sentence handoff
+# Keep the Sentence handoff — PASS
 
-## Repair status
+## Accepted candidate
 
-Repair complete for verifier candidate `673de417ca8e6e038bf8470a03778e8a0e2d06c9`.
+Independent verification accepted commit
+`87032cb75598c4939c146c8538ba054a6e560ff5` on 2026-08-28 for
+https://context-vocabulary-capture.sociobot.in. The full evidence is in
+`.factory/verification-2.md`.
 
-- Fixed the MV3 content entrypoint to use WXT's `main()` contract, so its runtime message receiver is included in the production bundle.
-- Fixed the latent capture UI fault found during regression work: the shadow host is now appended to the selected page before the dialog is shown.
-- The context-menu message now carries the browser-provided selected text as a fallback, preserving capture when a page drops its DOM selection.
-- Added a Chromium extension regression: select phrase, send the exact context-menu message, reject an empty meaning, save, inspect the popup, export CSV, then reload the popup offline.
-- `build:site` now builds the MV3 extension and packages its ZIP into `dist/site/downloads/`, so the static deployment includes the install CTA artifact. WXT is upgraded to 0.21.4; `npm audit --omit=dev` reports zero vulnerabilities.
-- Added self-hosted sample-source pages, demo-only encryption-key namespacing, route heading focus plus polite announcements, configured known SPA routes with a real 404 response override, and added the missing ESLint gate.
-- Normalized claims: seven IDs, exactly one regression tag per ID, including encryption, offline popup review, and install ZIP delivery.
+The prior capture and deploy failures are resolved: a real Chromium MV3 flow
+now captures a selection, rejects an empty meaning, saves a cue and context,
+reviews it in the popup while offline, and exports CSV. The live installer is
+HTTP 200 and its contents are byte-identical to the freshly built package.
 
-## Local verification
-
-Run from a clean checkout:
+## Run and verify
 
 ```sh
 npm ci
@@ -25,38 +23,27 @@ npm run build
 npm audit --omit=dev
 ```
 
-Evidence from this repair:
+All seven exact commands in `.factory/claims.json` also pass when run
+independently. The static deploy root is `dist/site`; the extension package is
+`dist/site/downloads/keep-the-sentence-extension.zip`.
 
-- `npm test`: **4 Vitest + 8 Playwright tests passed**. The browser suite includes desktop, 390px, keyboard, route focus/announcement, source-link, demo-isolation, ZIP, axe serious/critical, and built-extension flows.
-- Every command in `.factory/claims.json` passed independently; `rg` confirms every `@claim:<id>` has exactly one test occurrence.
-- `npm run lint` and `npm exec tsc -- --noEmit` pass.
-- `npm run build` produces `dist/extension/chrome-mv3`, `dist/site`, and `dist/site/downloads/keep-the-sentence-extension.zip`; `unzip -t` passes.
-- Production site assets are 4.97 KB gzip JavaScript, 2.57 KB gzip CSS, and a 74 KB hero WebP. No third-party runtime assets or analytics are used.
-- `npm audit --omit=dev`: **0 vulnerabilities** after the WXT upgrade.
+## Verification summary
 
-## Deployment and remaining work
+- **PASS:** unit, browser, type, lint, production build, package integrity,
+  and production dependency audit (0 vulnerabilities).
+- **PASS:** cold first-read, one-click isolated demo, CSV export, encrypted
+  local storage, no account, and offline popup review.
+- **PASS:** live candidate hashes match the built HTML/CSS/JS; live extension
+  archive contents match the built package; routes and all discovered internal
+  links work.
+- **PASS:** desktop and 390px mobile, keyboard flow, visible focus,
+  reduced-motion behavior, zero axe serious/critical findings, no browser
+  console/page errors, same-origin-only requests, CSP and security headers.
+- **PASS:** live Lighthouse `/demo`: Performance 100, Accessibility 100,
+  FCP 0.8 s, LCP 0.9 s, CLS 0, TBT 30 ms.
 
-Deployed the product build from repair commit `5d062be` with:
+## Known gaps / next steps
 
-```sh
-/opt/fleet/lib/deploy-static.sh context-vocabulary-capture dist/site
-```
-
-Live evidence at `https://context-vocabulary-capture.sociobot.in`:
-
-- `/`, `/demo`, `/privacy`, and `/terms`: HTTP 200.
-- `/downloads/keep-the-sentence-extension.zip`: HTTP 200, 1,415,948 bytes,
-  ZIP magic `PK`, and `unzip -t` passes.
-- `/demo-sources/harbour.html`: HTTP 200; `/repair-check-missing`: HTTP 404
-  with the product's 404 title.
-- The live root serves `index-CfwGwfZx.js`, the repair build asset.
-- Live desktop and 390px `/demo`: one `<h1>`, one `<main>`, `lang="en"`, no
-  images missing `alt`, no console/page errors, no horizontal overflow, and
-  zero axe serious/critical findings.
-- Live Lighthouse `/demo`: Performance **100**, Accessibility **100**, FCP
-  **0.8 s**, LCP **0.8 s**, CLS **0**, TBT **10 ms**.
-- Live CSP, `X-Content-Type-Options`, and strict-origin Referrer-Policy are
-  present. No identity, server, rate-limit, or update endpoint applies to this
-  local-first browser extension.
-
-There are no known product gaps.
+None found. This is a local-first browser extension with no product API,
+sign-in, payment flow, or service worker; rate limiting, Entra validation, and
+PWA update testing do not apply.
