@@ -19,21 +19,22 @@ function localStore(): Store {
   };
 }
 function store(): Store { return chromeStore() ?? localStore(); }
-async function keyFor(storage: Store): Promise<CryptoKey> {
-  const saved = await storage.get(DEVICE_KEY) as string | undefined;
+async function keyFor(storage: Store, namespace = ''): Promise<CryptoKey> {
+  const keyName = `${namespace}${DEVICE_KEY}`;
+  const saved = await storage.get(keyName) as string | undefined;
   if (saved) return importKey(saved);
   const key = await createDeviceKey();
-  await storage.set({ [DEVICE_KEY]: await exportKey(key) });
+  await storage.set({ [keyName]: await exportKey(key) });
   return key;
 }
 export async function readVault(namespace = ''): Promise<Vault> {
   const storage = store(); const encrypted = await storage.get(`${namespace}${KEY}`) as EncryptedVault | undefined;
   if (!encrypted) return { version: 1, records: [] };
-  return decryptVault(encrypted, await keyFor(storage));
+  return decryptVault(encrypted, await keyFor(storage, namespace));
 }
 export async function writeVault(vault: Vault, namespace = ''): Promise<void> {
   const storage = store();
-  await storage.set({ [`${namespace}${KEY}`]: await encryptVault(vault, await keyFor(storage)) });
+  await storage.set({ [`${namespace}${KEY}`]: await encryptVault(vault, await keyFor(storage, namespace)) });
 }
 export async function addCapture(capture: Capture, namespace = ''): Promise<Capture> {
   const vault = await readVault(namespace); vault.records.unshift(capture); await writeVault(vault, namespace); return capture;

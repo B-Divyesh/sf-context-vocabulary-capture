@@ -2,7 +2,7 @@
 
 Keep the Sentence is a local browser extension for language learners reading real web pages. Select a phrase, save its nearby sentences and source link, write your own meaning, and review it later in context.
 
-It does not translate pages or build a reading library. It keeps the source sentence attached to a phrase you chose.
+It keeps the source sentence attached to a phrase you chose.
 
 ## Try it
 
@@ -18,12 +18,12 @@ Run the build. The packaged extension is at `dist/site/downloads/keep-the-senten
 4. Choose **Load unpacked** and select the extracted folder.
 5. On a web page, select a phrase and choose **Keep this sentence** from the right-click menu.
 
-The extension stores encrypted records in browser-local extension storage. No account or network service is needed. Use **Export CSV** from the popup to move your phrases to another tool.
+The extension stores encrypted records in browser-local extension storage. No account or network service is needed. Saved phrases can be reviewed offline. Use **Export CSV** from the popup to move your phrases to another tool.
 
 ## Develop, test, and build
 
 ```sh
-npm install
+npm ci
 npm run dev             # extension development build
 npm run dev:site        # landing site at the shown local URL
 npm test

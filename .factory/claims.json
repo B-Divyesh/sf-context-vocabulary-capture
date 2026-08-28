@@ -1,6 +1,9 @@
 [
   {"id":"csv-export","claim":"Exports saved phrases as CSV","where":"review toolbar, README","test":"npm run test:browser -- --grep @claim:csv-export","sandbox":"demo records; download CSV and assert header, phrase, and one row per record"},
-  {"id":"local-only","claim":"Saved phrases stay on your device","where":"landing facts, Privacy, README","test":"npm run test:browser -- --grep @claim:local-only","sandbox":"demo flow; assert every request is same-origin and encrypted storage does not expose the source URL"},
+  {"id":"local-only","claim":"Captures stay on your device","where":"landing facts, Privacy, README","test":"npm run test:browser -- --grep @claim:local-only","sandbox":"demo flow; assert every request is same-origin and encrypted storage does not expose the source URL"},
   {"id":"no-account","claim":"Works without an account","where":"landing facts, README","test":"npm run test:unit -- --testNamePattern @claim:no-account","sandbox":"create a local encrypted vault without identity data"},
-  {"id":"demo-sandbox","claim":"Demo sample data is separate from real data","where":"demo banner, README","test":"npm run test:browser -- --grep @claim:demo-sandbox","sandbox":"open ?demo=1, review, reset, and assert all three sample records return"}
+  {"id":"demo-sandbox","claim":"Demo sample data is separate from real data","where":"demo banner, README","test":"npm run test:browser -- --grep @claim:demo-sandbox","sandbox":"open ?demo=1, review, reset, and assert all three sample records and demo-only keys return"},
+  {"id":"encrypted-storage","claim":"Records are encrypted with AES-GCM before storage","where":"Privacy, README","test":"npm run test:unit -- --testNamePattern @claim:encrypted-storage","sandbox":"encrypt sample records and assert clear phrase text is absent before decrypting the payload"},
+  {"id":"offline-review","claim":"Review saved phrases offline","where":"landing facts, README","test":"npm run test:browser -- --grep @claim:offline-review","sandbox":"load the built extension, capture a selected phrase, set the browser offline, and reload the popup"},
+  {"id":"extension-download","claim":"Downloads the extension ZIP","where":"install CTA, README","test":"npm run test:browser -- --grep @claim:extension-download","sandbox":"request the deployment ZIP and assert a successful ZIP response"}
 ]

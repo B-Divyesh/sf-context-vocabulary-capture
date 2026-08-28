@@ -28,10 +28,45 @@ test('@claim:demo-sandbox loads sample data from the direct demo URL and can res
   await page.getByRole('button', { name: 'I remembered it' }).click();
   await page.getByRole('button', { name: 'Reset demo' }).click();
   await expect(page.getByText('3 total')).toBeVisible();
+  const storageKeys = await page.evaluate(() => Object.keys(localStorage));
+  expect(storageKeys).toContain('demo:keep-the-sentence:vault');
+  expect(storageKeys).toContain('demo:keep-the-sentence:device-key');
+  expect(storageKeys).not.toContain('keep-the-sentence:device-key');
+});
+
+test('@claim:extension-download serves the install ZIP from the deployment output', async ({ page }) => {
+  const response = await page.request.get('/downloads/keep-the-sentence-extension.zip');
+  expect(response.ok()).toBe(true);
+  expect(response.headers()['content-type']).toContain('application');
+  expect([...((await response.body()).subarray(0, 4))]).toEqual([80, 75, 3, 4]);
+});
+
+test('keeps sample source links live and announces route changes', async ({ page }) => {
+  await page.goto('/demo');
+  for (const href of await page.locator('.source a').evaluateAll((links) => links.map((link) => (link as HTMLAnchorElement).href))) {
+    const response = await page.request.get(href);
+    expect(response.ok()).toBe(true);
+  }
+  await page.getByRole('navigation').getByRole('link', { name: 'Privacy' }).click();
+  await expect(page.getByRole('heading', { level: 1 })).toBeFocused();
+  await expect(page.locator('#route-announcement')).toContainText('Privacy — Keep the Sentence.');
 });
 
 test('has no serious or critical accessibility findings on the demo', async ({ page }) => {
   await page.goto('/demo');
   const report = await new AxeBuilder({ page }).analyze();
   expect(report.violations.filter((finding) => ['serious', 'critical'].includes(finding.impact ?? ''))).toEqual([]);
+});
+
+test('works at 390px and with keyboard activation', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto('/demo');
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= document.documentElement.clientWidth)).toBe(true);
+  const review = page.getByRole('button', { name: 'I remembered it' });
+  await review.focus();
+  await page.keyboard.press('Enter');
+  await expect(page.locator('.review-action')).toContainText('recoger el hilo');
+  await page.getByRole('navigation').getByRole('link', { name: 'Privacy' }).focus();
+  await page.keyboard.press('Enter');
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText('Your reading notes stay on your device.');
 });

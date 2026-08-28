@@ -17,19 +17,19 @@ export const SAMPLE_RECORDS: Capture[] = [
   {
     id: 'sample-quietly', phrase: 'quietly held',
     context: 'At dawn, the harbour quietly held its breath. A single boat moved beyond the breakwater.',
-    title: 'A morning at the harbour', url: 'https://example.org/harbour', language: 'English',
+    title: 'A morning at the harbour', url: '/demo-sources/harbour.html', language: 'English',
     gloss: 'remained still and calm', createdAt: '2026-08-28T08:00:00.000Z', reviews: 0,
   },
   {
     id: 'sample-recoger', phrase: 'recoger el hilo',
     context: 'Después de una pausa, Marta volvió a recoger el hilo de la conversación. Nadie había olvidado la pregunta.',
-    title: 'La conversación', url: 'https://example.org/conversation', language: 'Spanish',
+    title: 'La conversación', url: '/demo-sources/conversation.html', language: 'Spanish',
     gloss: 'to pick up the thread again', createdAt: '2026-08-27T08:00:00.000Z', reviews: 1,
   },
   {
     id: 'sample-einfall', phrase: 'auf jeden Fall',
     context: 'Auf jeden Fall wollte er vor Sonnenuntergang zurück sein. Der Weg durch den Wald war länger als erwartet.',
-    title: 'Der Waldweg', url: 'https://example.org/wald', language: 'German',
+    title: 'Der Waldweg', url: '/demo-sources/wald.html', language: 'German',
     gloss: 'in any case; definitely', createdAt: '2026-08-25T08:00:00.000Z', reviews: 0,
   },
 ];

@@ -1,52 +1,39 @@
 # Keep the Sentence handoff
 
-## Independent verification status — FAIL (2026-08-28)
+## Repair status
 
-Candidate `673de417ca8e6e038bf8470a03778e8a0e2d06c9` was independently
-verified against https://context-vocabulary-capture.sociobot.in. **Do not
-release.** The built extension has no running content-script callback, so the
-selection capture dialog never opens (`Could not establish connection.
-Receiving end does not exist.`). The live primary installer URL
-`/downloads/keep-the-sentence-extension.zip` also returns HTTP 404.
+Repair complete for verifier candidate `673de417ca8e6e038bf8470a03778e8a0e2d06c9`.
 
-All four manifest claim commands, `npm test`, and `npm run build` passed, but
-`npm exec tsc -- --noEmit` fails with two errors in
-`entrypoints/content.ts`. There are also duplicate claim tags/unlisted
-reliance claims, three dead demo source links, a route focus/announcement
-failure, and a 200 SPA fallback for missing routes. See
-`.factory/verification.md` for exact commands, live response evidence,
-severity, positive checks, and repair/re-verification requirements.
+- Fixed the MV3 content entrypoint to use WXT's `main()` contract, so its runtime message receiver is included in the production bundle.
+- Fixed the latent capture UI fault found during regression work: the shadow host is now appended to the selected page before the dialog is shown.
+- The context-menu message now carries the browser-provided selected text as a fallback, preserving capture when a page drops its DOM selection.
+- Added a Chromium extension regression: select phrase, send the exact context-menu message, reject an empty meaning, save, inspect the popup, export CSV, then reload the popup offline.
+- `build:site` now builds the MV3 extension and packages its ZIP into `dist/site/downloads/`, so the static deployment includes the install CTA artifact. WXT is upgraded to 0.21.4; `npm audit --omit=dev` reports zero vulnerabilities.
+- Added self-hosted sample-source pages, demo-only encryption-key namespacing, route heading focus plus polite announcements, configured known SPA routes with a real 404 response override, and added the missing ESLint gate.
+- Normalized claims: seven IDs, exactly one regression tag per ID, including encryption, offline popup review, and install ZIP delivery.
 
-## Delivered
+## Local verification
 
-- MV3 WXT extension: select any phrase, use **Keep this sentence** in the context menu, add a learner-written meaning, and save the phrase with nearby source sentences, title, URL, and inferred language.
-- Extension popup with a daily context-first review, review history count, empty state, and CSV export suitable for Anki import.
-- AES-GCM encrypted local records in browser extension storage. No account, analytics, or third-party runtime calls.
-- Static landing site in `dist/site`, with `/demo`, `/privacy`, `/terms`, a styled 404, metadata, sitemap, CSP, and extension ZIP download.
-- Demo uses the separate `demo:keep-the-sentence:vault` namespace. It has three realistic samples, reset, and start-for-real controls.
-- Original generated dithered/halftone art at `assets/src/dithered-reading-margin-v2.png`, optimized as `public/assets/dithered-reading-margin.webp` (74 KB). Prompt and provenance are in `.factory/design.md`.
-
-## Verify
+Run from a clean checkout:
 
 ```sh
-npm install
+npm ci
 npm test
+npm run lint
+npm exec tsc -- --noEmit
 npm run build
+npm audit --omit=dev
 ```
 
-`npm test` runs five unit tests plus four Playwright checks: CSV download, same-origin/local encrypted demo flow, demo reset/direct URL, and axe serious/critical findings. `npm run build` produces `dist/extension/chrome-mv3` and the static deployment root `dist/site` (with `index.html` at that root).
+Evidence from this repair:
 
-Claim commands are listed in `.factory/claims.json`. Demo setup and isolation are documented in `.factory/demo.md`.
+- `npm test`: **4 Vitest + 8 Playwright tests passed**. The browser suite includes desktop, 390px, keyboard, route focus/announcement, source-link, demo-isolation, ZIP, axe serious/critical, and built-extension flows.
+- Every command in `.factory/claims.json` passed independently; `rg` confirms every `@claim:<id>` has exactly one test occurrence.
+- `npm run lint` and `npm exec tsc -- --noEmit` pass.
+- `npm run build` produces `dist/extension/chrome-mv3`, `dist/site`, and `dist/site/downloads/keep-the-sentence-extension.zip`; `unzip -t` passes.
+- Production site assets are 4.97 KB gzip JavaScript, 2.57 KB gzip CSS, and a 74 KB hero WebP. No third-party runtime assets or analytics are used.
+- `npm audit --omit=dev`: **0 vulnerabilities** after the WXT upgrade.
 
-## Measured checks
+## Deployment and remaining work
 
-- Playwright demo smoke: passed, no browser console errors.
-- Axe through Playwright: no serious or critical findings on `/demo`.
-- Lighthouse `/demo` (headless Chromium): Performance **100**, Accessibility **100**, FCP **1.0 s**, LCP **1.0 s**, CLS **0**, interactive **1.1 s**.
-- Site entry JavaScript: **4.96 KB gzip**; CSS: **2.52 KB gzip**; hero WebP: **74 KB**.
-
-## Known gaps / next steps
-
-- The first-release ZIP is loaded through Chromium Developer mode. A store-signed distribution can replace that manual install step later.
-- Encryption protects stored records at rest using a browser-local device key. A future passphrase unlock could add protection against a person with access to the same browser profile.
-- Review timing is intentionally daily and offline; it does not yet implement spaced-repetition intervals or sync.
+The static deployment is triggered by pushing `main`; after the push, verify `/downloads/keep-the-sentence-extension.zip`, `/demo-sources/*.html`, and a missing route on `https://context-vocabulary-capture.sociobot.in` return the expected HTTP statuses. There are no known product gaps.
