@@ -1,0 +1,4 @@
+[
+  {"id":"csv-export","claim":"Exports saved phrases as CSV","where":"review toolbar, README","test":"npm test -- --testNamePattern @claim:csv-export","sandbox":"sample records; assert CSV header and one row per record"},
+  {"id":"local-only","claim":"Saved phrases stay on your device","where":"landing facts, Privacy, README","test":"npm test -- --testNamePattern @claim:local-only","sandbox":"encrypt sample record; assert stored payload contains neither source URL nor an endpoint"}
+]

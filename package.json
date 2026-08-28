@@ -1,0 +1,26 @@
+{
+  "name": "context-vocabulary-capture",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "wxt",
+    "dev:site": "vite --host 0.0.0.0",
+    "build": "wxt build && npm run build:site && npm run package:extension",
+    "build:site": "vite build",
+    "package:extension": "node scripts/package-extension.mjs",
+    "test": "vitest run --config vitest.config.ts",
+    "test:watch": "vitest --config vitest.config.ts",
+    "preview:site": "vite preview --host 0.0.0.0"
+  },
+  "dependencies": {
+    "@wxt-dev/module-vue": "^1.0.0",
+    "wxt": "^0.20.8"
+  },
+  "devDependencies": {
+    "@types/chrome": "^0.0.289",
+    "typescript": "^5.7.3",
+    "vite": "^6.0.7",
+    "vitest": "^3.0.2"
+  }
+}
