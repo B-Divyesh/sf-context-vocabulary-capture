@@ -1,8 +1,8 @@
 # Keep the Sentence
 
-Keep the Sentence is a local browser extension for language learners reading real web pages. Select a phrase, save its nearby sentences and source link, write your own meaning, and review it later in context.
+Keep the Sentence is a local browser extension for language learners reading regular web pages in Chromium. Select a phrase, save nearby sentences and its source link, write your own meaning, and review it later in context.
 
-It keeps the source sentence attached to a phrase you chose.
+It saves a selected phrase with nearby sentences and its source link.
 
 ## Try it
 

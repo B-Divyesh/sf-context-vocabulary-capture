@@ -3,7 +3,7 @@ import { mkdtemp, rm } from 'node:fs/promises';
 import { join, resolve } from 'node:path';
 import { tmpdir } from 'node:os';
 
-test('@claim:offline-review captures a selected phrase, validates its meaning, saves it, and reviews it offline', async () => {
+test('@claim:offline-review @claim:local-only @claim:source-context-capture @claim:supported-chromium-pages captures a selected phrase, preserves its source context, and reviews it offline', async () => {
   const profile = await mkdtemp(join(tmpdir(), 'keep-the-sentence-extension-'));
   const extensionPath = resolve('dist/extension/chrome-mv3');
   const context = await chromium.launchPersistentContext(profile, {
@@ -17,7 +17,9 @@ test('@claim:offline-review captures a selected phrase, validates its meaning, s
     const extensionId = new URL(worker.url()).host;
     const page = await context.newPage();
     const pageErrors: string[] = [];
+    const requests: string[] = [];
     page.on('console', (message) => { if (message.type() === 'error') pageErrors.push(message.text()); });
+    page.on('request', (request) => requests.push(request.url()));
     await page.goto('http://127.0.0.1:4173/extension-fixture.html');
     await page.waitForTimeout(300);
     await page.locator('#return-focus').focus();
@@ -59,7 +61,14 @@ test('@claim:offline-review captures a selected phrase, validates its meaning, s
     await expect(popup.getByRole('heading', { name: 'quietly held' })).toBeVisible();
     const download = popup.waitForEvent('download');
     await popup.getByRole('button', { name: 'Export CSV' }).click();
-    expect((await download).suggestedFilename()).toBe('keep-the-sentence.csv');
+    const csvDownload = await download;
+    expect(csvDownload.suggestedFilename()).toBe('keep-the-sentence.csv');
+    const csv = await csvDownload.createReadStream();
+    let content = ''; for await (const chunk of csv!) content += chunk;
+    expect(content).toContain('quietly held');
+    expect(content).toContain('Nora quietly held the door.');
+    expect(content).toContain('http://127.0.0.1:4173/extension-fixture.html');
+    expect(requests.every((url) => new URL(url).origin === 'http://127.0.0.1:4173')).toBe(true);
     await context.setOffline(true);
     await popup.reload();
     await expect(popup.getByRole('heading', { name: 'quietly held' })).toBeVisible();

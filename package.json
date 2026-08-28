@@ -14,7 +14,7 @@
     "test:unit": "vitest run --config vitest.config.ts",
     "test:browser": "playwright test",
     "test:watch": "vitest --config vitest.config.ts",
-    "preview:site": "vite preview --host 0.0.0.0"
+    "preview:site": "node scripts/preview-static.mjs"
   },
   "dependencies": {
     "wxt": "0.21.4"

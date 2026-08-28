@@ -12,7 +12,7 @@ test('@claim:csv-export downloads the sample records with their source context',
   expect(content.split('\n')).toHaveLength(4);
 });
 
-test('@claim:local-only keeps the demo network requests on the same origin', async ({ page }) => {
+test('keeps demo network requests on the same origin', async ({ page }) => {
   const requests: string[] = [];
   page.on('request', (request) => requests.push(request.url()));
   await page.goto('/demo');
@@ -52,10 +52,44 @@ test('keeps sample source links live and announces route changes', async ({ page
   await expect(page.locator('#route-announcement')).toContainText('Privacy — Keep the Sentence.');
 });
 
-test('has no serious or critical accessibility findings on the demo', async ({ page }) => {
-  await page.goto('/demo');
-  const report = await new AxeBuilder({ page }).analyze();
-  expect(report.violations.filter((finding) => ['serious', 'critical'].includes(finding.impact ?? ''))).toEqual([]);
+test('sets route-specific titles, descriptions, canonical URLs, and social metadata', async ({ page }) => {
+  const expected = [
+    ['/', 'Keep the Sentence — save phrases in context', 'https://context-vocabulary-capture.sociobot.in/'],
+    ['/demo', 'Demo — Keep the Sentence', 'https://context-vocabulary-capture.sociobot.in/demo'],
+    ['/privacy', 'Privacy — Keep the Sentence', 'https://context-vocabulary-capture.sociobot.in/privacy'],
+    ['/terms', 'Terms — Keep the Sentence', 'https://context-vocabulary-capture.sociobot.in/terms'],
+  ] as const;
+  for (const [path, title, canonical] of expected) {
+    await page.goto(path);
+    await expect(page).toHaveTitle(title);
+    await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', canonical);
+    await expect(page.locator('meta[property="og:title"]')).toHaveAttribute('content', title);
+    await expect(page.locator('meta[name="description"]')).not.toHaveAttribute('content', '');
+    await expect(page.locator('meta[property="og:description"]')).not.toHaveAttribute('content', '');
+    await expect(page.locator('meta[name="twitter:title"]')).toHaveAttribute('content', title);
+  }
+});
+
+test('returns a CSP-clean, fully structured 404 response', async ({ page }) => {
+  const errors: string[] = [];
+  page.on('console', (message) => { if (message.type() === 'error') errors.push(message.text()); });
+  const response = await page.goto('/missing');
+  expect(response?.status()).toBe(404);
+  await expect(page).toHaveTitle('Page not found — Keep the Sentence');
+  await expect(page.locator('header nav')).toBeVisible();
+  await expect(page.locator('a.skip')).toHaveAttribute('href', '#main');
+  await expect(page.locator('main h1')).toHaveText('This page is not in the notebook.');
+  await expect(page.locator('footer')).toContainText('Privacy');
+  await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', 'https://context-vocabulary-capture.sociobot.in/404');
+  expect(errors.filter((error) => !error.includes('Failed to load resource: the server responded with a status of 404'))).toEqual([]);
+});
+
+test('has no serious or critical accessibility findings on every public page', async ({ page }) => {
+  for (const path of ['/', '/demo', '/privacy', '/terms', '/404.html']) {
+    await page.goto(path);
+    const report = await new AxeBuilder({ page }).analyze();
+    expect(report.violations.filter((finding) => ['serious', 'critical'].includes(finding.impact ?? ''))).toEqual([]);
+  }
 });
 
 test('works at 390px and with keyboard activation', async ({ page }) => {
