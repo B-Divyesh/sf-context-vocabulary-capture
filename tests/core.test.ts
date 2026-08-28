@@ -27,3 +27,9 @@ describe('@claim:local-only', () => {
     expect(JSON.stringify(encrypted)).not.toContain('example.org');
   });
 });
+describe('@claim:no-account', () => {
+  it('needs no identity field to create an encrypted local record', async () => {
+    const encrypted = await encryptVault({ version: 1, records: [SAMPLE_RECORDS[0]] }, await createDeviceKey());
+    expect(encrypted.version).toBe(1);
+  });
+});

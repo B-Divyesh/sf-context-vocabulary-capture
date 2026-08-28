@@ -1,4 +1,6 @@
 [
-  {"id":"csv-export","claim":"Exports saved phrases as CSV","where":"review toolbar, README","test":"npm test -- --testNamePattern @claim:csv-export","sandbox":"sample records; assert CSV header and one row per record"},
-  {"id":"local-only","claim":"Saved phrases stay on your device","where":"landing facts, Privacy, README","test":"npm test -- --testNamePattern @claim:local-only","sandbox":"encrypt sample record; assert stored payload contains neither source URL nor an endpoint"}
+  {"id":"csv-export","claim":"Exports saved phrases as CSV","where":"review toolbar, README","test":"npm run test:browser -- --grep @claim:csv-export","sandbox":"demo records; download CSV and assert header, phrase, and one row per record"},
+  {"id":"local-only","claim":"Saved phrases stay on your device","where":"landing facts, Privacy, README","test":"npm run test:browser -- --grep @claim:local-only","sandbox":"demo flow; assert every request is same-origin and encrypted storage does not expose the source URL"},
+  {"id":"no-account","claim":"Works without an account","where":"landing facts, README","test":"npm run test:unit -- --testNamePattern @claim:no-account","sandbox":"create a local encrypted vault without identity data"},
+  {"id":"demo-sandbox","claim":"Demo sample data is separate from real data","where":"demo banner, README","test":"npm run test:browser -- --grep @claim:demo-sandbox","sandbox":"open ?demo=1, review, reset, and assert all three sample records return"}
 ]

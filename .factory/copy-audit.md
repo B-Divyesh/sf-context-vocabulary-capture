@@ -19,6 +19,7 @@ Landing-page sentences and word counts (all are 22 words or fewer):
 | It does not translate pages or collect a reading history. | 11 |
 | It saves only the phrase, nearby text, source link, and meaning you choose. | 15 |
 | Export your records as a CSV for Anki or your own archive. | 13 |
+| Download the extension ZIP and load the extracted folder in your browser. | 12 |
 
 No banned terms are present.
 

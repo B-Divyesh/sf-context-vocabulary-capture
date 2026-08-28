@@ -4,5 +4,7 @@ dist
 *.zip
 .wxt
 graphify-out
+test-results
+playwright-report
 assets/src/dithered-reading-margin.png
 assets/src/dithered-reading-margin.png.json
