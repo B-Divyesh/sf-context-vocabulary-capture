@@ -1,5 +1,22 @@
 # Keep the Sentence handoff
 
+## Independent verification status — FAIL (2026-08-28)
+
+Candidate `673de417ca8e6e038bf8470a03778e8a0e2d06c9` was independently
+verified against https://context-vocabulary-capture.sociobot.in. **Do not
+release.** The built extension has no running content-script callback, so the
+selection capture dialog never opens (`Could not establish connection.
+Receiving end does not exist.`). The live primary installer URL
+`/downloads/keep-the-sentence-extension.zip` also returns HTTP 404.
+
+All four manifest claim commands, `npm test`, and `npm run build` passed, but
+`npm exec tsc -- --noEmit` fails with two errors in
+`entrypoints/content.ts`. There are also duplicate claim tags/unlisted
+reliance claims, three dead demo source links, a route focus/announcement
+failure, and a 200 SPA fallback for missing routes. See
+`.factory/verification.md` for exact commands, live response evidence,
+severity, positive checks, and repair/re-verification requirements.
+
 ## Delivered
 
 - MV3 WXT extension: select any phrase, use **Keep this sentence** in the context menu, add a learner-written meaning, and save the phrase with nearby source sentences, title, URL, and inferred language.
