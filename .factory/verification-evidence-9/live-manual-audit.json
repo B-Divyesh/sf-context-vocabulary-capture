@@ -1,0 +1,91 @@
+{
+  "homeStatus": 200,
+  "firstScreen": {
+    "title": "Keep the Sentence — save phrases in context",
+    "lang": "en",
+    "h1": "Save phrases with their source sentence.",
+    "h1Count": 1,
+    "mainCount": 1,
+    "audience": "For language learners reading web pages who want to remember a phrase and its context.",
+    "primaryAction": "Try it with sample data",
+    "actionResult": "Open sample phrases ready to review.",
+    "horizontalOverflow": false,
+    "reducedMotion": true
+  },
+  "keyboard": {
+    "first": {
+      "text": "Skip to content",
+      "href": "#main",
+      "outlineStyle": "solid",
+      "outlineWidth": "3px"
+    },
+    "skipTargetFocused": true,
+    "startTabTrail": [
+      "/// Keep the Sentence",
+      "Demo",
+      "How it works",
+      "Privacy",
+      "Reset demo",
+      "Start for real"
+    ],
+    "startFocus": {
+      "outlineStyle": "solid",
+      "outlineWidth": "3px"
+    }
+  },
+  "demo": {
+    "initial": {
+      "banner": true,
+      "total": "3 total",
+      "phrase": "quietly held",
+      "keys": [
+        "demo:keep-the-sentence:device-key",
+        "demo:keep-the-sentence:vault"
+      ]
+    },
+    "revealedMeaning": true,
+    "nextPhrase": "recoger el hilo",
+    "csvRows": 4,
+    "csvHasContext": true,
+    "resetPhrase": "quietly held",
+    "afterExit": {
+      "heading": "Nothing due today.",
+      "keys": []
+    }
+  },
+  "network": {
+    "requestCount": 4,
+    "origins": [
+      "https://context-vocabulary-capture.sociobot.in"
+    ],
+    "requests": [
+      "https://context-vocabulary-capture.sociobot.in/",
+      "https://context-vocabulary-capture.sociobot.in/assets/index-96Xc5cvM.js",
+      "https://context-vocabulary-capture.sociobot.in/assets/index-DIQ-UEVh.css",
+      "https://context-vocabulary-capture.sociobot.in/assets/dithered-reading-margin.webp"
+    ],
+    "responses": [
+      {
+        "url": "https://context-vocabulary-capture.sociobot.in/",
+        "status": 200
+      },
+      {
+        "url": "https://context-vocabulary-capture.sociobot.in/assets/index-DIQ-UEVh.css",
+        "status": 200
+      },
+      {
+        "url": "https://context-vocabulary-capture.sociobot.in/assets/index-96Xc5cvM.js",
+        "status": 200
+      },
+      {
+        "url": "https://context-vocabulary-capture.sociobot.in/assets/dithered-reading-margin.webp",
+        "status": 200
+      }
+    ],
+    "requestFailures": []
+  },
+  "errors": {
+    "consoleErrors": [],
+    "pageErrors": []
+  }
+}

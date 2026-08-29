@@ -1,0 +1,8 @@
+/	200	1596	public, must-revalidate, max-age=30
+/demo	200	1596	public, must-revalidate, max-age=30
+/privacy	200	1596	public, must-revalidate, max-age=30
+/terms	200	1596	public, must-revalidate, max-age=30
+/not-found	404	2052	public, must-revalidate, max-age=30
+/assets/index-96Xc5cvM.js	200	16591	public, max-age=31536000, immutable
+/assets/index-DIQ-UEVh.css	200	9693	public, max-age=31536000, immutable
+/downloads/keep-the-sentence-extension.zip	200	10869	public, must-revalidate, max-age=30

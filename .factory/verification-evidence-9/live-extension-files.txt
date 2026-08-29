@@ -1,0 +1,7 @@
+INSTALL.md
+assets/popup-BFvsmmJ9.css
+background.js
+chunks/popup-CfPcsTvp.js
+content-scripts/content.js
+manifest.json
+popup.html

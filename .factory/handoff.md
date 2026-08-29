@@ -1,46 +1,48 @@
-# Polish 6 handoff — PASS
+# Independent verification 9 handoff — PASS
 
-**Work order:** `context-vocabulary-capture-polish-6`
-**Base reviewed:** `4a928b6c347a5e24c3aa2ae585947b5f8b974896`
-**Product repair:** `376e64e8b8abd1918749345d7f2c46341a8840e7`
+**Work order:** `context-vocabulary-capture-verify-9`
+**Candidate:** `376e64e8b8abd1918749345d7f2c46341a8840e7`
 **Live URL:** <https://context-vocabulary-capture.sociobot.in>
+**Verified:** 2026-08-29
 
-## What changed
+## Result
 
-- The shipped popup now says **regular web page**, matching the documented and
-  tested Chromium boundary; its built-bundle test rejects the prior “any page”
-  wording.
-- The capture form now uses **meaning** in both label and placeholder; the
-  built bundle rejects the prior “cue” terminology.
-- README promises now describe only what is registered and tested. Its opening
-  names the page link clearly, and its build instruction names the artifacts.
-- Landing privacy wording consistently calls the stored/exported items **saved
-  phrases**. The privacy metadata and copy audit follow the same vocabulary.
-- The copy audit now contains the actual extension recovery text and tests it
-  against the extension sources, preventing another silent audit drift.
+**PASS.** Fresh independent evidence confirms that the candidate and deployed
+product satisfy the supplied researched brief and factory contract. No product
+code was changed. The complete report is
+[`verification-9.md`](verification-9.md).
 
-## Verification
+The live site and every extracted file in its extension ZIP match the candidate
+build. The extension completes source-aware capture, required learner meaning,
+encrypted local storage, offline review, and CSV export. The isolated one-click
+demo reviews, exports, resets, and discards sample data without touching real
+storage.
 
-- Fresh clean clone at the product repair commit: `npm ci`, every one of the
-  13 exact `claims.json` commands, `npm test` (8 Vitest + 32 Playwright),
-  `npm run lint`, `npx tsc --noEmit`, `npm run test:copy`, and `npm run build`
-  all passed.
-- Deployed through `/opt/fleet/lib/deploy-static.sh` as deployment
-  `5d94eabf-d7cc-45fa-b3e4-b8b0014d8899`; custom-domain HTTPS returned 200.
-- `verify-url.sh` passed live: 779 ms load, correct title/lang/h1/main, no
-  missing alt text or unnamed buttons, and no console errors. Evidence is in
-  [evidence-polish-6-live-root](evidence-polish-6-live-root).
-- Live route/demo/copy suite: 24 passed. Manual all-severity Axe scans of
-  Home, Demo, Privacy, Terms, and 404 in light and dark schemes found zero
-  violations. Mobile Lighthouse scored 100/100/100/100 with 0.8 s LCP.
-- Cold live ZIP inspection confirmed the package is valid and contains neither
-  `any page` nor `cue`; direct `/?demo=1` remained isolated with its banner,
-  reset, and real-data exit.
+## Verification performed
 
-## Known gaps and next steps
+- From the clean candidate checkout: `npm ci`, all 13 exact claim commands,
+  `npm run lint`, `npx tsc --noEmit`, `npm test`, and `npm run build` passed.
+  The full suite passed 8 unit and 32 browser tests.
+- A cold desktop and 390 px first read passed the what/who/first-action gate.
+  The one-click sample demo was visible and useful immediately.
+- The live 24-test site suite passed. Manual production runs covered normal,
+  repeated-selection boundary, blank and maximum-length meaning, offline,
+  malformed-vault recovery, keyboard, reduced motion, 200% layout, and mobile
+  paths.
+- Live request logs were same-origin only. Main product flows had zero console,
+  page, or request errors. Security headers and caching match the static
+  configuration.
+- Live Axe found zero serious/critical issues across public routes, recovery,
+  the capture dialog, and popup. Lighthouse mobile scored 97/100/100/100 on
+  Home and 100/100/100/100 on Demo; Home LCP was 1.2 s and CLS was 0.
+- Candidate/live SHA-256 checks matched all tested static files. The extracted
+  live extension and candidate extension match file-for-file.
 
-None. `.factory/brief.json` remains absent, so scope was assessed from the
-README, implementation, and design thesis as recorded in the review. The
-factory can deploy the committed static artifact normally.
+## Defects and next steps
 
-See [polish-6.md](polish-6.md) for the finding-by-finding evidence map.
+No release-blocking, high, medium, low, or informational product defects remain.
+No follow-up product change is required. `.factory/brief.json` is absent, so
+the supplied researched brief was used directly as the scope contract.
+
+Evidence is under [`verification-evidence-9`](verification-evidence-9) and
+[`qa-artifacts`](qa-artifacts).

@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="theme-color" content="#f5f0e4">
+    <meta name="description" content="Return to Keep the Sentence to save and review phrases with their source sentences.">
+    <link rel="canonical" href="https://context-vocabulary-capture.sociobot.in/404">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Page not found — Keep the Sentence">
+    <meta property="og:description" content="Return to Keep the Sentence to save and review phrases with their source sentences.">
+    <meta property="og:image" content="https://context-vocabulary-capture.sociobot.in/assets/social.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Page not found — Keep the Sentence">
+    <meta name="twitter:description" content="Return to Keep the Sentence to save and review phrases with their source sentences.">
+    <meta name="twitter:image" content="https://context-vocabulary-capture.sociobot.in/assets/social.png">
+    <link rel="icon" href="/favicon.svg">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="stylesheet" href="/404.css">
+    <title>Page not found — Keep the Sentence</title>
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <header class="site-header"><a class="wordmark" href="/"><span aria-hidden="true">///</span> Keep the Sentence</a><nav aria-label="Main navigation"><a href="/demo">Demo</a><a href="/#how">How it works</a><a href="/privacy">Privacy</a></nav></header>
+    <main id="main" class="not-found"><h1>This page could not be found.</h1><p>Try the home page or the sample phrases.</p><p><a class="primary" href="/">Go home</a></p></main>
+    <footer><p>Save phrases with source sentences. Review them later.</p><p><a href="/privacy">Privacy</a> · <a href="/terms">Terms</a> · Built by Param Factory · v1.0.0</p></footer>
+  </body>
+</html>
