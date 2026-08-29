@@ -124,6 +124,9 @@ test('@claim:storage-scope stores only the documented encrypted record fields', 
   const session = await openExtension();
   try {
     await saveFixtureCapture(session);
+    const popup = await openPopup(session);
+    await popup.getByRole('button', { name: 'Mark phrase as remembered' }).click();
+    await expect(popup.getByRole('heading', { name: 'No phrases due today' })).toBeVisible();
     const stored = await session.worker.evaluate(async () => chrome.storage.local.get([
       'keep-the-sentence:vault', 'keep-the-sentence:device-key',
     ]));
@@ -131,14 +134,15 @@ test('@claim:storage-scope stores only the documented encrypted record fields', 
     const vault = await decryptVault(stored['keep-the-sentence:vault'] as EncryptedVault, await importKey(stored['keep-the-sentence:device-key'] as string));
     expect(vault.records).toHaveLength(1);
     expect(Object.keys(vault.records[0] as Capture).sort()).toEqual([
-      'context', 'createdAt', 'gloss', 'id', 'language', 'phrase', 'reviews', 'title', 'url',
+      'context', 'createdAt', 'gloss', 'id', 'language', 'phrase', 'reviewedAt', 'reviews', 'title', 'url',
     ]);
     expect(vault.records[0]).toMatchObject({
       phrase: 'quietly held',
       context: 'The first train arrived late. Nora quietly held the door. Everyone stepped inside.',
       title: 'Reading fixture', url: `${sourceOrigin}/extension-fixture.html`, language: 'en',
-      gloss: 'remained still and calm', reviews: 0,
+      gloss: 'remained still and calm', reviews: 1,
     });
+    expect(vault.records[0].reviewedAt).toMatch(/^\d{4}-\d{2}-\d{2}T/);
   } finally { await session.close(); }
 });
 
