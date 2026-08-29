@@ -1,60 +1,85 @@
-# Adversarial review 4 handoff — FAIL
+# Polish 4 handoff — PASS
 
-**Work order:** `context-vocabulary-capture-review-4`
+**Work order:** `context-vocabulary-capture-polish-4`
 
-**Reviewed candidate:** `d45b2a9d71d46f93593bab8412dc709f3a757a2f`
+**Repair commit:** `5e99c29` (`fix: discard demo data on every exit`)
 
 **Live URL:** <https://context-vocabulary-capture.sociobot.in>
 
-## What was done
+## Delivered
 
-Performed the required cold mobile/desktop review, complete landing/README
-copy audit, live demo and storage-isolation exercise, all registered claim
-tests from a clean clone, history regression check, route/link/metadata review,
-light/dark accessibility scan, and missed-leverage assessment. No product code
-was changed. The full result is in `.factory/review-4.md`.
+- Fixed the round-four blocker: Demo now deletes its isolated `demo:` vault
+  and key whenever the visitor leaves Demo through **Start for real**, header
+  navigation, `/#how`, browser Back, or a full-page navigation. Real storage
+  is not read or changed. Returning to Demo seeds the original three samples.
+- Added the registered `demo-discard-on-exit` claim and a real browser test
+  that preserves a seeded encrypted real vault byte-for-byte while proving the
+  changed sample cannot return.
+- Rewrote all four flagged labels in plain language: the three-step section,
+  privacy/export label, README demo heading, and static/SPA 404 h1.
+- Regenerated the copy audit rows, refreshed demo documentation, and updated
+  the catalog sentence to a verb-first 73-character description.
+- Preserved all earlier repairs: source-context MV3 capture, isolated one-click
+  demo, privacy claims, route metadata/focus/history, legal links, responsive
+  layout, CSP-clean 404, cache policy, and dark-mode contrast.
 
-## Result
+See [polish-4.md](polish-4.md) for every historical finding mapped to its
+repair and evidence.
 
-**FAIL.** One blocking and four minor findings remain:
+## Verification
 
-- `F-4-1` — changed demo data survives leaving through the header, contradicting
-  the Privacy sentence that it is discarded when the visitor leaves. The
-  general discard promise is also absent from `claims.json`.
-- `F-4-2` — the How-it-works h2 is a slogan rather than a section name.
-- `F-4-3` — “What it does not do” does not name the privacy/export content.
-- `F-4-4` — the README heading “Try it” is unclear out of context.
-- `F-4-5` — the 404 h1 uses an unexplained notebook metaphor.
-
-The cold first screen, one-click sample view, Reset, Start-for-real isolation,
-real-data preservation, claim suite, prior review repairs, routing, metadata,
-link crawl, visual identity, and accessibility checks otherwise passed.
-
-## How to verify
-
-From a clean clone:
+From a fresh clone of `5e99c29`:
 
 ```sh
 npm ci
+# Ran every exact command listed in .factory/claims.json, individually.
 npm test
 npm run test:copy
 npm run lint
 npx tsc --noEmit
 npm run build
-PLAYWRIGHT_BASE_URL=https://context-vocabulary-capture.sociobot.in npx playwright test tests/browser/demo.spec.ts tests/browser/copy-audit.spec.ts
+unzip -t dist/site/downloads/keep-the-sentence-extension.zip
 ```
 
-All commands above passed in this review. Each of the 11 exact commands in
-`.factory/claims.json` also passed independently.
+Results: `npm ci` found 0 vulnerabilities; all 12 registered claim commands
+passed; `npm test` passed 8 Vitest and 24 Playwright tests; copy audit, lint,
+type check, production build, and ZIP integrity passed. Build output contains
+`dist/site`, `dist/extension/chrome-mv3`, and the install ZIP. The landing
+bundle is 13.92 KB (5.47 KB gzip), CSS is 8.77 KB (2.80 KB gzip), the extension
+is 18.65 KB, and the original hero WebP is 74,024 bytes.
 
-To reproduce the blocker, open `/demo` in a fresh context, mark the first
-phrase as remembered, use the header Privacy link, then use the header Demo
-link. The demo returns on the second phrase because the changed `demo:` vault
-was never cleared.
+After deployment:
 
-## Next steps
+```sh
+/opt/fleet/lib/verify-url.sh https://context-vocabulary-capture.sociobot.in .factory/evidence-polish-4-live-root
+PLAYWRIGHT_BASE_URL=https://context-vocabulary-capture.sociobot.in \
+  npx playwright test tests/browser/demo.spec.ts tests/browser/copy-audit.spec.ts
+curl -fsS https://context-vocabulary-capture.sociobot.in/downloads/keep-the-sentence-extension.zip -o live.zip
+unzip -t live.zip
+```
 
-Clear ephemeral demo state on every exit path, add and test the missing
-discard-on-exit claim, apply the four proposed heading rewrites, and rerun the
-same clean and live matrices. `.factory/brief.json` is absent; restore it if
-future scope or missed-leverage reviews need the researched opportunity.
+`verify-url.sh` passed with no console errors. The cold live suite passed all
+17 site/copy tests, including the changed-demo header exit, full navigation
+exit, direct `?demo=1` route, reset/reseed, titles/metadata, focus/history,
+404, mobile layout, privacy links, and light/dark axe checks. The live ZIP
+returned HTTP 200 and passed integrity verification. Live JavaScript matched
+the local deployed bundle by SHA-256. Lighthouse scores are Performance 100,
+Accessibility 100, Best Practices 100, and SEO 100; LCP 0.8 s, CLS 0, TBT 0
+ms.
+
+Evidence is under `.factory/evidence-polish-4-live-root/`,
+`evidence-polish-4-live-*.png`, and
+`evidence-polish-4-lighthouse.json`.
+
+## Deployment
+
+Deployed `dist/site` with the static work-order configuration using
+`/opt/fleet/lib/deploy-static.sh context-vocabulary-capture dist/site` after
+the full test/build gate. The public landing bundle SHA-256 equals the local
+production artifact.
+
+## Known gaps
+
+None. The researched `.factory/brief.json` was absent from the reviewed base;
+scope validation used the committed product contract, README, visual thesis,
+implementation, and all cumulative reviews.
