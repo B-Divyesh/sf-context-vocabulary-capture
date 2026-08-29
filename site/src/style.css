@@ -401,6 +401,23 @@ nav a {
 .install p {
   max-width: 640px;
 }
+.install-steps {
+  max-width: 640px;
+  margin: 22px 0;
+  padding-left: 24px;
+}
+.install-steps li + li {
+  margin-top: 8px;
+}
+.install code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.9em;
+}
+.install a:not(.link-button) {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+}
 .demo-banner {
   position: sticky;
   top: 0;
@@ -444,12 +461,14 @@ nav a {
   padding: 55px 0;
 }
 .legal,
-.not-found {
+.not-found,
+.recovery {
   max-width: 760px;
   margin: 70px auto 110px;
 }
 .legal h1,
-.not-found h1 {
+.not-found h1,
+.recovery h1 {
   font-size: clamp(38px, 5vw, 62px);
   margin-bottom: 30px;
 }
@@ -460,6 +479,45 @@ nav a {
 }
 .not-found p {
   font-size: 20px;
+}
+.recovery > section > p {
+  max-width: 640px;
+  font-size: 19px;
+}
+.recovery-actions,
+.dialog-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin: 28px 0;
+}
+.danger-button {
+  min-height: 44px;
+  padding: 10px 16px;
+  border: 2px solid var(--ink);
+  border-radius: 7px;
+  background: var(--orange);
+  color: #171614;
+  box-shadow: 3px 3px 0 var(--ink);
+  font: inherit;
+  font-weight: 800;
+  cursor: pointer;
+}
+.recovery-dialog {
+  width: min(520px, calc(100% - 32px));
+  border: 2px solid var(--ink);
+  border-radius: 10px;
+  padding: 24px;
+  color: var(--ink);
+  background: var(--surface);
+  box-shadow: 8px 8px 0 var(--blue);
+}
+.recovery-dialog::backdrop {
+  background: rgb(23 22 20 / 0.62);
+}
+.recovery-dialog h2 {
+  font: 700 30px/1.1 Georgia, Times, serif;
+  margin: 0;
 }
 footer {
   border-top: 1px dotted var(--muted);
@@ -661,7 +719,8 @@ footer a {
 }
 @media (max-width: 720px) {
   .legal,
-  .not-found {
+  .not-found,
+  .recovery {
     margin-left: 18px;
     margin-right: 18px;
   }

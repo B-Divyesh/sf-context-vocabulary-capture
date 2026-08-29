@@ -56,3 +56,14 @@ export async function clearVault(namespace = ''): Promise<void> { await writeVau
 export async function discardVault(namespace = ''): Promise<void> {
   await store().remove([`${namespace}${KEY}`, `${namespace}${DEVICE_KEY}`]);
 }
+
+/**
+ * Return the two stored values without attempting to parse or decrypt them.
+ * This is deliberately limited to the product's own keys so a recovery screen
+ * can let someone keep a damaged payload before they explicitly clear it.
+ */
+export async function unreadableVaultData(namespace = ''): Promise<Record<string, unknown>> {
+  const keys = [`${namespace}${KEY}`, `${namespace}${DEVICE_KEY}`];
+  if (globalThis.chrome?.storage?.local) return globalThis.chrome.storage.local.get(keys);
+  return Object.fromEntries(keys.map((key) => [key, localStorage.getItem(key)]));
+}

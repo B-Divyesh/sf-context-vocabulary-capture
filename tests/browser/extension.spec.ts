@@ -1,4 +1,5 @@
 import { chromium, expect, test, type BrowserContext, type Page, type Worker } from '@playwright/test';
+import AxeBuilder from '@axe-core/playwright';
 import { mkdtemp, rm } from 'node:fs/promises';
 import { join, resolve } from 'node:path';
 import { tmpdir } from 'node:os';
@@ -196,5 +197,34 @@ test('@claim:no-analytics makes no analytics or product-data requests during cap
     const httpRequests = requests.filter((url) => /^https?:/.test(url));
     expect(httpRequests).not.toEqual([]);
     expect(httpRequests.every((url) => new URL(url).origin === sourceOrigin)).toBe(true);
+  } finally { await session.close(); }
+});
+
+test('offers confirmed recovery when unreadable extension data prevents loading', async () => {
+  const session = await openExtension();
+  try {
+    await session.worker.evaluate(async () => chrome.storage.local.set({
+      'keep-the-sentence:vault': 'not an encrypted vault',
+      'keep-the-sentence:device-key': 'not a device key',
+    }));
+    const popup = await session.context.newPage();
+    await popup.goto(`chrome-extension://${session.extensionId}/popup.html`);
+    await expect(popup.getByRole('heading', { name: 'Your phrases could not load' })).toBeVisible();
+    const report = await new AxeBuilder({ page: popup }).analyze();
+    expect(report.violations.filter((finding) => ['serious', 'critical'].includes(finding.impact ?? ''))).toEqual([]);
+    const clear = popup.getByRole('button', { name: 'Clear unreadable saved data' });
+    await clear.click();
+    const dialog = popup.getByRole('dialog', { name: 'Clear unreadable saved data?' });
+    await expect(dialog).toBeVisible();
+    await dialog.getByRole('button', { name: 'Cancel' }).click();
+    expect(await session.worker.evaluate(async () => chrome.storage.local.get('keep-the-sentence:vault'))).toEqual({
+      'keep-the-sentence:vault': 'not an encrypted vault',
+    });
+    await clear.click();
+    await dialog.getByRole('button', { name: 'Clear saved phrase data' }).click();
+    await expect(popup.getByRole('heading', { name: 'No phrases due today' })).toBeVisible();
+    expect(await session.worker.evaluate(async () => chrome.storage.local.get([
+      'keep-the-sentence:vault', 'keep-the-sentence:device-key',
+    ]))).toEqual({});
   } finally { await session.close(); }
 });

@@ -29,8 +29,12 @@ selected and saved vocabulary.
 | 7 | Your saved phrases stay private and local. |
 | 16 | Records store a phrase, nearby text, source title and link, language, your meaning, and review details. |
 | 5 | Export your records as CSV. |
-| 4 | Download the extension package. |
-| 16 | Your browser will ask you to load it as an unpacked extension during this first release. |
+| 10 | Download the ZIP, then load its extracted folder in Chromium. |
+| 5 | Download and extract the ZIP. |
+| 4 | Open chrome://extensions in Chromium. |
+| 4 | Turn on Developer mode. |
+| 3 | Choose Load unpacked. |
+| 4 | Select the extracted folder. |
 | 3 | Save source sentences. |
 | 3 | Review them later. |
 | 5 | Illustration generated for this product. |
@@ -60,6 +64,8 @@ selected and saved vocabulary.
 | 4 | Privacy and data export |
 | 3 | Install the extension |
 | 8 | Capture phrases from regular web pages in Chromium. |
+| 2 | Load unpacked |
+| 4 | Read the install guide |
 | 3 | Download extension ZIP |
 | 7 | Privacy · Terms · Built by Param Factory · v1.0.0 |
 | 1 | Terms |
@@ -104,6 +110,25 @@ selected and saved vocabulary.
 | 6 | This page could not be found. |
 | 8 | Try the home page or the sample phrases. |
 | 2 | Go home |
+| 4 | Local data needs attention |
+| 6 | Your local notes could not load. |
+| 10 | This browser has saved phrase data that cannot be read. |
+| 8 | Download it first if you may need it. |
+| 12 | You can then clear only Keep the Sentence data and start again. |
+| 3 | Download unreadable data |
+| 4 | Clear unreadable saved data |
+| 3 | Read privacy details |
+| 4 | Clear unreadable saved data? |
+| 11 | This removes only Keep the Sentence phrase data from this browser. |
+| 4 | It cannot be undone. |
+| 1 | Cancel |
+| 4 | Clear saved phrase data |
+| 5 | Your phrases could not load |
+| 5 | Demo data could not load. |
+| 9 | This browser has sample data that cannot be read. |
+| 4 | Clear unreadable demo data |
+| 4 | Clear unreadable demo data? |
+| 11 | This removes only Keep the Sentence sample data from this browser. |
 
 ## Extension interface copy
 

@@ -1,5 +1,5 @@
 import { SAMPLE_RECORDS, due, makeCsv, type Capture } from '../../src/core';
-import { discardVault, readVault, replaceRecords, reviewCapture } from '../../src/storage';
+import { discardVault, readVault, replaceRecords, reviewCapture, unreadableVaultData } from '../../src/storage';
 import './style.css';
 
 const app = document.querySelector<HTMLDivElement>('#app')!;
@@ -41,7 +41,7 @@ async function productBoard(demo: boolean) {
 }
 async function landing() {
   setMetadata('/');
-  app.innerHTML = html`${header()}<main id="main" tabindex="-1"><section class="hero"><div class="hero-copy"><p class="eyebrow">A local browser extension</p><h1>Save phrases with their source sentence.</h1><p class="lede">For language learners reading web pages who want to remember a phrase and its context.</p><div class="actions"><a class="primary link-button" href="/demo" data-route>Try it with sample data</a><span>Open sample phrases ready to review.</span></div><ul class="facts"><li>Saved phrases stay on your device</li><li>Works without an account</li><li>Review saved phrases offline</li></ul></div><figure class="hero-art"><img src="/assets/dithered-reading-margin.webp" width="1200" height="800" fetchpriority="high" decoding="async" alt="A blank open book, a bookmark, a flashcard, and halftone dots show a saved phrase beside its source sentence."></figure></section><section class="preview-section"><div class="section-label"><p class="eyebrow">A sentence stays attached</p><h2>Review the phrase where you met it.</h2></div>${await productBoard(false)}</section><section id="how" class="how" tabindex="-1"><p class="eyebrow">How it works</p><h2>Save and review a phrase in three steps.</h2><ol><li><strong>Select the phrase.</strong><span>Choose “Keep this sentence” from the page menu.</span></li><li><strong>Write a short meaning.</strong><span>Your saved phrase includes nearby sentences and the source link.</span></li><li><strong>Review today’s phrases.</strong><span>Try the phrase in context before you reveal your meaning.</span></li></ol></section><section class="privacy-blurb"><div><p class="eyebrow">Privacy and data export</p><h2>Your saved phrases stay private and local.</h2></div><p>Records store a phrase, nearby text, source title and link, language, your meaning, and review details. Export your records as CSV.</p></section><section class="install"><div><p class="eyebrow">Install the extension</p><h2>Capture phrases from regular web pages in Chromium.</h2><p>Download the extension package. Your browser will ask you to load it as an unpacked extension during this first release.</p></div><a class="primary link-button" href="/downloads/keep-the-sentence-extension.zip" download>Download extension ZIP</a></section></main>${footer()}`;
+  app.innerHTML = html`${header()}<main id="main" tabindex="-1"><section class="hero"><div class="hero-copy"><p class="eyebrow">A local browser extension</p><h1>Save phrases with their source sentence.</h1><p class="lede">For language learners reading web pages who want to remember a phrase and its context.</p><div class="actions"><a class="primary link-button" href="/demo" data-route>Try it with sample data</a><span>Open sample phrases ready to review.</span></div><ul class="facts"><li>Saved phrases stay on your device</li><li>Works without an account</li><li>Review saved phrases offline</li></ul></div><figure class="hero-art"><img src="/assets/dithered-reading-margin.webp" width="1200" height="800" fetchpriority="high" decoding="async" alt="A blank open book, a bookmark, a flashcard, and halftone dots show a saved phrase beside its source sentence."></figure></section><section class="preview-section"><div class="section-label"><p class="eyebrow">A sentence stays attached</p><h2>Review the phrase where you met it.</h2></div>${await productBoard(false)}</section><section id="how" class="how" tabindex="-1"><p class="eyebrow">How it works</p><h2>Save and review a phrase in three steps.</h2><ol><li><strong>Select the phrase.</strong><span>Choose “Keep this sentence” from the page menu.</span></li><li><strong>Write a short meaning.</strong><span>Your saved phrase includes nearby sentences and the source link.</span></li><li><strong>Review today’s phrases.</strong><span>Try the phrase in context before you reveal your meaning.</span></li></ol></section><section class="privacy-blurb"><div><p class="eyebrow">Privacy and data export</p><h2>Your saved phrases stay private and local.</h2></div><p>Records store a phrase, nearby text, source title and link, language, your meaning, and review details. Export your records as CSV.</p></section><section class="install" aria-labelledby="install-heading"><div><p class="eyebrow">Install the extension</p><h2 id="install-heading">Capture phrases from regular web pages in Chromium.</h2><p>Download the ZIP, then load its extracted folder in Chromium.</p><ol class="install-steps" aria-label="Install the extension"><li>Download and extract the ZIP.</li><li>Open <code>chrome://extensions</code> in Chromium.</li><li>Turn on Developer mode.</li><li>Choose <strong>Load unpacked</strong>. Select the extracted folder.</li></ol><p><a href="/downloads/INSTALL.md" download>Read the install guide</a></p></div><a class="primary link-button" href="/downloads/keep-the-sentence-extension.zip" download>Download extension ZIP</a></section></main>${footer()}`;
 }
 async function demo() {
   setMetadata('/demo');
@@ -59,7 +59,8 @@ function discardDemoBeforePageExit() {
 async function discardDemo() {
   await discardVault('demo:');
 }
-async function render() {
+type RenderOptions = { moveFocus?: boolean };
+async function render({ moveFocus = false }: RenderOptions = {}) {
   const enteringDemo = isDemo();
   if (renderedDemo && !enteringDemo) await discardDemo();
   const path = route();
@@ -69,6 +70,7 @@ async function render() {
   else notFound();
   renderedDemo = enteringDemo;
   bind();
+  if (!moveFocus) return;
   const target = location.hash ? document.getElementById(location.hash.slice(1)) : null;
   const focusTarget = target ?? document.querySelector<HTMLElement>('h1');
   if (focusTarget) {
@@ -78,17 +80,60 @@ async function render() {
     if (announcement) announcement.textContent = target ? `${target.querySelector('h2')?.textContent ?? 'Section'} section.` : `${document.title}.`;
   }
 }
+function downloadUnreadableData(data: Record<string, unknown>) {
+  const payload = JSON.stringify({ product: 'Keep the Sentence', exportedAt: new Date().toISOString(), localData: data }, null, 2);
+  const link = document.createElement('a');
+  link.href = URL.createObjectURL(new Blob([payload], { type: 'application/json' }));
+  link.download = 'keep-the-sentence-unreadable-data.json';
+  link.click();
+  setTimeout(() => URL.revokeObjectURL(link.href), 500);
+}
+function showRecovery(namespace = isDemo() ? 'demo:' : '') {
+  const demoRecovery = namespace === 'demo:';
+  const dataName = demoRecovery ? 'sample data' : 'saved phrase data';
+  const heading = demoRecovery ? 'Demo data could not load.' : 'Your local notes could not load.';
+  const clearLabel = demoRecovery ? 'Clear unreadable demo data' : 'Clear unreadable saved data';
+  const clearScope = demoRecovery
+    ? 'This removes only Keep the Sentence sample data from this browser. It cannot be undone.'
+    : 'This removes only Keep the Sentence phrase data from this browser. It cannot be undone.';
+  setMetadata('/');
+  app.innerHTML = html`${header()}<main id="main" class="recovery" tabindex="-1"><section aria-labelledby="recovery-title"><p class="eyebrow">Local data needs attention</p><h1 id="recovery-title">${heading}</h1><p role="alert">This browser has ${dataName} that cannot be read.</p><p>Download it first if you may need it. You can then clear only Keep the Sentence data and start again.</p><div class="recovery-actions"><button class="quiet-button" id="download-unreadable-data">Download unreadable data</button><button class="danger-button" id="clear-unreadable-data">${clearLabel}</button></div><p><a href="/demo" data-route>Try sample phrases</a> · <a href="/privacy" data-route>Read privacy details</a></p></section><dialog id="recovery-confirm" class="recovery-dialog" aria-labelledby="recovery-confirm-title"><form method="dialog"><h2 id="recovery-confirm-title">${clearLabel}?</h2><p>${clearScope}</p><div class="dialog-actions"><button value="cancel" class="quiet-button">Cancel</button><button value="clear" class="danger-button">Clear saved phrase data</button></div></form></dialog></main>${footer()}`;
+  bind();
+  const dialog = document.querySelector<HTMLDialogElement>('#recovery-confirm')!;
+  document.querySelector('#download-unreadable-data')?.addEventListener('click', async () => downloadUnreadableData(await unreadableVaultData(namespace)));
+  document.querySelector('#clear-unreadable-data')?.addEventListener('click', () => dialog.showModal());
+  dialog.addEventListener('close', async () => {
+    if (dialog.returnValue !== 'clear') return;
+    try {
+      await discardVault(namespace);
+      await render({ moveFocus: true });
+    } catch {
+      showRecovery(namespace);
+    }
+  });
+}
+async function safelyRender(options: RenderOptions = {}) {
+  try {
+    await render(options);
+  } catch {
+    showRecovery();
+  }
+}
 function bind() {
   document.querySelectorAll<HTMLAnchorElement>('[data-route]').forEach((a) => a.addEventListener('click', async (e) => {
     e.preventDefault();
-    if (isDemo() && !new URL(a.href).pathname.startsWith('/demo')) await discardDemo();
-    history.pushState({}, '', a.href);
-    await render();
+    try {
+      if (isDemo() && !new URL(a.href).pathname.startsWith('/demo')) await discardDemo();
+      history.pushState({}, '', a.href);
+      await safelyRender({ moveFocus: true });
+    } catch {
+      showRecovery();
+    }
   }));
-  document.querySelector('#reset-demo')?.addEventListener('click', async () => { await replaceRecords(SAMPLE_RECORDS, 'demo:'); await render(); });
-  document.querySelector('#remembered')?.addEventListener('click', async () => { const record = due((await readVault(isDemo() ? 'demo:' : '')).records)[0]; if (record) { await reviewCapture(record.id, isDemo() ? 'demo:' : ''); await render(); } });
+  document.querySelector('#reset-demo')?.addEventListener('click', async () => { try { await replaceRecords(SAMPLE_RECORDS, 'demo:'); await safelyRender(); } catch { showRecovery(); } });
+  document.querySelector('#remembered')?.addEventListener('click', async () => { try { const record = due((await readVault(isDemo() ? 'demo:' : '')).records)[0]; if (record) { await reviewCapture(record.id, isDemo() ? 'demo:' : ''); await safelyRender(); } } catch { showRecovery(); } });
   document.querySelector('#export-csv')?.addEventListener('click', async () => download((await readVault(isDemo() ? 'demo:' : '')).records));
 }
 window.addEventListener('pagehide', () => { if (isDemo()) discardDemoBeforePageExit(); });
-window.addEventListener('popstate', () => { void render(); });
-render().catch(() => { app.innerHTML = '<main id="main"><h1>Your local notes could not load.</h1><p>Reload this page. If it still fails, reset the demo and try again.</p></main>'; });
+window.addEventListener('popstate', () => { void safelyRender({ moveFocus: true }); });
+void safelyRender();

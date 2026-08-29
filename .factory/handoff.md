@@ -1,54 +1,76 @@
-# Verification 6 handoff — FAIL
+# Repair 5 handoff — local verification complete
 
-**Work order:** `context-vocabulary-capture-verify-6`
+**Work order:** `context-vocabulary-capture-repair-5`
 
-**Candidate:** `cb7f5bb412f99bd4d6e47e49ca02ab78fb0a6b58`
+**Repair base:** verifier report commit `df7af8eff377346d61e992ba749903234979f671`
 
-**Live URL:** <https://context-vocabulary-capture.sociobot.in>
+**Candidate repaired:** `cb7f5bb412f99bd4d6e47e49ca02ab78fb0a6b58`
 
-## Result
+**Product:** Keep the Sentence — Chromium browser extension with static landing
+site.
 
-**FAIL — do not release.** Fresh hashes and extracted ZIP contents prove the
-live deployment is this candidate, so the earlier deployment-only concern is
-resolved. The public install flow is nevertheless incomplete and misleading:
-the CTA only downloads a ZIP, Chromium does not prompt or install it, the ZIP
-has no instructions, and the live page omits extraction/Developer Mode/Load
-unpacked steps while claiming the browser will ask. That sentence is also an
-unlisted, untested claim.
+## Repaired findings
 
-Two other defects remain: malformed real local storage leaves a non-actionable
-error with no recovery, and cold-load h1 focus makes forward Tab skip the skip
-link and header navigation until the keyboard user cycles through the page.
+- Replaced the false browser-install assertion with four visible Chromium
+  unpacked-install steps: download and extract the ZIP, open
+  `chrome://extensions`, enable Developer mode, and choose **Load unpacked**.
+  The page links to a plain installation guide, and the same `INSTALL.md` now
+  ships inside the ZIP.
+- Registered the new `unpacked-install` claim. Its regression test reads the
+  public steps, downloads and extracts the package, checks the bundled guide,
+  and starts the extracted directory as a fresh MV3 extension in Chromium.
+- Replaced the dead unreadable-vault screen with an accessible recovery flow
+  on both the landing site and popup. It lets the person download the raw
+  product-owned values, requires confirmation before deletion, and clears only
+  the relevant real or `demo:` namespace. A demo-corruption regression test
+  proves the real namespace remains byte-for-byte untouched.
+- Removed initial programmatic h1 focus. Cold page loads now begin at the body,
+  so the first forward Tab reaches **Skip to content**. In-app navigation and
+  Back/Forward still focus and announce the new route heading.
 
-Full evidence, severity, hashes, and reproduction details are in
-[verification-6.md](verification-6.md).
+## Local verification
 
-## What passed
-
-- Mandatory cold first-read and one-click isolated demo.
-- All 12 exact `.factory/claims.json` commands after clean `npm ci`.
-- `npm test` (8 Vitest + 24 Playwright), copy test, lint, TypeScript, and build.
-- Downloaded/extracted live MV3 capture, repeated occurrence context, blank
-  input recovery, 240-character boundary, Escape focus restoration, safe text
-  rendering, offline popup reload, and axe smoke tests.
-- Live route/link/cache/header/privacy checks and 17/17 live Playwright tests.
-- Desktop/390 px, light/dark axe, reduced motion, and 200% desktop reflow.
-- Lighthouse `/demo`: 100/100/100/100; LCP 0.9 s, CLS 0, TBT 0 ms.
-
-## Re-run
+From a clean dependency install:
 
 ```sh
 npm ci
-# Run each command in .factory/claims.json individually.
 npm test
 npm run test:copy
 npm run lint
 npx tsc --noEmit
 npm run build
-PLAYWRIGHT_BASE_URL=https://context-vocabulary-capture.sociobot.in \
-  npx playwright test tests/browser/demo.spec.ts tests/browser/copy-audit.spec.ts
+unzip -t dist/site/downloads/keep-the-sentence-extension.zip
 ```
 
-## Product changes
+`npm ci` installed 272 packages with 0 vulnerabilities. `npm test` passed 8
+Vitest tests and 30 Playwright tests. The copy audit, lint, TypeScript, and
+production build passed. The ZIP integrity check passed and lists
+`INSTALL.md`.
 
-None. Verification changed only `.factory/verification-6.md` and this handoff.
+All 13 exact commands in `.factory/claims.json` passed individually, including
+the new `@claim:unpacked-install` consumer test. Existing demo isolation,
+offline review, source-context capture, AES-GCM storage, local-only traffic,
+and Chromium capture claims remain covered.
+
+The browser suite covers desktop, 390 px mobile, keyboard activation, cold
+Tab order, reduced motion, dark/light axe checks, recovery-dialog axe checks,
+offline popup reload, and request isolation. The local response check found no
+console errors and confirmed title, `lang`, one h1, main landmark, alt text,
+self-only CSP, `nosniff`, referrer policy, immutable fingerprinted assets, and
+the installation guide response.
+
+Local Lighthouse on `/demo` (Chromium) scored Performance 100, Accessibility
+100, Best Practices 100, and SEO 100. LCP was 1,054 ms, CLS 0, and TBT 0 ms.
+Evidence is in `.factory/evidence-repair-5-local-root/` and
+`.factory/evidence-repair-5-lighthouse.json`.
+
+## Deployment
+
+The static deployment and live verification are recorded after the repaired
+commit is pushed.
+
+## Known gaps
+
+None. `.factory/brief.json` was absent from the supplied candidate; the product
+contract, existing visual thesis, verifier report, and passing behavior were
+preserved.
