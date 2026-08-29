@@ -1,1 +1,1 @@
-Save selected phrases with their source sentences for later review.
+Save phrases with their source sentences, then review them in your browser.

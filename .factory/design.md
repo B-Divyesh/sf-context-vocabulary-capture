@@ -29,4 +29,4 @@ One generated editorial hero illustrates a folded source page, a cobalt underlin
 
 Prompt sheet: "Use case: illustration-story. Asset type: browser-extension landing hero. A tactile editorial collage of a cream paperback page with one cobalt underline, an orange paper tab, a tiny blank flashcard, and halftone ink dots travelling between them. Flat screen-print / risograph texture, warm paper, black ink, cobalt and burnt orange only, high contrast, no people, no logos, no text, no watermark, no gradients. Wide landscape with empty paper area."
 
-Generated with the factory image deployment on 2026-08-28. The resulting raster is original product art. It will be checked for text artifacts and converted to WebP below 300 KB before shipping.
+Generated with the factory image deployment on 2026-08-28. The original raster is stored in `assets/src/` with its prompt sidecar. It was checked for text artifacts, brands, seams, and unintended symbols, then exported as a 74,024-byte WebP for the site.

@@ -6,7 +6,7 @@ It saves a selected phrase with nearby sentences and its source link.
 
 ## Try it
 
-Open `/demo` after starting the site. It loads three sample phrases in a separate `demo:` storage namespace. The banner can reset the samples or discard them and start for real.
+Open `/?demo=1` after starting the site, or visit [the live demo](https://context-vocabulary-capture.sociobot.in/?demo=1). It loads three sample phrases in a separate `demo:` storage namespace. The banner can reset the samples or discard them and start for real.
 
 ## Install the extension
 
@@ -27,6 +27,7 @@ npm ci
 npm run dev             # extension development build
 npm run dev:site        # landing site at the shown local URL
 npm test
+npm run test:copy       # verify rendered copy and word counts
 npm run build           # extension -> dist/extension; static site -> dist/site
 ```
 

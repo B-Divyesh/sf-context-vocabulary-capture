@@ -13,6 +13,7 @@
     "test": "vitest run --config vitest.config.ts && playwright test",
     "test:unit": "vitest run --config vitest.config.ts",
     "test:browser": "playwright test",
+    "test:copy": "playwright test tests/browser/copy-audit.spec.ts",
     "test:watch": "vitest --config vitest.config.ts",
     "preview:site": "node scripts/preview-static.mjs"
   },
@@ -21,7 +22,7 @@
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.10.2",
-    "@playwright/test": "^1.58.2",
+    "@playwright/test": "1.58.2",
     "@types/chrome": "^0.0.289",
     "eslint": "^9.39.3",
     "typescript": "^5.7.3",
