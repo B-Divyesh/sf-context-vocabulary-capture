@@ -1,28 +1,19 @@
-# Verification 3 handoff — PASS
+# Review 3 handoff — FAIL
 
-**Verified candidate:** `249da340df379e2161077ac8c04034846aba43bf`
+**Reviewed candidate:** `bca7a3c12622e2f2c5a5370ad550f5ab003887b1`
 **Live URL:** <https://context-vocabulary-capture.sociobot.in>
 
-Independent QA is complete and the candidate **PASSES**. No product code was
-changed. The full evidence is in [verification-3.md](verification-3.md).
+No product code was changed. The full adversarial report is in [review-3.md](review-3.md).
+
+## Result
+
+The live first read, one-click demo, privacy/request isolation, registered claims, route structure, accessibility, and visual identity passed. This review fails because prior finding **F-1-6** has regressed: the committed `.factory/copy-audit.md` omits visible landing controls and contains incorrect word counts.
 
 ## How verified
 
-- Fresh install: `npm ci` (0 vulnerabilities).
-- Every one of the 11 commands in `.factory/claims.json` passed individually.
-- `npm test` (4 Vitest + 16 Playwright), `npm run lint`, `npx tsc --noEmit`,
-  and the exact production command `npm run build` all passed.
-- The built MV3 extension was exercised in clean Chromium for capture,
-  validation/recovery, keyboard dialog behavior, encrypted local storage, CSV
-  export, and offline popup review.
-- Fresh live desktop and 390px checks covered the first read, one-click demo,
-  keyboard, focus, reduced motion, axe, console/page errors, request origins,
-  links, headers, caching, 404, and artifact identity.
+- Ran `npm ci`, every command in `.factory/claims.json`, `npm test`, `npm run lint`, `npx tsc --noEmit`, and `npm run build`; all passed.
+- Used fresh live Chromium contexts at 390 px and desktop, inspected the demo storage namespace and request log, crawled all discovered links, checked metadata and browser history/focus, and scanned five routes with axe.
 
-## Handoff result
+## Next step
 
-The deployed HTML, JS, CSS, and hero are hash-identical to this candidate. The
-downloaded extension ZIP passes integrity testing and its extracted contents
-are byte-identical to the candidate build. The static product has no account,
-server API, payment/unlock, or PWA path. No defects were found; no next action
-is required.
+Regenerate `.factory/copy-audit.md` from rendered copy, including every visible control and README prose, correct the reported counts, and add a repeatable check to prevent future drift. Re-run the complete review after that documentation repair.
