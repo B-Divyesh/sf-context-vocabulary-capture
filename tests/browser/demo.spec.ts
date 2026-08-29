@@ -16,7 +16,7 @@ test('keeps demo network requests on the same origin', async ({ page }) => {
   const requests: string[] = [];
   page.on('request', (request) => requests.push(request.url()));
   await page.goto('/demo');
-  await page.getByRole('button', { name: 'I remembered it' }).click();
+  await page.getByRole('button', { name: 'Mark phrase as remembered' }).click();
   expect(requests.every((url) => new URL(url).origin === 'http://127.0.0.1:4173')).toBe(true);
   const stored = await page.evaluate(() => Object.values(localStorage).join(' '));
   expect(stored).not.toContain('example.org');
@@ -25,7 +25,7 @@ test('keeps demo network requests on the same origin', async ({ page }) => {
 test('@claim:demo-sandbox loads sample data from the direct demo URL and can reset it', async ({ page }) => {
   await page.goto('/?demo=1');
   await expect(page.getByText('Demo — sample data, nothing is saved')).toBeVisible();
-  await page.getByRole('button', { name: 'I remembered it' }).click();
+  await page.getByRole('button', { name: 'Mark phrase as remembered' }).click();
   await page.getByRole('button', { name: 'Reset demo' }).click();
   await expect(page.getByText('3 total')).toBeVisible();
   const storageKeys = await page.evaluate(() => Object.keys(localStorage));
@@ -50,6 +50,19 @@ test('keeps sample source links live and announces route changes', async ({ page
   await page.getByRole('navigation').getByRole('link', { name: 'Privacy' }).click();
   await expect(page.getByRole('heading', { level: 1 })).toBeFocused();
   await expect(page.locator('#route-announcement')).toContainText('Privacy — Keep the Sentence.');
+});
+
+test('routes How it works from every public page to the landing section and preserves back navigation', async ({ page }) => {
+  for (const path of ['/demo', '/privacy', '/terms']) {
+    await page.goto(path);
+    await page.getByRole('navigation').getByRole('link', { name: 'How it works' }).click();
+    await expect(page).toHaveURL(/\/#how$/);
+    await expect(page.locator('#how')).toBeFocused();
+    await expect(page.locator('#how')).toContainText('Keep reading. Keep the source.');
+    await page.goBack();
+    await expect(page).toHaveURL(new RegExp(`${path}$`));
+    await expect(page.getByRole('heading', { level: 1 })).toBeFocused();
+  }
 });
 
 test('sets route-specific titles, descriptions, canonical URLs, and social metadata', async ({ page }) => {
@@ -96,7 +109,7 @@ test('works at 390px and with keyboard activation', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto('/demo');
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= document.documentElement.clientWidth)).toBe(true);
-  const review = page.getByRole('button', { name: 'I remembered it' });
+  const review = page.getByRole('button', { name: 'Mark phrase as remembered' });
   await review.focus();
   await page.keyboard.press('Enter');
   await expect(page.locator('.review-action')).toContainText('recoger el hilo');

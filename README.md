@@ -34,7 +34,7 @@ npm run build           # extension -> dist/extension; static site -> dist/site
 
 ## Privacy
 
-Only the phrase, nearby source text, source URL/title, language, and your meaning are stored. The extension does not send those records to a server. Read the deployed `/privacy` and `/terms` pages for details.
+It stores only an ID, phrase, nearby text, source title and link, language, meaning, review count, and capture and review dates. The extension sends no analytics or product data to any server. Read the deployed `/privacy` and `/terms` pages for details.
 
 ## License
 

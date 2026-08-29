@@ -1,10 +1,10 @@
 # Copy audit
 
-Rendered landing-page prose is below. All sentences are 22 words or fewer.
-Headings, controls, facts, and image alt text are listed separately so they are
-also checked for plain wording. No listed prose contains a banned term.
+All rendered product prose is 22 words or fewer. Headings, controls, facts,
+and alt text are listed separately. No audited text uses a banned marketing
+word. **Phrase** is the only name for selected and saved vocabulary.
 
-## Landing sentences
+## Landing page sentences
 
 | Words | Text |
 | ---: | --- |
@@ -20,15 +20,15 @@ also checked for plain wording. No listed prose contains a banned term.
 | 10 | Your saved phrase includes nearby sentences and the source link. |
 | 10 | Try the phrase in context before you reveal your meaning. |
 | 7 | Your saved phrases stay private and local. |
-| 13 | It saves only the phrase, nearby text, source link, and meaning you choose. |
-| 12 | Export your records as a CSV for Anki or your own archive. |
+| 16 | Records store a phrase, nearby text, source title and link, language, your meaning, and review details. |
+| 5 | Export your records as CSV. |
 | 4 | Download the extension package. |
 | 16 | Your browser will ask you to load it as an unpacked extension during this first release. |
 | 3 | Save source sentences. |
 | 3 | Review them later. |
 | 5 | Illustration generated for this product. |
 
-## Landing headings, labels, facts, and alt text
+## Landing labels, controls, facts, and alt text
 
 | Words | Text |
 | ---: | --- |
@@ -45,11 +45,45 @@ also checked for plain wording. No listed prose contains a banned term.
 | 3 | Select the phrase. |
 | 5 | Write a short meaning. |
 | 4 | Review today’s phrases. |
+| 4 | Mark phrase as remembered |
+| 5 | This records one review today. |
 | 5 | What it does not do |
 | 3 | Install the extension |
 | 8 | Capture phrases from regular web pages in Chromium. |
 | 3 | Download extension ZIP |
 | 19 | A blank open book, a bookmark, a flashcard, and halftone dots show a saved phrase beside its source sentence. |
+
+## Demo, privacy, terms, and 404 prose
+
+| Words | Text |
+| ---: | --- |
+| 6 | Review a saved phrase in context. |
+| 5 | These phrases are sample data. |
+| 5 | Reset them whenever you want. |
+| 13 | A phrase, two nearby sentences, a source link, and your meaning. |
+| 11 | In the extension, select text on a page. Choose “Keep this sentence.” |
+| 7 | Your reading notes stay on your device. |
+| 6 | It uses your browser’s local extension storage. |
+| 7 | Records are encrypted with AES-GCM before storage. |
+| 20 | It stores only an ID, phrase, nearby text, source title and link, language, meaning, review count, and capture and review dates. |
+| 12 | The extension sends no analytics or product data to any server. |
+| 14 | The sample demo uses separate local storage and is discarded when you leave it. |
+| 6 | You can export your phrases as CSV. |
+| 12 | Removing the extension or clearing its browser storage may remove your local data. |
+| 5 | Terms for Keep the Sentence. |
+| 8 | Keep the Sentence is a local reading utility. |
+| 14 | Use it only for text you may read and save for personal study. |
+| 8 | Do not use the extension to redistribute source text. |
+| 9 | You are responsible for the web pages you select from. |
+| 5 | This page is not in the notebook. |
+| 9 | Try the home page or the sample phrases. |
+
+## README prose changed in this round
+
+| Words | Text |
+| ---: | --- |
+| 20 | It stores only an ID, phrase, nearby text, source title and link, language, meaning, review count, and capture and review dates. |
+| 12 | The extension sends no analytics or product data to any server. |
 
 ## Terminology
 
@@ -60,32 +94,3 @@ also checked for plain wording. No listed prose contains a banned term.
 | learner-written definition | your meaning |
 | recall action | review |
 | saved collection | saved phrases |
-
-## README sentences
-
-| Words | Text |
-| ---: | --- |
-| 17 | Keep the Sentence is a local browser extension for language learners reading regular web pages in Chromium. |
-| 20 | Select a phrase, save nearby sentences and its source link, write your own meaning, and review it later in context. |
-| 12 | It saves a selected phrase with nearby sentences and its source link. |
-| 6 | Open `/demo` after starting the site. |
-| 11 | It loads three sample phrases in a separate `demo:` storage namespace. |
-| 13 | The banner can reset the samples or discard them and start for real. |
-| 3 | Run the build. |
-| 6 | The packaged extension is at `dist/site/downloads/keep-the-sentence-extension.zip`. |
-| 5 | Download and extract the ZIP. |
-| 6 | Open your Chromium browser’s extensions page. |
-| 4 | Turn on Developer mode. |
-| 8 | Choose **Load unpacked** and select the extracted folder. |
-| 16 | On a web page, select a phrase and choose **Keep this sentence** from the right-click menu. |
-| 9 | The extension stores encrypted records in browser-local extension storage. |
-| 7 | No account or network service is needed. |
-| 6 | Saved phrases can be reviewed offline. |
-| 13 | Use **Export CSV** from the popup to move your phrases to another tool. |
-| 8 | `npm run build` is the reproducible deployment command. |
-| 12 | The static deploy root is `dist/site`, where `index.html` is at the root. |
-| 14 | Only the phrase, nearby source text, source URL/title, language, and your meaning are stored. |
-| 10 | The extension does not send those records to a server. |
-| 9 | Read the deployed `/privacy` and `/terms` pages for details. |
-| 1 | MIT. |
-| 2 | See [LICENSE](LICENSE). |
