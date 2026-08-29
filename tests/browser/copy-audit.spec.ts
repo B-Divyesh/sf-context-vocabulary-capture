@@ -65,8 +65,20 @@ test('copy audit keeps the documented extension boundary and meaning vocabulary'
     readFileSync('entrypoints/popup/main.ts', 'utf8'),
     readFileSync('entrypoints/content.ts', 'utf8'),
   ].join('\n');
-  expect(audited).toContain('Select a phrase on a regular web page. Choose “Keep this sentence”.');
-  expect(audited).toContain('Write a short meaning');
+  const requiredExtensionCopy = [
+    'Select a phrase on a regular web page. Choose “Keep this sentence”.',
+    'Write a short meaning',
+    'Your phrases could not load',
+    'This extension has saved phrase data that cannot be read.',
+    'Download unreadable data',
+    'Clear unreadable saved data',
+    'This removes only Keep the Sentence phrase data from this browser.',
+    'Clear saved phrase data',
+  ];
+  for (const copy of requiredExtensionCopy) {
+    expect(audited, `missing extension copy-audit row: ${copy}`).toContain(copy);
+    expect(extensionSource, `extension source drifted from audited copy: ${copy}`).toContain(copy);
+  }
   expect(extensionSource).not.toMatch(/\bany page\b/iu);
   expect(extensionSource).not.toMatch(/\bcue\b/iu);
 });

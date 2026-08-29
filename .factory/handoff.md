@@ -1,48 +1,46 @@
-# Review 6 handoff — FAIL
+# Polish 6 handoff — PASS
 
-**Work order:** `context-vocabulary-capture-review-6`
-
-**Reviewed candidate:** `4a928b6c347a5e24c3aa2ae585947b5f8b974896`
-
+**Work order:** `context-vocabulary-capture-polish-6`
+**Base reviewed:** `4a928b6c347a5e24c3aa2ae585947b5f8b974896`
+**Product repair:** `376e64e8b8abd1918749345d7f2c46341a8840e7`
 **Live URL:** <https://context-vocabulary-capture.sociobot.in>
 
-## Result
+## What changed
 
-The complete adversarial review is in [review-6.md](review-6.md). No product
-code was changed.
+- The shipped popup now says **regular web page**, matching the documented and
+  tested Chromium boundary; its built-bundle test rejects the prior “any page”
+  wording.
+- The capture form now uses **meaning** in both label and placeholder; the
+  built bundle rejects the prior “cue” terminology.
+- README promises now describe only what is registered and tested. Its opening
+  names the page link clearly, and its build instruction names the artifacts.
+- Landing privacy wording consistently calls the stored/exported items **saved
+  phrases**. The privacy metadata and copy audit follow the same vocabulary.
+- The copy audit now contains the actual extension recovery text and tests it
+  against the extension sources, preventing another silent audit drift.
 
-The landing cold read, one-click isolated demo, all 13 registered claims,
-routing, metadata, link crawl, all-severity Axe scans, lint, type-check, tests,
-and build pass. The verdict is still **FAIL** because the published extension
-regresses two earlier copy/claim findings:
+## Verification
 
-- its empty state says **“Select a phrase on any page”** although the tested
-  boundary is regular Chromium web pages;
-- its capture form labels the definition **“Your meaning”** but calls it a
-  **“cue”** in the placeholder.
+- Fresh clean clone at the product repair commit: `npm ci`, every one of the
+  13 exact `claims.json` commands, `npm test` (8 Vitest + 32 Playwright),
+  `npm run lint`, `npx tsc --noEmit`, `npm run test:copy`, and `npm run build`
+  all passed.
+- Deployed through `/opt/fleet/lib/deploy-static.sh` as deployment
+  `5d94eabf-d7cc-45fa-b3e4-b8b0014d8899`; custom-domain HTTPS returned 200.
+- `verify-url.sh` passed live: 779 ms load, correct title/lang/h1/main, no
+  missing alt text or unnamed buttons, and no console errors. Evidence is in
+  [evidence-polish-6-live-root](evidence-polish-6-live-root).
+- Live route/demo/copy suite: 24 passed. Manual all-severity Axe scans of
+  Home, Demo, Privacy, Terms, and 404 in light and dark schemes found zero
+  violations. Mobile Lighthouse scored 100/100/100/100 with 0.8 s LCP.
+- Cold live ZIP inspection confirmed the package is valid and contains neither
+  `any page` nor `cue`; direct `/?demo=1` remained isolated with its banner,
+  reset, and real-data exit.
 
-The review also records two unlisted README claims and two smaller plain-copy
-issues. `.factory/brief.json` was not present, so missed-leverage scope was
-assessed from the README, implementation, and design thesis.
+## Known gaps and next steps
 
-## Verification performed
+None. `.factory/brief.json` remains absent, so scope was assessed from the
+README, implementation, and design thesis as recorded in the review. The
+factory can deploy the committed static artifact normally.
 
-- Fresh 390 × 844 and 1440 × 900 live browser contexts.
-- Manual one-click demo, review, reset, exit, local-storage, and request-log
-  checks.
-- Every exact `.factory/claims.json` command from a separate clean clone: 13
-  passed.
-- `npm run lint`, `npx tsc --noEmit`, `npm test`, and `npm run build` in that
-  clean clone: passed; 8 unit and 31 browser tests.
-- Live route/copy/keyboard/mobile suite: 23 passed.
-- Axe on Home, Demo, Privacy, Terms, and 404 at mobile/desktop in light/dark:
-  zero violations at any severity.
-- Live site assets matched the clean build byte-for-byte; extracted live ZIP
-  contents matched file-for-file.
-
-## Required next work
-
-Resolve F-6-1 through F-6-6 in `review-6.md`, especially the two reopened
-blocking findings, then repeat the full review. Do not treat the passing claims
-suite alone as closure: the conflicting strings are present in the actual
-published extension package.
+See [polish-6.md](polish-6.md) for the finding-by-finding evidence map.

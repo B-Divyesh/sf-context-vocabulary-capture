@@ -135,6 +135,7 @@ selected and saved vocabulary.
 
 | Words | Text |
 | ---: | --- |
+| 3 | Keep the Sentence |
 | 2 | Your meaning |
 | 4 | Write a short meaning |
 | 2 | Save phrase |
@@ -151,9 +152,16 @@ selected and saved vocabulary.
 | 3 | Your saved phrases |
 | 2 | Export CSV |
 | 6 | Your saved phrases will appear here. |
-| 4 | Your phrases are unavailable |
-| 5 | Close and reopen the extension. |
-| 7 | Your saved phrases stay on this device. |
+| 5 | Your phrases could not load |
+| 10 | This extension has saved phrase data that cannot be read. |
+| 8 | Download it first if you may need it. |
+| 12 | You can then clear only Keep the Sentence data and start again. |
+| 3 | Download unreadable data |
+| 4 | Clear unreadable saved data |
+| 4 | Clear unreadable saved data? |
+| 11 | This removes only Keep the Sentence phrase data from this browser. |
+| 4 | It cannot be undone. |
+| 4 | Clear saved phrase data |
 
 ## README headings and prose
 
