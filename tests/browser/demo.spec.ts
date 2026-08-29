@@ -97,11 +97,34 @@ test('opens the isolated sample review in one click from the first screen', asyn
   await expect(page.getByText('3 total')).toBeVisible();
 });
 
-test('@claim:extension-download serves the install ZIP from the deployment output', async ({ page }) => {
+test('@claim:extension-download lets a fresh visitor download the free extension ZIP without an account or payment', async ({ page }) => {
+  const requests: string[] = [];
+  page.on('request', (request) => requests.push(request.url()));
+  await page.goto('/');
+  await expect(page.locator('.facts')).toContainText('Free to download and use');
+  const install = page.getByRole('link', { name: 'Download extension ZIP' });
+  await expect(install).toHaveAttribute('href', '/downloads/keep-the-sentence-extension.zip');
+  const download = page.waitForEvent('download');
+  await install.click();
+  const archive = await download;
+  expect(new URL(archive.url()).origin).toBe(siteOrigin);
+  expect(archive.suggestedFilename()).toBe('keep-the-sentence-extension.zip');
   const response = await page.request.get('/downloads/keep-the-sentence-extension.zip');
   expect(response.ok()).toBe(true);
   expect(response.headers()['content-type']).toContain('application');
   expect([...((await response.body()).subarray(0, 4))]).toEqual([80, 75, 3, 4]);
+  expect(requests.every((url) => new URL(url).origin === siteOrigin)).toBe(true);
+});
+
+test('uses literal phrase-review language and no generic provenance footer claim', async ({ page }) => {
+  await page.goto('/');
+  await expect(page.locator('.section-label .eyebrow')).toHaveText('Phrase review');
+  await expect(page.locator('.section-label h2')).toHaveText('Review a phrase with its source sentence.');
+  await expect(page.locator('footer')).toContainText('Save phrases with source sentences. Review them later.');
+  await expect(page.locator('footer')).not.toContainText('Illustration generated for this product.');
+  await page.goto('/missing');
+  await expect(page.locator('footer')).toContainText('Save phrases with source sentences. Review them later.');
+  await expect(page.locator('footer')).not.toContainText('Illustration generated for this product.');
 });
 
 test('@claim:unpacked-install gives complete Chromium unpacked-install steps and a loadable ZIP', async ({ page }) => {

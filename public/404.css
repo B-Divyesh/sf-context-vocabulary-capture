@@ -124,9 +124,6 @@ footer a {
   display: inline-flex;
   align-items: center;
 }
-.generated-note {
-  font-size: 12px;
-}
 a:focus-visible {
   outline: 3px solid var(--orange);
   outline-offset: 4px;

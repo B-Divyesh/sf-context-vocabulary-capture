@@ -2,7 +2,7 @@ import eslint from '@eslint/js';
 import tseslint from 'typescript-eslint';
 
 export default tseslint.config(
-  { ignores: ['.wxt/**', 'dist/**', 'node_modules/**', 'test-results/**'] },
+  { ignores: ['.wxt/**', 'dist/**', 'node_modules/**', 'test-results/**', '.factory/verification-evidence-*/live-files/**'] },
   eslint.configs.recommended,
   tseslint.configs.recommended,
   {

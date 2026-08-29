@@ -1,1 +1,1 @@
-Save phrases with source sentences and review them later in your browser.
+Save phrases with source sentences for later review in Chromium.

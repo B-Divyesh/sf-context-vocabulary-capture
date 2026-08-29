@@ -15,7 +15,7 @@ selected and saved vocabulary.
 | 6 | Save phrases with their source sentence. |
 | 15 | For language learners reading web pages who want to remember a phrase and its context. |
 | 6 | Open sample phrases ready to review. |
-| 7 | Review the phrase where you met it. |
+| 7 | Review a phrase with its source sentence. |
 | 3 | Nothing due today. |
 | 9 | Saved phrases will appear here after you capture one. |
 | 4 | No saved phrases yet. |
@@ -35,9 +35,8 @@ selected and saved vocabulary.
 | 4 | Turn on Developer mode. |
 | 3 | Choose Load unpacked. |
 | 4 | Select the extracted folder. |
-| 3 | Save source sentences. |
+| 5 | Save phrases with source sentences. |
 | 3 | Review them later. |
-| 5 | Illustration generated for this product. |
 
 ## Landing headings, facts, controls, links, states, and alt text
 
@@ -54,8 +53,9 @@ selected and saved vocabulary.
 | 6 | Saved phrases stay on your device |
 | 4 | Works without an account |
 | 4 | Review saved phrases offline |
+| 5 | Free to download and use |
 | 19 | A blank open book, a bookmark, a flashcard, and halftone dots show a saved phrase beside its source sentence. |
-| 4 | A sentence stays attached |
+| 2 | Phrase review |
 | 4 | Your phrases to review |
 | 2 | Export CSV |
 | 3 | Try sample phrases |
@@ -161,12 +161,12 @@ selected and saved vocabulary.
 | 3 | Keep the Sentence |
 | 17 | Keep the Sentence is a local browser extension for language learners reading regular web pages in Chromium. |
 | 20 | Select a phrase, save nearby sentences and its source link, write your own meaning, and review it later in context. |
-| 12 | It saves a selected phrase with nearby sentences and its source link. |
 | 4 | Try the sample demo |
 | 11 | Open /?demo=1 after starting the site, or visit the live demo. |
-| 11 | It loads three sample phrases in a separate demo: storage namespace. |
+| 10 | It keeps three sample phrases separate from your saved phrases. |
 | 11 | The banner can reset the samples, and leaving Demo discards them. |
 | 3 | Install the extension |
+| 7 | It is free to download and use. |
 | 3 | Run the build. |
 | 6 | The packaged extension is at dist/site/downloads/keep-the-sentence-extension.zip. |
 | 5 | Download and extract the ZIP. |
@@ -174,7 +174,7 @@ selected and saved vocabulary.
 | 4 | Turn on Developer mode. |
 | 8 | Choose Load unpacked and select the extracted folder. |
 | 16 | On a web page, select a phrase and choose Keep this sentence from the right-click menu. |
-| 9 | The extension stores encrypted records in browser-local extension storage. |
+| 12 | The extension encrypts your saved phrases and stores them only in Chromium. |
 | 7 | No account or network service is needed. |
 | 6 | Saved phrases can be reviewed offline. |
 | 13 | Use Export CSV from the popup to move your phrases to another tool. |

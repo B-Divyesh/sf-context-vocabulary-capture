@@ -2,15 +2,13 @@
 
 Keep the Sentence is a local browser extension for language learners reading regular web pages in Chromium. Select a phrase, save nearby sentences and its source link, write your own meaning, and review it later in context.
 
-It saves a selected phrase with nearby sentences and its source link.
-
 ## Try the sample demo
 
-Open `/?demo=1` after starting the site, or visit [the live demo](https://context-vocabulary-capture.sociobot.in/?demo=1). It loads three sample phrases in a separate `demo:` storage namespace. The banner can reset the samples, and leaving Demo discards them.
+Open `/?demo=1` after starting the site, or visit [the live demo](https://context-vocabulary-capture.sociobot.in/?demo=1). It keeps three sample phrases separate from your saved phrases. The banner can reset the samples, and leaving Demo discards them.
 
 ## Install the extension
 
-Run the build. The packaged extension is at `dist/site/downloads/keep-the-sentence-extension.zip`.
+It is free to download and use. Run the build. The packaged extension is at `dist/site/downloads/keep-the-sentence-extension.zip`.
 
 1. Download and extract the ZIP.
 2. Open your Chromium browser’s extensions page.
@@ -18,7 +16,7 @@ Run the build. The packaged extension is at `dist/site/downloads/keep-the-senten
 4. Choose **Load unpacked** and select the extracted folder.
 5. On a web page, select a phrase and choose **Keep this sentence** from the right-click menu.
 
-The extension stores encrypted records in browser-local extension storage. No account or network service is needed. Saved phrases can be reviewed offline. Use **Export CSV** from the popup to move your phrases to another tool.
+The extension encrypts your saved phrases and stores them only in Chromium. No account or network service is needed. Saved phrases can be reviewed offline. Use **Export CSV** from the popup to move your phrases to another tool.
 
 ## Develop, test, and build
 

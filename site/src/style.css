@@ -528,9 +528,6 @@ footer {
 footer p {
   margin: 4px 0;
 }
-.generated-note {
-  font-size: 12px;
-}
 h1:focus {
   outline: 0;
 }
