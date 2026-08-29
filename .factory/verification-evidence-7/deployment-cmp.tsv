@@ -1,0 +1,7 @@
+MATCH	index.html
+MATCH	assets/index-Dzjv1zer.js
+MATCH	assets/index-CFkQbq2z.css
+MATCH	assets/dithered-reading-margin.webp
+MATCH	downloads/INSTALL.md
+MATCH	404.html
+DIFF	staticwebapp.config.json

@@ -1,0 +1,12 @@
+Archive:  dist/site/downloads/keep-the-sentence-extension.zip
+    testing: background.js            OK
+    testing: assets/                  OK
+    testing: assets/popup-BFvsmmJ9.css   OK
+    testing: manifest.json            OK
+    testing: content-scripts/         OK
+    testing: content-scripts/content.js   OK
+    testing: popup.html               OK
+    testing: chunks/                  OK
+    testing: chunks/popup-BtbTwnWW.js   OK
+    testing: INSTALL.md               OK
+No errors detected in compressed data of dist/site/downloads/keep-the-sentence-extension.zip.

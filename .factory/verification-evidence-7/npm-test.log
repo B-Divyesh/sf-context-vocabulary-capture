@@ -1,0 +1,33 @@
+
+> context-vocabulary-capture@1.0.0 test
+> vitest run --config vitest.config.ts && playwright test
+
+
+ RUN  v3.2.7 /work/repo
+
+ ✓ tests/contracts.test.ts (3 tests) 6ms
+ ✓ tests/core.test.ts (5 tests) 56ms
+
+ Test Files  2 passed (2)
+      Tests  8 passed (8)
+   Start at  12:09:53
+   Duration  1.36s (transform 245ms, setup 0ms, collect 305ms, tests 62ms, environment 0ms, prepare 645ms)
+
+[WebServer] (node:4429) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:4449) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:4505) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 30 tests using 2 workers
+(node:4517) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:4518) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:4517) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:4518) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+······························
+  30 passed (55.0s)

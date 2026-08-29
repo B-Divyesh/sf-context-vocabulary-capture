@@ -1,0 +1,342 @@
+{
+  "routes": [
+    {
+      "viewport": 1280,
+      "scheme": "light",
+      "path": "/",
+      "status": 200,
+      "lang": "en",
+      "title": "Keep the Sentence — save phrases in context",
+      "h1": 1,
+      "main": 1,
+      "overflow": 0,
+      "missingAlt": 0,
+      "undersized": [],
+      "axeSeriousCritical": []
+    },
+    {
+      "viewport": 1280,
+      "scheme": "light",
+      "path": "/demo",
+      "status": 200,
+      "lang": "en",
+      "title": "Demo — Keep the Sentence",
+      "h1": 1,
+      "main": 1,
+      "overflow": 0,
+      "missingAlt": 0,
+      "undersized": [],
+      "axeSeriousCritical": []
+    },
+    {
+      "viewport": 1280,
+      "scheme": "light",
+      "path": "/privacy",
+      "status": 200,
+      "lang": "en",
+      "title": "Privacy — Keep the Sentence",
+      "h1": 1,
+      "main": 1,
+      "overflow": 0,
+      "missingAlt": 0,
+      "undersized": [],
+      "axeSeriousCritical": []
+    },
+    {
+      "viewport": 1280,
+      "scheme": "light",
+      "path": "/terms",
+      "status": 200,
+      "lang": "en",
+      "title": "Terms — Keep the Sentence",
+      "h1": 1,
+      "main": 1,
+      "overflow": 0,
+      "missingAlt": 0,
+      "undersized": [],
+      "axeSeriousCritical": []
+    },
+    {
+      "viewport": 1280,
+      "scheme": "light",
+      "path": "/definitely-missing-verify-7",
+      "status": 404,
+      "lang": "en",
+      "title": "Page not found — Keep the Sentence",
+      "h1": 1,
+      "main": 1,
+      "overflow": 0,
+      "missingAlt": 0,
+      "undersized": [],
+      "axeSeriousCritical": []
+    },
+    {
+      "viewport": 1280,
+      "scheme": "dark",
+      "path": "/",
+      "status": 200,
+      "lang": "en",
+      "title": "Keep the Sentence — save phrases in context",
+      "h1": 1,
+      "main": 1,
+      "overflow": 0,
+      "missingAlt": 0,
+      "undersized": [],
+      "axeSeriousCritical": []
+    },
+    {
+      "viewport": 1280,
+      "scheme": "dark",
+      "path": "/demo",
+      "status": 200,
+      "lang": "en",
+      "title": "Demo — Keep the Sentence",
+      "h1": 1,
+      "main": 1,
+      "overflow": 0,
+      "missingAlt": 0,
+      "undersized": [],
+      "axeSeriousCritical": []
+    },
+    {
+      "viewport": 1280,
+      "scheme": "dark",
+      "path": "/privacy",
+      "status": 200,
+      "lang": "en",
+      "title": "Privacy — Keep the Sentence",
+      "h1": 1,
+      "main": 1,
+      "overflow": 0,
+      "missingAlt": 0,
+      "undersized": [],
+      "axeSeriousCritical": []
+    },
+    {
+      "viewport": 1280,
+      "scheme": "dark",
+      "path": "/terms",
+      "status": 200,
+      "lang": "en",
+      "title": "Terms — Keep the Sentence",
+      "h1": 1,
+      "main": 1,
+      "overflow": 0,
+      "missingAlt": 0,
+      "undersized": [],
+      "axeSeriousCritical": []
+    },
+    {
+      "viewport": 1280,
+      "scheme": "dark",
+      "path": "/definitely-missing-verify-7",
+      "status": 404,
+      "lang": "en",
+      "title": "Page not found — Keep the Sentence",
+      "h1": 1,
+      "main": 1,
+      "overflow": 0,
+      "missingAlt": 0,
+      "undersized": [],
+      "axeSeriousCritical": []
+    },
+    {
+      "viewport": 390,
+      "scheme": "light",
+      "path": "/",
+      "status": 200,
+      "lang": "en",
+      "title": "Keep the Sentence — save phrases in context",
+      "h1": 1,
+      "main": 1,
+      "overflow": 0,
+      "missingAlt": 0,
+      "undersized": [],
+      "axeSeriousCritical": []
+    },
+    {
+      "viewport": 390,
+      "scheme": "light",
+      "path": "/demo",
+      "status": 200,
+      "lang": "en",
+      "title": "Demo — Keep the Sentence",
+      "h1": 1,
+      "main": 1,
+      "overflow": 0,
+      "missingAlt": 0,
+      "undersized": [],
+      "axeSeriousCritical": []
+    },
+    {
+      "viewport": 390,
+      "scheme": "light",
+      "path": "/privacy",
+      "status": 200,
+      "lang": "en",
+      "title": "Privacy — Keep the Sentence",
+      "h1": 1,
+      "main": 1,
+      "overflow": 0,
+      "missingAlt": 0,
+      "undersized": [],
+      "axeSeriousCritical": []
+    },
+    {
+      "viewport": 390,
+      "scheme": "light",
+      "path": "/terms",
+      "status": 200,
+      "lang": "en",
+      "title": "Terms — Keep the Sentence",
+      "h1": 1,
+      "main": 1,
+      "overflow": 0,
+      "missingAlt": 0,
+      "undersized": [],
+      "axeSeriousCritical": []
+    },
+    {
+      "viewport": 390,
+      "scheme": "light",
+      "path": "/definitely-missing-verify-7",
+      "status": 404,
+      "lang": "en",
+      "title": "Page not found — Keep the Sentence",
+      "h1": 1,
+      "main": 1,
+      "overflow": 0,
+      "missingAlt": 0,
+      "undersized": [],
+      "axeSeriousCritical": []
+    },
+    {
+      "viewport": 390,
+      "scheme": "dark",
+      "path": "/",
+      "status": 200,
+      "lang": "en",
+      "title": "Keep the Sentence — save phrases in context",
+      "h1": 1,
+      "main": 1,
+      "overflow": 0,
+      "missingAlt": 0,
+      "undersized": [],
+      "axeSeriousCritical": []
+    },
+    {
+      "viewport": 390,
+      "scheme": "dark",
+      "path": "/demo",
+      "status": 200,
+      "lang": "en",
+      "title": "Demo — Keep the Sentence",
+      "h1": 1,
+      "main": 1,
+      "overflow": 0,
+      "missingAlt": 0,
+      "undersized": [],
+      "axeSeriousCritical": []
+    },
+    {
+      "viewport": 390,
+      "scheme": "dark",
+      "path": "/privacy",
+      "status": 200,
+      "lang": "en",
+      "title": "Privacy — Keep the Sentence",
+      "h1": 1,
+      "main": 1,
+      "overflow": 0,
+      "missingAlt": 0,
+      "undersized": [],
+      "axeSeriousCritical": []
+    },
+    {
+      "viewport": 390,
+      "scheme": "dark",
+      "path": "/terms",
+      "status": 200,
+      "lang": "en",
+      "title": "Terms — Keep the Sentence",
+      "h1": 1,
+      "main": 1,
+      "overflow": 0,
+      "missingAlt": 0,
+      "undersized": [],
+      "axeSeriousCritical": []
+    },
+    {
+      "viewport": 390,
+      "scheme": "dark",
+      "path": "/definitely-missing-verify-7",
+      "status": 404,
+      "lang": "en",
+      "title": "Page not found — Keep the Sentence",
+      "h1": 1,
+      "main": 1,
+      "overflow": 0,
+      "missingAlt": 0,
+      "undersized": [],
+      "axeSeriousCritical": []
+    }
+  ],
+  "keyboard": {
+    "firstTab": {
+      "text": "Skip to content",
+      "class": "skip",
+      "outline": "rgb(216, 90, 42) solid 3px"
+    },
+    "skipTarget": "main",
+    "afterSkipTab": "Try it with sample data",
+    "demoUrl": "https://context-vocabulary-capture.sociobot.in/demo",
+    "reviewOutline": "rgb(216, 90, 42) solid 3px"
+  },
+  "mobile": {
+    "headline": "Save phrases with their source sentence.",
+    "audience": "For language learners reading web pages who want to remember a phrase and its context.",
+    "action": "Try it with sample data",
+    "actionBottom": 518.734375,
+    "withinViewport": true,
+    "overflow": 0
+  },
+  "reducedMotion": {
+    "scrollBehavior": "auto",
+    "animationDurations": [],
+    "transitionDurations": [],
+    "primaryTransform": "none"
+  },
+  "flow": {
+    "requestOrigins": [
+      "https://context-vocabulary-capture.sociobot.in"
+    ],
+    "storageKeys": [
+      "demo:keep-the-sentence:vault",
+      "demo:keep-the-sentence:device-key"
+    ],
+    "sampleTotal": 3,
+    "errors": 4
+  },
+  "errors": [
+    {
+      "type": "console",
+      "url": "https://context-vocabulary-capture.sociobot.in/definitely-missing-verify-7",
+      "text": "Failed to load resource: the server responded with a status of 404 ()"
+    },
+    {
+      "type": "console",
+      "url": "https://context-vocabulary-capture.sociobot.in/definitely-missing-verify-7",
+      "text": "Failed to load resource: the server responded with a status of 404 ()"
+    },
+    {
+      "type": "console",
+      "url": "https://context-vocabulary-capture.sociobot.in/definitely-missing-verify-7",
+      "text": "Failed to load resource: the server responded with a status of 404 ()"
+    },
+    {
+      "type": "console",
+      "url": "https://context-vocabulary-capture.sociobot.in/definitely-missing-verify-7",
+      "text": "Failed to load resource: the server responded with a status of 404 ()"
+    }
+  ]
+}

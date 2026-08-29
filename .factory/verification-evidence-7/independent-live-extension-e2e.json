@@ -1,0 +1,54 @@
+{
+  "phrase": "quietly held",
+  "context": "The first train arrived late. Nora quietly held the door. Everyone stepped inside.",
+  "initialFocus": "gloss",
+  "shiftTabFocus": "cancel",
+  "wrappedTabFocus": "gloss",
+  "whitespaceError": "Write a short meaning, then save it.",
+  "maxLength": 240,
+  "escapeReturnedFocus": "return-focus",
+  "popupTitle": "Keep the Sentence",
+  "savedCount": "1 saved locally",
+  "literalRendered": "<img src=x onerror=alert(1)> remained still",
+  "injectedImages": 0,
+  "axeSeriousCritical": [],
+  "csv": {
+    "name": "keep-the-sentence.csv",
+    "rows": 2,
+    "hasPhrase": true,
+    "hasContext": true,
+    "hasUrl": true,
+    "hasLiteral": true
+  },
+  "clearPhraseAbsent": true,
+  "fields": [
+    "context",
+    "createdAt",
+    "gloss",
+    "id",
+    "language",
+    "phrase",
+    "reviews",
+    "title",
+    "url"
+  ],
+  "stored": {
+    "phrase": "quietly held",
+    "context": "Reading fixture The first train arrived late. Nora quietly held the door. Everyone stepped inside.",
+    "title": "Reading fixture",
+    "url": "https://context-vocabulary-capture.sociobot.in/extension-fixture.html",
+    "language": "en",
+    "gloss": "<img src=x onerror=alert(1)> remained still",
+    "id": "920995d5-635a-4d20-ab75-84b04f76c860",
+    "createdAt": "2026-08-29T12:14:56.539Z",
+    "reviews": 0
+  },
+  "popupFocusOutline": "rgb(255, 255, 255) none 0px",
+  "offlineReload": true,
+  "requestOrigins": [
+    "https://context-vocabulary-capture.sociobot.in"
+  ],
+  "consoleErrors": [
+    "page:Failed to load resource: the server responded with a status of 404 ()"
+  ]
+}

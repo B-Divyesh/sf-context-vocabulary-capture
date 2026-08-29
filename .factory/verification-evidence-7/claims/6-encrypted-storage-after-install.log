@@ -1,0 +1,15 @@
+
+> context-vocabulary-capture@1.0.0 test:unit
+> vitest run --config vitest.config.ts --testNamePattern @claim:encrypted-storage
+
+
+ RUN  v3.2.7 /work/repo
+
+ ↓ tests/contracts.test.ts (3 tests | 3 skipped)
+ ✓ tests/core.test.ts (5 tests | 4 skipped) 8ms
+
+ Test Files  1 passed | 1 skipped (2)
+      Tests  1 passed | 7 skipped (8)
+   Start at  12:08:33
+   Duration  1.30s (transform 319ms, setup 0ms, collect 310ms, tests 8ms, environment 1ms, prepare 589ms)
+

@@ -1,0 +1,17 @@
+{
+  "heading": "Your local notes could not load.",
+  "actions": [
+    "Download unreadable data",
+    "Clear unreadable saved data"
+  ],
+  "dialogVisible": true,
+  "dialogInitialFocus": "Cancel",
+  "focusAfterEscape": "Clear unreadable saved data",
+  "dataAfterCancel": "{bad json",
+  "focusAfterDialogTab": "Clear saved phrase data",
+  "keysAfterClear": [],
+  "requestOrigins": [
+    "https://context-vocabulary-capture.sociobot.in"
+  ],
+  "errors": []
+}

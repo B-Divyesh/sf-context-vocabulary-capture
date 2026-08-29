@@ -1,0 +1,11 @@
+LANDING_TITLE Keep the Sentence — save phrases in context
+LANDING_H1 Save phrases with their source sentence.
+PRIMARY Try it with sample data
+AFTER_CLICK_URL https://context-vocabulary-capture.sociobot.in/demo
+DEMO_H1 Review a saved phrase in context.
+BANNER Demo — sample data, nothing is saved
+SAMPLE_ITEMS 4
+BODY_EXCERPT TRY THE REVIEW FLOW |  | Review a saved phrase in context. |  | These phrases are sample data. Reset them whenever you want. |  | SAMPLE PHRASES TO REVIEW |  | Read the sentence first. | Export CSV |  | quietly held |  | At dawn, the harbour quietly held its breath. A single boat moved beyond the breakwater. |  | Your meaning: remained still and calm |  | A morning at the harbour | (opens source) |  · English |  | Can you recall what quietly held means here? |  | Show your meaning | Mark phrase as remembered |  | This records one review today. |  | Saved phrases | 3 total |  | quietly held |  | At dawn, the harbour quietly held its breath. A single boat moved beyond the breakwater. |  | Your meaning: remained still and calm |  | A morning at the harbour | (opens source) |  · English |  | recoger el hilo |  | Después de una pausa, Marta volvió a recoger el hilo de la conversación. Nadie había olvidado la pregunta. |  | Your meaning: to pick up the thread again |  | La conversación | (opens source) |  · Spanish |  | auf jeden Fall |  | Auf jeden Fall wollte er vor Sonnenuntergang zurück sein
+STORAGE_KEYS [ 'demo:keep-the-sentence:vault', 'demo:keep-the-sentence:device-key' ]
+REQUESTS ["https://context-vocabulary-capture.sociobot.in/","https://context-vocabulary-capture.sociobot.in/assets/index-Dzjv1zer.js","https://context-vocabulary-capture.sociobot.in/assets/index-CFkQbq2z.css","https://context-vocabulary-capture.sociobot.in/assets/dithered-reading-margin.webp"]
+ERRORS []

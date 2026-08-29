@@ -1,0 +1,120 @@
+
+### /
+HTTP/2 200 
+content-type: text/html
+cache-control: public, must-revalidate, max-age=30
+etag: "29778856"
+last-modified: Sat, 29 Aug 2026 11:51:14 GMT
+content-length: 1596
+strict-transport-security: max-age=10886400; includeSubDomains; preload
+referrer-policy: strict-origin-when-cross-origin
+x-content-type-options: nosniff
+content-security-policy: default-src 'self'; img-src 'self' data:; style-src 'self'; script-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'
+
+### /demo
+HTTP/2 200 
+content-type: text/html
+cache-control: public, must-revalidate, max-age=30
+etag: "29778856"
+last-modified: Sat, 29 Aug 2026 11:51:14 GMT
+content-length: 1596
+strict-transport-security: max-age=10886400; includeSubDomains; preload
+referrer-policy: strict-origin-when-cross-origin
+x-content-type-options: nosniff
+content-security-policy: default-src 'self'; img-src 'self' data:; style-src 'self'; script-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'
+
+### /privacy
+HTTP/2 200 
+content-type: text/html
+cache-control: public, must-revalidate, max-age=30
+etag: "29778856"
+last-modified: Sat, 29 Aug 2026 11:51:14 GMT
+content-length: 1596
+strict-transport-security: max-age=10886400; includeSubDomains; preload
+referrer-policy: strict-origin-when-cross-origin
+x-content-type-options: nosniff
+content-security-policy: default-src 'self'; img-src 'self' data:; style-src 'self'; script-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'
+
+### /terms
+HTTP/2 200 
+content-type: text/html
+cache-control: public, must-revalidate, max-age=30
+etag: "29778856"
+last-modified: Sat, 29 Aug 2026 11:51:14 GMT
+content-length: 1596
+strict-transport-security: max-age=10886400; includeSubDomains; preload
+referrer-policy: strict-origin-when-cross-origin
+x-content-type-options: nosniff
+content-security-policy: default-src 'self'; img-src 'self' data:; style-src 'self'; script-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'
+
+### /assets/index-Dzjv1zer.js
+HTTP/2 200 
+content-type: text/javascript
+cache-control: public, max-age=31536000, immutable
+etag: "29778856"
+last-modified: Sat, 29 Aug 2026 11:51:14 GMT
+content-length: 16609
+strict-transport-security: max-age=10886400; includeSubDomains; preload
+referrer-policy: strict-origin-when-cross-origin
+x-content-type-options: nosniff
+content-security-policy: default-src 'self'; img-src 'self' data:; style-src 'self'; script-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'
+
+### /assets/index-CFkQbq2z.css
+HTTP/2 200 
+content-type: text/css
+cache-control: public, max-age=31536000, immutable
+etag: "29778856"
+last-modified: Sat, 29 Aug 2026 11:51:14 GMT
+content-length: 9724
+strict-transport-security: max-age=10886400; includeSubDomains; preload
+referrer-policy: strict-origin-when-cross-origin
+x-content-type-options: nosniff
+content-security-policy: default-src 'self'; img-src 'self' data:; style-src 'self'; script-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'
+
+### /assets/dithered-reading-margin.webp
+HTTP/2 200 
+content-type: image/webp
+cache-control: public, max-age=0, must-revalidate
+etag: "29778856"
+last-modified: Sat, 29 Aug 2026 11:51:14 GMT
+content-length: 74024
+strict-transport-security: max-age=10886400; includeSubDomains; preload
+referrer-policy: strict-origin-when-cross-origin
+x-content-type-options: nosniff
+content-security-policy: default-src 'self'; img-src 'self' data:; style-src 'self'; script-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'
+
+### /downloads/keep-the-sentence-extension.zip
+HTTP/2 200 
+content-type: application/zip
+cache-control: public, must-revalidate, max-age=30
+etag: "29778856"
+last-modified: Sat, 29 Aug 2026 11:51:14 GMT
+content-length: 10865
+strict-transport-security: max-age=10886400; includeSubDomains; preload
+referrer-policy: strict-origin-when-cross-origin
+x-content-type-options: nosniff
+content-security-policy: default-src 'self'; img-src 'self' data:; style-src 'self'; script-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'
+
+### /downloads/INSTALL.md
+HTTP/2 200 
+content-type: application/octet-stream
+cache-control: public, must-revalidate, max-age=30
+etag: "29778856"
+last-modified: Sat, 29 Aug 2026 11:51:14 GMT
+content-length: 487
+strict-transport-security: max-age=10886400; includeSubDomains; preload
+referrer-policy: strict-origin-when-cross-origin
+x-content-type-options: nosniff
+content-security-policy: default-src 'self'; img-src 'self' data:; style-src 'self'; script-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'
+
+### /definitely-missing-verify-7
+HTTP/2 404 
+content-type: text/html
+cache-control: public, must-revalidate, max-age=30
+etag: "29778856"
+last-modified: Sat, 29 Aug 2026 11:51:14 GMT
+content-length: 2109
+strict-transport-security: max-age=10886400; includeSubDomains; preload
+referrer-policy: strict-origin-when-cross-origin
+x-content-type-options: nosniff
+content-security-policy: default-src 'self'; img-src 'self' data:; style-src 'self'; script-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'

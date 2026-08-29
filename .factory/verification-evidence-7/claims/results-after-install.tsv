@@ -1,0 +1,13 @@
+1	csv-export	0	npm run test:browser -- --grep @claim:csv-export
+2	local-only	0	npm run test:browser -- --grep @claim:local-only
+3	no-account	0	npm run test:unit -- --testNamePattern @claim:no-account
+4	demo-sandbox	0	npm run test:browser -- --grep @claim:demo-sandbox
+5	demo-discard-on-exit	0	npm run test:browser -- --grep @claim:demo-discard-on-exit
+6	encrypted-storage	0	npm run test:unit -- --testNamePattern @claim:encrypted-storage
+7	offline-review	0	npm run test:browser -- --grep @claim:offline-review
+8	source-context-capture	0	npm run test:browser -- --grep @claim:source-context-capture
+9	supported-chromium-pages	0	npm run test:browser -- --grep @claim:supported-chromium-pages
+10	storage-scope	0	npm run test:browser -- --grep @claim:storage-scope
+11	no-analytics	0	npm run test:browser -- --grep @claim:no-analytics
+12	extension-download	0	npm run test:browser -- --grep @claim:extension-download
+13	unpacked-install	0	npm run test:browser -- --grep @claim:unpacked-install

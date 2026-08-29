@@ -1,0 +1,30 @@
+[
+  {
+    "tag": "BUTTON",
+    "text": "Export CSV",
+    "outline": "rgb(216, 90, 42) solid 3px",
+    "outlineColor": "rgb(216, 90, 42)",
+    "outlineWidth": "3px"
+  },
+  {
+    "tag": "BODY",
+    "text": "///Keep the Sentence1 saved locallyNo phrases due todaySelect a phrase on any page. Choose “Keep this sentence”.Saved phrasesExport CSVquietly heldReading fixture1 review",
+    "outline": "rgb(23, 22, 20) none 0px",
+    "outlineColor": "rgb(23, 22, 20)",
+    "outlineWidth": "0px"
+  },
+  {
+    "tag": "BUTTON",
+    "text": "Export CSV",
+    "outline": "rgb(216, 90, 42) solid 3px",
+    "outlineColor": "rgb(216, 90, 42)",
+    "outlineWidth": "3px"
+  },
+  {
+    "tag": "BODY",
+    "text": "///Keep the Sentence1 saved locallyNo phrases due todaySelect a phrase on any page. Choose “Keep this sentence”.Saved phrasesExport CSVquietly heldReading fixture1 review",
+    "outline": "rgb(23, 22, 20) none 0px",
+    "outlineColor": "rgb(23, 22, 20)",
+    "outlineWidth": "0px"
+  }
+]
