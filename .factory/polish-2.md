@@ -1,6 +1,6 @@
 # Polish 2 — cumulative review remediation evidence
 
-**Repair commit:** `058371527c3479c470358c7545f83aed79c20938`
+**Repair commits:** `058371527c3479c470358c7545f83aed79c20938` (product repair), `862438e` (reviewed-record claim evidence)
 **Reviewed base:** `4b3567582bf8864c08be3c7dd8824588eef49cad`
 **Live URL:** <https://context-vocabulary-capture.sociobot.in>
 

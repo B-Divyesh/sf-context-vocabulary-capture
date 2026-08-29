@@ -1,6 +1,6 @@
 # Polish 2 handoff — PASS
 
-**Repair commit:** `058371527c3479c470358c7545f83aed79c20938`
+**Repair commits:** `058371527c3479c470358c7545f83aed79c20938` (product repair), `862438e` (reviewed-record claim evidence)
 **Deployed URL:** <https://context-vocabulary-capture.sociobot.in>
 **Deploy:** `/opt/fleet/lib/deploy-static.sh context-vocabulary-capture dist/site`
 
