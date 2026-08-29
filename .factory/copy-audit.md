@@ -19,8 +19,7 @@ selected and saved vocabulary.
 | 3 | Nothing due today. |
 | 9 | Saved phrases will appear here after you capture one. |
 | 4 | No saved phrases yet. |
-| 2 | Keep reading. |
-| 3 | Keep the source. |
+| 8 | Save and review a phrase in three steps. |
 | 3 | Select the phrase. |
 | 8 | Choose “Keep this sentence” from the page menu. |
 | 4 | Write a short meaning. |
@@ -58,7 +57,7 @@ selected and saved vocabulary.
 | 3 | Try sample phrases |
 | 2 | Saved phrases |
 | 2 | 0 total |
-| 5 | What it does not do |
+| 4 | Privacy and data export |
 | 3 | Install the extension |
 | 8 | Capture phrases from regular web pages in Chromium. |
 | 3 | Download extension ZIP |
@@ -102,7 +101,7 @@ selected and saved vocabulary.
 | 9 | Do not use the extension to redistribute source text. |
 | 10 | You are responsible for the web pages you select from. |
 | 5 | The extension is provided as-is. |
-| 7 | This page is not in the notebook. |
+| 6 | This page could not be found. |
 | 8 | Try the home page or the sample phrases. |
 | 2 | Go home |
 
@@ -138,10 +137,10 @@ selected and saved vocabulary.
 | 17 | Keep the Sentence is a local browser extension for language learners reading regular web pages in Chromium. |
 | 20 | Select a phrase, save nearby sentences and its source link, write your own meaning, and review it later in context. |
 | 12 | It saves a selected phrase with nearby sentences and its source link. |
-| 2 | Try it |
+| 4 | Try the sample demo |
 | 11 | Open /?demo=1 after starting the site, or visit the live demo. |
 | 11 | It loads three sample phrases in a separate demo: storage namespace. |
-| 13 | The banner can reset the samples or discard them and start for real. |
+| 11 | The banner can reset the samples, and leaving Demo discards them. |
 | 3 | Install the extension |
 | 3 | Run the build. |
 | 6 | The packaged extension is at dist/site/downloads/keep-the-sentence-extension.zip. |

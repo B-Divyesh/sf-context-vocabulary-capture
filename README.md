@@ -4,9 +4,9 @@ Keep the Sentence is a local browser extension for language learners reading reg
 
 It saves a selected phrase with nearby sentences and its source link.
 
-## Try it
+## Try the sample demo
 
-Open `/?demo=1` after starting the site, or visit [the live demo](https://context-vocabulary-capture.sociobot.in/?demo=1). It loads three sample phrases in a separate `demo:` storage namespace. The banner can reset the samples or discard them and start for real.
+Open `/?demo=1` after starting the site, or visit [the live demo](https://context-vocabulary-capture.sociobot.in/?demo=1). It loads three sample phrases in a separate `demo:` storage namespace. The banner can reset the samples, and leaving Demo discards them.
 
 ## Install the extension
 

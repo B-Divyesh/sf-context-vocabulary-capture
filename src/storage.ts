@@ -2,7 +2,11 @@ import { type Capture, type EncryptedVault, type Vault, createDeviceKey, decrypt
 
 const KEY = 'keep-the-sentence:vault';
 const DEVICE_KEY = 'keep-the-sentence:device-key';
-type Store = { get: (key: string) => Promise<unknown>; set: (items: Record<string, unknown>) => Promise<void> };
+type Store = {
+  get: (key: string) => Promise<unknown>;
+  set: (items: Record<string, unknown>) => Promise<void>;
+  remove: (keys: string[]) => Promise<void>;
+};
 
 function chromeStore(): Store | null {
   const area = globalThis.chrome?.storage?.local;
@@ -10,12 +14,14 @@ function chromeStore(): Store | null {
   return {
     get: async (key) => (await area.get(key))[key],
     set: async (items) => { await area.set(items); },
+    remove: async (keys) => { await area.remove(keys); },
   };
 }
 function localStore(): Store {
   return {
     get: async (key) => { const value = localStorage.getItem(key); return value ? JSON.parse(value) : undefined; },
     set: async (items) => Object.entries(items).forEach(([key, value]) => localStorage.setItem(key, JSON.stringify(value))),
+    remove: async (keys) => keys.forEach((key) => localStorage.removeItem(key)),
   };
 }
 function store(): Store { return chromeStore() ?? localStore(); }
@@ -46,3 +52,7 @@ export async function reviewCapture(id: string, namespace = ''): Promise<void> {
 }
 export async function replaceRecords(records: Capture[], namespace = ''): Promise<void> { await writeVault({ version: 1, records }, namespace); }
 export async function clearVault(namespace = ''): Promise<void> { await writeVault({ version: 1, records: [] }, namespace); }
+/** Remove a vault and its key together. This is used for disposable demo data. */
+export async function discardVault(namespace = ''): Promise<void> {
+  await store().remove([`${namespace}${KEY}`, `${namespace}${DEVICE_KEY}`]);
+}

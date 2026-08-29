@@ -1,5 +1,6 @@
 import { expect, test } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
+import { SAMPLE_RECORDS, createDeviceKey, encryptVault, exportKey } from '../../src/core';
 
 const siteOrigin = (process.env.PLAYWRIGHT_BASE_URL ?? 'http://127.0.0.1:4173').replace(/\/$/, '');
 
@@ -38,17 +39,49 @@ test('@claim:demo-sandbox loads sample data from the direct demo URL and can res
   await expect(page).toHaveURL(`${siteOrigin}/`);
   await expect(page.getByText('Demo — sample data, nothing is saved')).toHaveCount(0);
   await expect(page.getByRole('heading', { name: 'Nothing due today.' })).toBeVisible();
-  const exitState = await page.evaluate(async () => {
-    const savedKey = JSON.parse(localStorage.getItem('demo:keep-the-sentence:device-key') ?? 'null') as string | null;
-    const savedVault = JSON.parse(localStorage.getItem('demo:keep-the-sentence:vault') ?? 'null') as { iv: string; cipher: string } | null;
-    if (!savedKey || !savedVault) return { demoRecords: -1, realKeys: [] as string[] };
-    const decode = (value: string) => Uint8Array.from(atob(value), (character) => character.charCodeAt(0));
-    const key = await crypto.subtle.importKey('raw', decode(savedKey), { name: 'AES-GCM' }, false, ['decrypt']);
-    const clear = await crypto.subtle.decrypt({ name: 'AES-GCM', iv: decode(savedVault.iv) }, key, decode(savedVault.cipher));
-    const vault = JSON.parse(new TextDecoder().decode(clear)) as { records: unknown[] };
-    return { demoRecords: vault.records.length, realKeys: Object.keys(localStorage).filter((name) => !name.startsWith('demo:')) };
-  });
-  expect(exitState).toEqual({ demoRecords: 0, realKeys: [] });
+  const exitState = await page.evaluate(() => Object.keys(localStorage));
+  expect(exitState.filter((key) => key.startsWith('demo:'))).toEqual([]);
+  expect(exitState.filter((key) => !key.startsWith('demo:'))).toEqual([]);
+});
+
+test('@claim:demo-discard-on-exit discards changed sample data on a header exit and preserves real records', async ({ page }) => {
+  const realKey = await createDeviceKey();
+  const realVault = await encryptVault({ version: 1, records: [SAMPLE_RECORDS[2]] }, realKey);
+  const seed = { key: await exportKey(realKey), vault: realVault };
+  await page.goto('/');
+  await page.evaluate(({ key, vault }) => {
+    localStorage.setItem('keep-the-sentence:device-key', JSON.stringify(key));
+    localStorage.setItem('keep-the-sentence:vault', JSON.stringify(vault));
+  }, seed);
+  const realBefore = await page.evaluate(() => ({
+    key: localStorage.getItem('keep-the-sentence:device-key'),
+    vault: localStorage.getItem('keep-the-sentence:vault'),
+  }));
+
+  await page.goto('/?demo=1');
+  await page.getByRole('button', { name: 'Mark phrase as remembered' }).click();
+  await expect(page.locator('.review-action')).toContainText('recoger el hilo');
+  await page.getByRole('navigation').getByRole('link', { name: 'Privacy' }).click();
+  await expect(page).toHaveURL(`${siteOrigin}/privacy`);
+  const afterExit = await page.evaluate(() => ({
+    demoKeys: Object.keys(localStorage).filter((key) => key.startsWith('demo:')),
+    key: localStorage.getItem('keep-the-sentence:device-key'),
+    vault: localStorage.getItem('keep-the-sentence:vault'),
+  }));
+  expect(afterExit).toEqual({ demoKeys: [], ...realBefore });
+
+  await page.getByRole('navigation').getByRole('link', { name: 'Demo' }).click();
+  await expect(page.getByRole('heading', { name: 'Read the sentence first.' })).toBeVisible();
+  await expect(page.locator('.review-action')).toContainText('quietly held');
+  await expect(page.getByText('3 total')).toBeVisible();
+});
+
+test('discards demo keys on a full page navigation away from Demo', async ({ page }) => {
+  await page.goto('/demo');
+  await page.getByRole('button', { name: 'Mark phrase as remembered' }).click();
+  await page.goto('/privacy');
+  await expect(page.getByRole('heading', { name: 'Your reading notes stay on your device.' })).toBeVisible();
+  expect(await page.evaluate(() => Object.keys(localStorage).filter((key) => key.startsWith('demo:')))).toEqual([]);
 });
 
 test('opens the isolated sample review in one click from the first screen', async ({ page }) => {
@@ -99,7 +132,7 @@ test('routes How it works from every public page to the landing section and pres
     await page.getByRole('navigation').getByRole('link', { name: 'How it works' }).click();
     await expect(page).toHaveURL(/\/#how$/);
     await expect(page.locator('#how')).toBeFocused();
-    await expect(page.locator('#how')).toContainText('Keep reading. Keep the source.');
+    await expect(page.locator('#how')).toContainText('Save and review a phrase in three steps.');
     await page.goBack();
     await expect(page).toHaveURL(new RegExp(`${path}$`));
     await expect(page.getByRole('heading', { level: 1 })).toBeFocused();
@@ -136,7 +169,7 @@ test('returns a CSP-clean, fully structured 404 response', async ({ page }) => {
   await expect(page).toHaveTitle('Page not found — Keep the Sentence');
   await expect(page.locator('header nav')).toBeVisible();
   await expect(page.locator('a.skip')).toHaveAttribute('href', '#main');
-  await expect(page.locator('main h1')).toHaveText('This page is not in the notebook.');
+  await expect(page.locator('main h1')).toHaveText('This page could not be found.');
   await expect(page.locator('footer')).toContainText('Privacy');
   await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', 'https://context-vocabulary-capture.sociobot.in/404');
   await expect(page.locator('meta[name="description"]')).toHaveAttribute('content', 'Return to Keep the Sentence to save and review phrases with their source sentences.');
