@@ -1,4 +1,4 @@
-# Repair 5 handoff — local verification complete
+# Repair 5 handoff — PASS
 
 **Work order:** `context-vocabulary-capture-repair-5`
 
@@ -66,8 +66,40 @@ Evidence is in `.factory/evidence-repair-5-local-root/` and
 
 ## Deployment
 
-The static deployment and live verification are recorded after the repaired
-commit is pushed.
+Committed and pushed the repair as `bd9c6c8` (`fix: repair install recovery and
+focus flow`). Deployed `dist/site` with:
+
+```sh
+/opt/fleet/lib/deploy-static.sh context-vocabulary-capture dist/site
+```
+
+Azure deployment `358d3fa4-9076-4dc4-9eb4-10d36f38ae1c` succeeded. The public
+URL is <https://context-vocabulary-capture.sociobot.in>.
+
+`/opt/fleet/lib/verify-url.sh` passed against the live URL with no console
+errors. It confirmed the title, `lang`, one h1, main landmark, alt text, and
+labels. Live headers include HSTS, `nosniff`, strict-origin referrer policy,
+and the self-only CSP with header-delivered `frame-ancestors 'none'`. The
+unknown-route response is HTTP 404.
+
+The live `index.html` SHA-256 is
+`4aec38c620c5721f56be8a811452abe02aa8c9b503aa22679e2defc5d184d4c8` and
+matches local. The live landing JavaScript SHA-256 is
+`1e64da9cc01a70a1777ae11fe0127d176e89b6beb7e0472f6f16d5fa6fa9e8cf` and
+matches local. The live ZIP passed `unzip -t`; recursively extracted contents
+match the local production package and contain `INSTALL.md`.
+
+```sh
+PLAYWRIGHT_BASE_URL=https://context-vocabulary-capture.sociobot.in \
+  npx playwright test tests/browser/demo.spec.ts tests/browser/copy-audit.spec.ts
+```
+
+The live desktop/mobile site and copy suite passed 22/22, including the new
+unpacked-install, real/demo recovery, keyboard focus, privacy, route, 404, and
+axe checks. Live Lighthouse on `/demo` scored Performance 100, Accessibility
+100, Best Practices 100, and SEO 100; LCP was 832 ms, CLS 0, and TBT 0 ms.
+Live evidence is in `.factory/evidence-repair-5-live-root/` and
+`.factory/evidence-repair-5-live-lighthouse.json`.
 
 ## Known gaps
 
