@@ -1,6 +1,8 @@
 import { expect, test } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
 
+const siteOrigin = (process.env.PLAYWRIGHT_BASE_URL ?? 'http://127.0.0.1:4173').replace(/\/$/, '');
+
 test('@claim:csv-export downloads the sample records with their source context', async ({ page }) => {
   await page.goto('/demo');
   const download = page.waitForEvent('download');
@@ -17,7 +19,7 @@ test('keeps demo network requests on the same origin', async ({ page }) => {
   page.on('request', (request) => requests.push(request.url()));
   await page.goto('/demo');
   await page.getByRole('button', { name: 'Mark phrase as remembered' }).click();
-  expect(requests.every((url) => new URL(url).origin === 'http://127.0.0.1:4173')).toBe(true);
+  expect(requests.every((url) => new URL(url).origin === siteOrigin)).toBe(true);
   const stored = await page.evaluate(() => Object.values(localStorage).join(' '));
   expect(stored).not.toContain('example.org');
 });
@@ -33,7 +35,7 @@ test('@claim:demo-sandbox loads sample data from the direct demo URL and can res
   expect(storageKeys).toContain('demo:keep-the-sentence:device-key');
   expect(storageKeys).not.toContain('keep-the-sentence:device-key');
   await page.getByRole('link', { name: 'Start for real' }).click();
-  await expect(page).toHaveURL('http://127.0.0.1:4173/');
+  await expect(page).toHaveURL(`${siteOrigin}/`);
   await expect(page.getByText('Demo — sample data, nothing is saved')).toHaveCount(0);
   await expect(page.getByRole('heading', { name: 'Nothing due today.' })).toBeVisible();
   const exitState = await page.evaluate(async () => {
@@ -52,7 +54,7 @@ test('@claim:demo-sandbox loads sample data from the direct demo URL and can res
 test('opens the isolated sample review in one click from the first screen', async ({ page }) => {
   await page.goto('/');
   await page.getByRole('link', { name: 'Try it with sample data' }).click();
-  await expect(page).toHaveURL('http://127.0.0.1:4173/demo');
+  await expect(page).toHaveURL(`${siteOrigin}/demo`);
   await expect(page.getByText('Demo — sample data, nothing is saved')).toBeVisible();
   await expect(page.getByRole('heading', { name: 'Review a saved phrase in context.' })).toBeVisible();
   await expect(page.getByText('3 total')).toBeVisible();
@@ -85,7 +87,7 @@ test('serves every public route and every same-origin link', async ({ page }) =>
   }
   for (const href of links) {
     const url = new URL(href);
-    if (url.origin !== 'http://127.0.0.1:4173') continue;
+    if (url.origin !== siteOrigin) continue;
     url.hash = '';
     expect((await page.request.get(url.toString())).status(), url.toString()).toBe(200);
   }
@@ -174,6 +176,7 @@ test('keeps every route structured, linked, and usable at mobile width', async (
     await expect(page.locator('footer').getByRole('link', { name: 'Privacy' })).toBeVisible();
     await expect(page.locator('footer').getByRole('link', { name: 'Terms' })).toBeVisible();
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= document.documentElement.clientWidth)).toBe(true);
+    if (['/privacy', '/terms', '/missing'].includes(path)) expect((await page.getByRole('heading', { level: 1 }).boundingBox())?.x).toBeGreaterThanOrEqual(16);
     const undersized = await page.locator('a, button, summary').evaluateAll((elements) => elements.flatMap((element) => {
       const box = element.getBoundingClientRect();
       const visible = box.width > 0 && box.height > 0;
