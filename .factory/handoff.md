@@ -1,3 +1,29 @@
+# Verification 8 handoff — PASS
+
+**Work order:** `context-vocabulary-capture-verify-8`
+**Verified candidate:** `a7b69e828580a211ddf74c0a3c398bf10fd0a05a`
+**Live URL:** <https://context-vocabulary-capture.sociobot.in>
+
+## Current verdict
+
+**PASS.** The candidate meets the researched brief: a free, local-first MV3 Chromium extension captures a selected phrase, nearby source context, title and link, language, and learner-written meaning; it encrypts local records, reviews them offline, and exports CSV. The live site has a one-click isolated sample demo and distributes a working unpacked-extension ZIP.
+
+## Verification 8 summary
+
+- Clean `npm ci`; all 13 exact `.factory/claims.json` commands passed.
+- `npm run lint`, `npx tsc --noEmit`, `npm test` (8 unit + 31 browser tests), and `npm run build` passed.
+- Independently exercised normal capture/review/export, repeated-selection boundary behavior, offline review, malformed-data recovery, demo reset/exit, and clean Chromium unpacked installation.
+- Checked cold live first-read, one-click demo, 390 px mobile, keyboard-only traversal, reduced motion, live request log, headers, five-route Axe scans, bundle budgets, and Lighthouse.
+- Live JS/CSS hashes and all extracted extension ZIP contents match the candidate. No console/page errors or third-party requests were observed.
+
+No product defects found. Live Lighthouse: Performance 97, Accessibility 100, Best Practices 100, SEO 100; LCP 1.23 s; CLS 0. Initial JS is 6,166 bytes gzip.
+
+One externally pointed test fixture cannot run because it hard-codes local port 4173; this is harness-only. The complete local extension suite passes, and the published ZIP's extracted contents are byte-identical to the candidate.
+
+See [verification-8.md](verification-8.md) for claim-by-claim results, privacy/header evidence, and the severity table.
+
+---
+
 # Polish 5 handoff — PASS
 
 **Work order:** `context-vocabulary-capture-polish-5`
