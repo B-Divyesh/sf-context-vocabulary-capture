@@ -10,7 +10,7 @@
 - Surface: `#fffaf0` (page edge)
 - Ink: `#171614`
 - Muted ink: `#625d54`
-- Cobalt: `#1647b7`; cobalt ink: `#ffffff` (8.4:1)
+- Cobalt: `#1647b7`; cobalt ink: `#ffffff` (8.0:1)
 - Tangerine: `#d85a2a`
 - Success: `#176b4d`; warning: `#9a4d08`; danger: `#a02323`
 - 1px ink rules, 3px offset cobalt shadows, 12px rounded but visibly printed corners
