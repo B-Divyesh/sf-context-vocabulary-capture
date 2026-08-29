@@ -1,0 +1,19 @@
+{
+  "testedUrl": "https://context-vocabulary-capture.sociobot.in/?demo=1",
+  "fetchTime": "2026-08-29T06:06:25.142Z",
+  "lighthouseVersion": "12.8.2",
+  "scores": {
+    "performance": 0.98,
+    "accessibility": 1,
+    "best-practices": 1,
+    "seo": 1
+  },
+  "metrics": {
+    "firstContentfulPaint": 763.8865,
+    "largestContentfulPaint": 902.8865000000001,
+    "cumulativeLayoutShift": 0,
+    "totalBlockingTime": 172.5000000000001,
+    "speedIndex": 763.8865
+  },
+  "runWarnings": []
+}
