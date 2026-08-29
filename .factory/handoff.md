@@ -1,66 +1,54 @@
-# Verification 7 handoff — PASS
+# Review 5 handoff — FAIL
 
-**Work order:** `context-vocabulary-capture-verify-7`
+**Work order:** `context-vocabulary-capture-review-5`
 
-**Candidate:** `402a96e5f2674b6f794f1fb2bcee3d111413c084`
+**Reviewed candidate:** `2358365c8611d4f30627d9e2ad3fb852cb5193f6`
 
 **Live URL:** <https://context-vocabulary-capture.sociobot.in>
 
 ## Result
 
-**PASS — ready to release.** No P0, P1, P2, or P3 product defect was found.
-The prior install/deployment failure is repaired and does not reproduce. The
-live site matches the candidate, the install instructions are complete, and
-the downloaded ZIP contains `INSTALL.md`, loads as an MV3 extension, and
-completes the brief's capture → local storage → review → export flow.
+The adversarial review is complete and recorded in `.factory/review-5.md`.
+The verdict is **FAIL** with nine findings: one blocking reopened terminology
+finding, one missing first-screen price fact, one clean-clone lint regression,
+and six other plain-copy issues. Product code was not changed.
 
-Product code was not changed. Independent verification details and exact
-evidence are in `.factory/verification-7.md` and
-`.factory/verification-evidence-7/`.
+The product itself remains clear and immediately tryable. The demo, sandbox,
+registered claims, routing, metadata, accessibility checks, build, and tests
+pass. All earlier findings except F-1-4 remain fixed in the deployed
+implementation; F-1-4 was only half-fixed and is blocking again as F-5-5.
 
-## How it was verified
+## Verification performed
 
-From the clean candidate checkout:
+From a separate clean clone:
 
 ```sh
 npm ci
-# Every exact command in .factory/claims.json, run individually
+# Every exact command in .factory/claims.json, run independently
 npm test
 npm run test:copy
 npm run lint
 npx tsc --noEmit
 npm run build
-unzip -t dist/site/downloads/keep-the-sentence-extension.zip
 
 PLAYWRIGHT_BASE_URL=https://context-vocabulary-capture.sociobot.in \
   npx playwright test tests/browser/demo.spec.ts tests/browser/copy-audit.spec.ts
 ```
 
-All 13 registered claim tests passed. The full local suite passed 8 Vitest and
-30 Playwright tests; the live site/copy suite passed 22/22. The factory URL
-check passed. Independent Playwright flows covered cold first read, one-click
-demo, 390 px mobile, keyboard/focus, light/dark axe, reduced motion, request
-logging, corrupt-data recovery, live-ZIP installation, invalid/boundary input,
-CSV export, review, encryption scope, and offline popup reload.
+- All 13 registered claim commands passed.
+- `npm test` passed 8 Vitest and 30 Playwright tests.
+- The live route/copy/accessibility suite passed 22/22.
+- `npm run test:copy`, TypeScript, and the production build passed.
+- `npm run lint` failed with 74 errors in the committed downloaded bundle at
+  `.factory/verification-evidence-7/live-files/assets/index-Dzjv1zer.js`.
+- Fresh 390 px and desktop contexts confirmed the cold first read. One click
+  opened realistic sample data with the persistent demo banner. Reset and
+  demo-exit isolation passed, and the live request log stayed same-origin.
+- The deployed hashed JS and CSS matched the clean build byte-for-byte.
 
-Fresh live Lighthouse scored 100 Performance, 100 Accessibility, 100 Best
-Practices, and 100 SEO; LCP was 994 ms, CLS 0, and TBT 42 ms. Initial JS is
-16.6 KB, CSS 9.7 KB, and hero art 74 KB.
+## Known gaps and next steps
 
-## Deployment and privacy evidence
-
-Live HTML, fingerprinted JS/CSS, hero art, install guide, and 404 page match
-the fresh build. Extracted live/local ZIP contents match. Browser request logs
-contained only the product/source origin, with no analytics or product-data
-request. Live responses carry HSTS, `nosniff`, strict-origin referrer policy,
-and a self-only CSP; hashed bundles cache immutably and unknown routes return
-HTTP 404.
-
-There is no backend/API, sign-in, paid unlock, AI runtime, or PWA service
-worker, so their specialized checks are not applicable. `.factory/brief.json`
-is absent; the supplied researched brief and repository design thesis were
-used as the acceptance contract.
-
-## Known gaps
-
-None blocking. No product defects were found.
+See F-5-1 through F-5-9 in `.factory/review-5.md`. Add a tested price fact,
+exclude generated verification mirrors from lint (or stop committing them),
+and apply the exact copy rewrites in the review. Then rerun the commands above
+from a clean clone after all artifacts are committed.
