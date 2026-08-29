@@ -1,6 +1,7 @@
 import { defineConfig } from 'wxt';
 
 export default defineConfig({
+  publicDir: 'extension-public',
   manifest: {
     name: 'Keep the Sentence',
     description: 'Save a phrase with its source sentence, then review it locally.',
