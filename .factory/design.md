@@ -10,12 +10,11 @@
 - Surface: `#fffaf0` (page edge)
 - Ink: `#171614`
 - Muted ink: `#625d54`
-- Cobalt: `#1647b7`
-- Cobalt ink: `#ffffff`
+- Cobalt: `#1647b7`; cobalt ink: `#ffffff` (8.4:1)
 - Tangerine: `#d85a2a`
 - Success: `#176b4d`; warning: `#9a4d08`; danger: `#a02323`
 - 1px ink rules, 3px offset cobalt shadows, 12px rounded but visibly printed corners
-- 8px spacing scale; generous 48/72px section breaks. Dark mode uses `#171614` paper, `#25231f` surface, and `#f8f2e7` ink.
+- 8px spacing scale; generous 48/72px section breaks. Dark mode uses `#171614` paper, `#25231f` surface, and `#f8f2e7` ink. Primary actions use light cobalt `#7da8ff` with ink-black `#171614` text (7.7:1).
 
 ## Type and interaction
 

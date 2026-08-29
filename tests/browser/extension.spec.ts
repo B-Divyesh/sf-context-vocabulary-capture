@@ -72,6 +72,42 @@ async function openPopup(session: ExtensionSession) {
 
 test.describe.configure({ mode: 'serial' });
 
+test('uses the selected occurrence when a phrase repeats in one paragraph', async () => {
+  const session = await openExtension();
+  try {
+    await session.page.goto(`${sourceOrigin}/extension-fixture.html`);
+    await session.page.locator('#repeated-text').evaluate((element) => {
+      const text = element.firstChild!;
+      const phrase = text.textContent!.lastIndexOf('target');
+      const range = document.createRange();
+      range.setStart(text, phrase); range.setEnd(text, phrase + 'target'.length);
+      const selection = window.getSelection()!;
+      selection.removeAllRanges(); selection.addRange(range);
+    });
+    await expect.poll(() => session.page.evaluate(() => window.getSelection()?.toString())).toBe('target');
+    await session.worker.evaluate(async () => {
+      const [tab] = await chrome.tabs.query({ url: 'http://127.0.0.1:4173/extension-fixture.html' });
+      if (!tab?.id) throw new Error('The reading fixture tab was not found.');
+      await chrome.tabs.sendMessage(tab.id, { type: 'open-capture', selectionText: 'target' });
+    });
+    const dialog = session.page.locator('#keep-sentence-capture').locator('[role="dialog"]');
+    await expect(dialog.locator('.context')).toHaveText(
+      'Several pages later, rain began to fall. The target appeared beside the harbour. This second passage ended loudly.',
+    );
+    await dialog.getByLabel('Your meaning').fill('the selected harbour occurrence');
+    await dialog.getByRole('button', { name: 'Save phrase' }).click();
+    await expect(dialog).toContainText('Saved. You can review it in the extension.');
+    const stored = await session.worker.evaluate(async () => chrome.storage.local.get([
+      'keep-the-sentence:vault', 'keep-the-sentence:device-key',
+    ]));
+    const vault = await decryptVault(stored['keep-the-sentence:vault'] as EncryptedVault, await importKey(stored['keep-the-sentence:device-key'] as string));
+    expect(vault.records[0]).toMatchObject({
+      phrase: 'target',
+      context: 'Several pages later, rain began to fall. The target appeared beside the harbour. This second passage ended loudly.',
+    });
+  } finally { await session.close(); }
+});
+
 test('@claim:offline-review captures a phrase and reopens its review offline', async () => {
   const session = await openExtension();
   try {

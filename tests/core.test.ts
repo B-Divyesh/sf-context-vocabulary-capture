@@ -1,10 +1,16 @@
 import { describe, expect, it } from 'vitest';
-import { SAMPLE_RECORDS, createDeviceKey, decryptVault, encryptVault, makeCsv, sentenceContext } from '../src/core';
+import { SAMPLE_RECORDS, createDeviceKey, decryptVault, encryptVault, makeCsv, sentenceContext, sentenceContextAt } from '../src/core';
 
 describe('context extraction', () => {
   it('keeps the selected sentence and its neighbours', () => {
     const text = 'The first train arrived late. Nora quietly held the door. Everyone stepped inside.';
     expect(sentenceContext(text, 'quietly held')).toBe('The first train arrived late. Nora quietly held the door. Everyone stepped inside.');
+  });
+  it('uses the supplied occurrence offset when selected text repeats', () => {
+    const text = 'The target appeared beside the station. This first passage ended quietly. Several pages later, rain began to fall. The target appeared beside the harbour. This second passage ended loudly.';
+    expect(sentenceContextAt(text, text.lastIndexOf('target'))).toBe(
+      'Several pages later, rain began to fall. The target appeared beside the harbour. This second passage ended loudly.',
+    );
   });
 });
 describe('encrypted local vault', () => {

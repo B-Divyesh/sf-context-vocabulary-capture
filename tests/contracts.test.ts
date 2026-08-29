@@ -29,5 +29,16 @@ describe('factory acceptance contracts', () => {
     expect(description.length).toBeLessThanOrEqual(120);
     expect(description).not.toContain('\n');
   });
-});
 
+  it('revalidates stable media while keeping fingerprinted bundles immutable', () => {
+    const config = JSON.parse(readFileSync('public/staticwebapp.config.json', 'utf8')) as {
+      routes: Array<{ route: string; headers?: Record<string, string> }>;
+    };
+    const cacheControl = (route: string) => config.routes.find((entry) => entry.route === route)?.headers?.['Cache-Control'];
+    for (const route of ['/assets/dithered-reading-margin.webp', '/assets/social.png']) {
+      expect(cacheControl(route)).toContain('must-revalidate');
+      expect(cacheControl(route)).not.toContain('immutable');
+    }
+    expect(cacheControl('/assets/index-*')).toContain('immutable');
+  });
+});

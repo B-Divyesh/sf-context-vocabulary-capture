@@ -47,20 +47,37 @@ export function inferLanguage(text: string): string {
   return typeof document !== 'undefined' && document.documentElement.lang ? document.documentElement.lang : 'Unknown';
 }
 
+const normalizedText = (text: string) => text.replace(/\s+/g, ' ').trim();
+
+function contextAtPosition(clean: string, position: number): string {
+  const sentences = [...clean.matchAll(/[^.!?…。！？]+(?:[.!?…。！？]+|$)/g)]
+    .map((match) => {
+      const text = match[0].trim();
+      const leadingSpace = match[0].search(/\S/);
+      const start = (match.index ?? 0) + Math.max(0, leadingSpace);
+      return { text, start, end: start + text.length };
+    })
+    .filter(({ text }) => text.length > 0);
+  if (!sentences.length) return clean;
+  const index = sentences.findIndex(({ start, end }) => position >= start && position < end);
+  const selectedIndex = index < 0 ? sentences.length - 1 : index;
+  const start = Math.max(0, selectedIndex - 1);
+  return sentences.slice(start, Math.min(sentences.length, selectedIndex + 2)).map(({ text }) => text).join(' ');
+}
+
+export function sentenceContextAt(fullText: string, selectedStart: number): string {
+  const clean = normalizedText(fullText);
+  if (!clean) return '';
+  const rawStart = Math.max(0, Math.min(selectedStart, fullText.length));
+  const position = fullText.slice(0, rawStart).replace(/\s+/g, ' ').trimStart().length;
+  return contextAtPosition(clean, Math.min(position, clean.length - 1));
+}
+
 export function sentenceContext(fullText: string, selected: string): string {
-  const clean = fullText.replace(/\s+/g, ' ').trim();
-  const target = selected.replace(/\s+/g, ' ').trim();
+  const clean = normalizedText(fullText);
+  const target = normalizedText(selected);
   const position = clean.toLocaleLowerCase().indexOf(target.toLocaleLowerCase());
-  if (position < 0) return target;
-  const sentences = clean.match(/[^.!?…。！？]+[.!?…。！？]+|[^.!?…。！？]+$/g)?.map((x) => x.trim()).filter(Boolean) ?? [clean];
-  let cursor = 0;
-  const index = sentences.findIndex((sentence) => {
-    const start = cursor;
-    cursor += sentence.length + 1;
-    return position >= start && position < cursor;
-  });
-  const start = Math.max(0, index - 1);
-  return sentences.slice(start, Math.min(sentences.length, index + 2)).join(' ');
+  return position < 0 ? target : contextAtPosition(clean, position);
 }
 
 export function newCapture(fields: Pick<Capture, 'phrase' | 'context' | 'title' | 'url' | 'language' | 'gloss'>): Capture {

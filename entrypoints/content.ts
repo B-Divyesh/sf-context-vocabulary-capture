@@ -1,6 +1,6 @@
 import { defineContentScript } from 'wxt/utils/define-content-script';
 import { browser } from 'wxt/browser';
-import { inferLanguage, sentenceContext } from '../src/core';
+import { inferLanguage, sentenceContext, sentenceContextAt } from '../src/core';
 
 export default defineContentScript({
   matches: ['<all_urls>'],
@@ -13,11 +13,26 @@ export default defineContentScript({
     returnFocus?.focus(); returnFocus = null;
   };
   const selectionData = (fallbackPhrase = '') => {
-    const selected = window.getSelection()?.toString().trim() || fallbackPhrase;
-    const active = window.getSelection()?.anchorNode?.parentElement?.closest('article, main, p, div')?.textContent || document.body.innerText;
+    const selection = window.getSelection();
+    const selected = selection?.toString().trim() || fallbackPhrase;
+    let active = document.body.innerText;
+    let context = sentenceContext(active, selected);
+    if (selection?.rangeCount && !selection.isCollapsed) {
+      const range = selection.getRangeAt(0);
+      const common = range.commonAncestorContainer;
+      const origin = common instanceof Element ? common : common.parentElement;
+      const container = origin?.closest('p, li, blockquote, article, main, div') ?? document.body;
+      const contents = document.createRange();
+      contents.selectNodeContents(container);
+      const beforeSelection = document.createRange();
+      beforeSelection.selectNodeContents(container);
+      beforeSelection.setEnd(range.startContainer, range.startOffset);
+      active = contents.toString();
+      context = sentenceContextAt(active, beforeSelection.toString().length);
+    }
     return {
       phrase: selected,
-      context: sentenceContext(active, selected),
+      context,
       title: document.title || 'Untitled page', url: location.href, language: inferLanguage(selected), gloss: '',
     };
   };

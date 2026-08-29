@@ -144,12 +144,33 @@ test('returns a CSP-clean, fully structured 404 response', async ({ page }) => {
   expect(errors.filter((error) => !error.includes('Failed to load resource: the server responded with a status of 404'))).toEqual([]);
 });
 
-test('has no serious or critical accessibility findings on every public page', async ({ page }) => {
-  for (const path of ['/', '/demo', '/privacy', '/terms', '/404.html']) {
-    await page.goto(path);
-    const report = await new AxeBuilder({ page }).analyze();
-    expect(report.violations.filter((finding) => ['serious', 'critical'].includes(finding.impact ?? ''))).toEqual([]);
+test('has no serious or critical accessibility findings in both themes at desktop and 390px', async ({ page }) => {
+  for (const colorScheme of ['light', 'dark'] as const) {
+    await page.emulateMedia({ colorScheme });
+    for (const viewport of [{ width: 1280, height: 800 }, { width: 390, height: 844 }]) {
+      await page.setViewportSize(viewport);
+      for (const path of ['/', '/demo', '/privacy', '/terms', '/404.html']) {
+        await page.goto(path);
+        const report = await new AxeBuilder({ page }).analyze();
+        expect(
+          report.violations.filter((finding) => ['serious', 'critical'].includes(finding.impact ?? '')),
+          `${colorScheme} ${viewport.width}px ${path}`,
+        ).toEqual([]);
+      }
+    }
   }
+});
+
+test('revalidates stable hero media and caches fingerprinted bundles immutably', async ({ page }) => {
+  const hero = await page.request.get('/assets/dithered-reading-margin.webp');
+  expect(hero.headers()['cache-control']).toContain('must-revalidate');
+  expect(hero.headers()['cache-control']).not.toContain('immutable');
+
+  await page.goto('/');
+  const scriptPath = await page.locator('script[type="module"]').getAttribute('src');
+  expect(scriptPath).toMatch(/^\/assets\/index-[\w-]+\.js$/);
+  const script = await page.request.get(scriptPath!);
+  expect(script.headers()['cache-control']).toContain('immutable');
 });
 
 test('works at 390px and with keyboard activation', async ({ page }) => {
