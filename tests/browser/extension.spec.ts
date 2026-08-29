@@ -1,6 +1,6 @@
 import { chromium, expect, test, type BrowserContext, type Page, type Worker } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
-import { mkdtemp, rm } from 'node:fs/promises';
+import { mkdtemp, readdir, readFile, rm } from 'node:fs/promises';
 import { join, resolve } from 'node:path';
 import { tmpdir } from 'node:os';
 import { decryptVault, importKey, type Capture, type EncryptedVault } from '../../src/core';
@@ -14,6 +14,20 @@ type ExtensionSession = {
   page: Page;
   close: () => Promise<void>;
 };
+
+async function filesBelow(directory: string): Promise<string[]> {
+  const entries = await readdir(directory, { withFileTypes: true });
+  return (await Promise.all(entries.map(async (entry) => {
+    const path = join(directory, entry.name);
+    return entry.isDirectory() ? filesBelow(path) : [path];
+  }))).flat();
+}
+
+async function compiledExtensionText() {
+  const files = await filesBelow('dist/extension');
+  const textFiles = files.filter((file) => /\.(?:html|js|css|json)$/u.test(file));
+  return (await Promise.all(textFiles.map((file) => readFile(file, 'utf8')))).join('\n');
+}
 
 async function openExtension(): Promise<ExtensionSession> {
   const profile = await mkdtemp(join(tmpdir(), 'keep-the-sentence-extension-'));
@@ -57,6 +71,7 @@ async function saveFixtureCapture(session: ExtensionSession) {
   await expect(dialog).toContainText('quietly held');
   await dialog.getByRole('button', { name: 'Save phrase' }).click();
   await expect(dialog).toContainText('Write a short meaning, then save it.');
+  await expect(dialog.getByLabel('Your meaning')).toHaveAttribute('placeholder', 'Write a short meaning');
   await dialog.getByLabel('Your meaning').fill('remained still and calm');
   await dialog.getByRole('button', { name: 'Save phrase' }).click();
   await expect(dialog).toContainText('Saved. You can review it in the extension.');
@@ -148,12 +163,20 @@ test('@claim:source-context-capture exports the selected phrase, nearby sentence
   } finally { await session.close(); }
 });
 
-test('@claim:supported-chromium-pages saves a selection from a regular Chromium web page', async () => {
+test('@claim:supported-chromium-pages states and uses the regular Chromium web-page boundary', async () => {
   const session = await openExtension();
   try {
+    const popup = await session.context.newPage();
+    await popup.goto(`chrome-extension://${session.extensionId}/popup.html`);
+    await expect(popup.getByText('Select a phrase on a regular web page. Choose “Keep this sentence”.')).toBeVisible();
+    await expect(popup.locator('main')).not.toContainText(/any page/i);
+    const compiled = await compiledExtensionText();
+    expect(compiled).not.toMatch(/\bany page\b/iu);
+    expect(compiled).not.toMatch(/\bcue\b/iu);
+    await popup.close();
     await saveFixtureCapture(session);
-    const popup = await openPopup(session);
-    await expect(popup.getByText('1 saved locally')).toBeVisible();
+    const savedPopup = await openPopup(session);
+    await expect(savedPopup.getByText('1 saved locally')).toBeVisible();
   } finally { await session.close(); }
 });
 

@@ -49,7 +49,7 @@ export default defineContentScript({
       </style>
       <section class="card" role="dialog" aria-modal="true" aria-labelledby="keep-title">
         <div class="eyebrow">Keep the Sentence</div><div id="keep-title" class="phrase"></div><p class="context"></p>
-        <label class="label" for="gloss">Your meaning</label><input class="input" id="gloss" maxlength="240" autocomplete="off" placeholder="Write a short cue">
+        <label class="label" for="gloss">Your meaning</label><input class="input" id="gloss" maxlength="240" autocomplete="off" placeholder="Write a short meaning">
         <div class="buttons"><button class="button" id="save">Save phrase</button><button class="button quiet" id="cancel">Cancel</button></div><div class="status" aria-live="polite"></div>
       </section>`;
     (root.querySelector('.phrase') as HTMLElement).textContent = data.phrase;

@@ -270,7 +270,7 @@ test('sets route-specific titles, descriptions, canonical URLs, and social metad
     ['/', 'Keep the Sentence — save phrases in context', 'https://context-vocabulary-capture.sociobot.in/', 'Save a phrase with its source sentence, then review it in your browser.'],
     ['/demo', 'Demo — Keep the Sentence', 'https://context-vocabulary-capture.sociobot.in/demo', 'Try three sample phrases with source sentences in Keep the Sentence.'],
     ['/?demo=1', 'Demo — Keep the Sentence', 'https://context-vocabulary-capture.sociobot.in/demo', 'Try three sample phrases with source sentences in Keep the Sentence.'],
-    ['/privacy', 'Privacy — Keep the Sentence', 'https://context-vocabulary-capture.sociobot.in/privacy', 'Learn which local phrase records Keep the Sentence stores and what it does not send.'],
+    ['/privacy', 'Privacy — Keep the Sentence', 'https://context-vocabulary-capture.sociobot.in/privacy', 'Learn what each saved phrase stores and what Keep the Sentence does not send.'],
     ['/terms', 'Terms — Keep the Sentence', 'https://context-vocabulary-capture.sociobot.in/terms', 'Read the terms for using Keep the Sentence as a personal reading tool.'],
   ] as const;
   for (const [path, title, canonical, description] of expected) {

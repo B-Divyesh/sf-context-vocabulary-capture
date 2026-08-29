@@ -1,9 +1,10 @@
 # Copy audit
 
 Every visible landing-page heading, sentence, fact, control, link, empty state,
-footer line, and meaningful alt text appears below. README prose and headings
-are also complete. `npm run test:copy` extracts both surfaces, checks coverage,
-recounts every row, enforces the 22-word cap, and fails when copy drifts.
+footer line, meaningful alt text, and extension control appears below. README
+prose and headings are also complete. `npm run test:copy` extracts the landing
+and README, checks the extension terminology source, recounts every row,
+enforces the 22-word cap, and fails when copy drifts.
 
 No audited text uses a banned marketing word. **Phrase** is the single name for
 selected and saved vocabulary.
@@ -27,8 +28,8 @@ selected and saved vocabulary.
 | 3 | Review today’s phrases. |
 | 10 | Try the phrase in context before you reveal your meaning. |
 | 7 | Your saved phrases stay private and local. |
-| 16 | Records store a phrase, nearby text, source title and link, language, your meaning, and review details. |
-| 5 | Export your records as CSV. |
+| 18 | Each saved phrase includes nearby text, its source title and link, its language, your meaning, and review dates. |
+| 5 | Export saved phrases as CSV. |
 | 10 | Download the ZIP, then load its extracted folder in Chromium. |
 | 5 | Download and extract the ZIP. |
 | 4 | Open chrome://extensions in Chromium. |
@@ -94,7 +95,7 @@ selected and saved vocabulary.
 | 4 | Choose “Keep this sentence.” |
 | 7 | Your reading notes stay on your device. |
 | 7 | It uses your browser’s local extension storage. |
-| 7 | Records are encrypted with AES-GCM before storage. |
+| 9 | Each saved phrase is encrypted with AES-GCM before storage. |
 | 21 | It stores only an ID, phrase, nearby text, source title and link, language, meaning, review count, and capture and review dates. |
 | 11 | The extension sends no analytics or product data to any server. |
 | 14 | The sample demo uses separate local storage and is discarded when you leave it. |
@@ -135,7 +136,7 @@ selected and saved vocabulary.
 | Words | Text |
 | ---: | --- |
 | 2 | Your meaning |
-| 4 | Write a short cue |
+| 4 | Write a short meaning |
 | 2 | Save phrase |
 | 1 | Cancel |
 | 7 | Write a short meaning, then save it. |
@@ -146,7 +147,7 @@ selected and saved vocabulary.
 | 3 | Show your meaning |
 | 4 | Mark phrase as remembered |
 | 4 | No phrases due today |
-| 10 | Select a phrase on any page. Choose “Keep this sentence”. |
+| 12 | Select a phrase on a regular web page. Choose “Keep this sentence”. |
 | 3 | Your saved phrases |
 | 2 | Export CSV |
 | 6 | Your saved phrases will appear here. |
@@ -160,7 +161,7 @@ selected and saved vocabulary.
 | ---: | --- |
 | 3 | Keep the Sentence |
 | 17 | Keep the Sentence is a local browser extension for language learners reading regular web pages in Chromium. |
-| 20 | Select a phrase, save nearby sentences and its source link, write your own meaning, and review it later in context. |
+| 21 | Select a phrase, save it with nearby sentences and the page link, add your meaning, and review it later in context. |
 | 4 | Try the sample demo |
 | 11 | Open /?demo=1 after starting the site, or visit the live demo. |
 | 10 | It keeps three sample phrases separate from your saved phrases. |
@@ -175,11 +176,11 @@ selected and saved vocabulary.
 | 8 | Choose Load unpacked and select the extracted folder. |
 | 16 | On a web page, select a phrase and choose Keep this sentence from the right-click menu. |
 | 12 | The extension encrypts your saved phrases and stores them only in Chromium. |
-| 7 | No account or network service is needed. |
+| 4 | No account is needed. |
 | 6 | Saved phrases can be reviewed offline. |
 | 13 | Use Export CSV from the popup to move your phrases to another tool. |
 | 4 | Develop, test, and build |
-| 8 | npm run build is the reproducible deployment command. |
+| 11 | Run npm run build to create dist/site and the extension ZIP. |
 | 12 | The static deploy root is dist/site, where index.html is at the root. |
 | 1 | Privacy |
 | 21 | It stores only an ID, phrase, nearby text, source title and link, language, meaning, review count, and capture and review dates. |

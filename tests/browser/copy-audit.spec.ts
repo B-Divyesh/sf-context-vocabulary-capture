@@ -58,3 +58,15 @@ test('copy audit matches every rendered landing label and every README prose lin
   for (const row of rows) expect(row.count, `wrong word count: ${row.text}`).toBe(wordCount(row.text));
   expect(Math.max(...rows.map((row) => row.count))).toBeLessThanOrEqual(22);
 });
+
+test('copy audit keeps the documented extension boundary and meaning vocabulary', () => {
+  const audited = new Set(auditRows().map((row) => row.text));
+  const extensionSource = [
+    readFileSync('entrypoints/popup/main.ts', 'utf8'),
+    readFileSync('entrypoints/content.ts', 'utf8'),
+  ].join('\n');
+  expect(audited).toContain('Select a phrase on a regular web page. Choose “Keep this sentence”.');
+  expect(audited).toContain('Write a short meaning');
+  expect(extensionSource).not.toMatch(/\bany page\b/iu);
+  expect(extensionSource).not.toMatch(/\bcue\b/iu);
+});
