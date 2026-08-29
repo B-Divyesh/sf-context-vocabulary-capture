@@ -1,0 +1,82 @@
+[
+  {
+    "path": "/",
+    "status": 200,
+    "title": "Keep the Sentence — save phrases in context",
+    "h1": [
+      "Save phrases with their source sentence."
+    ],
+    "main": 1,
+    "footer": "Save phrases with source sentences. Review them later.\n\nPrivacy · Terms · Built by Param Factory · v1.0.0",
+    "facts": [
+      "Saved phrases stay on your deviceWorks without an accountReview saved phrases offlineFree to download and use"
+    ],
+    "demoBanner": [],
+    "scrollWidth": 1440,
+    "clientWidth": 1440,
+    "errors": []
+  },
+  {
+    "path": "/",
+    "status": 200,
+    "title": "Keep the Sentence — save phrases in context",
+    "h1": [
+      "Save phrases with their source sentence."
+    ],
+    "main": 1,
+    "footer": "Save phrases with source sentences. Review them later.\n\nPrivacy · Terms · Built by Param Factory · v1.0.0",
+    "facts": [
+      "Saved phrases stay on your deviceWorks without an accountReview saved phrases offlineFree to download and use"
+    ],
+    "demoBanner": [],
+    "scrollWidth": 390,
+    "clientWidth": 390,
+    "errors": []
+  },
+  {
+    "path": "/?demo=1",
+    "status": 200,
+    "title": "Demo — Keep the Sentence",
+    "h1": [
+      "Review a saved phrase in context."
+    ],
+    "main": 1,
+    "footer": "Save phrases with source sentences. Review them later.\n\nPrivacy · Terms · Built by Param Factory · v1.0.0",
+    "facts": [],
+    "demoBanner": [
+      "Demo — sample data, nothing is savedReset demoStart for real"
+    ],
+    "scrollWidth": 390,
+    "clientWidth": 390,
+    "errors": []
+  },
+  {
+    "path": "/missing-polish-5",
+    "status": 404,
+    "title": "Page not found — Keep the Sentence",
+    "h1": [
+      "This page could not be found."
+    ],
+    "main": 1,
+    "footer": "Save phrases with source sentences. Review them later.\n\nPrivacy · Terms · Built by Param Factory · v1.0.0",
+    "facts": [],
+    "demoBanner": [],
+    "scrollWidth": 390,
+    "clientWidth": 390,
+    "errors": []
+  },
+  {
+    "demoStart": "quietly held",
+    "demoNext": "recoger el hilo",
+    "demoReset": "quietly held",
+    "exit": {
+      "url": "https://context-vocabulary-capture.sociobot.in/",
+      "demoKeys": [],
+      "realKeys": []
+    },
+    "route": {
+      "url": "https://context-vocabulary-capture.sociobot.in/#how",
+      "focused": "how"
+    }
+  }
+]
