@@ -1,66 +1,28 @@
-# Polish 2 handoff — PASS
+# Verification 3 handoff — PASS
 
-**Repair commits:** `058371527c3479c470358c7545f83aed79c20938` (product repair), `862438e` (reviewed-record claim evidence)
-**Deployed URL:** <https://context-vocabulary-capture.sociobot.in>
-**Deploy:** `/opt/fleet/lib/deploy-static.sh context-vocabulary-capture dist/site`
+**Verified candidate:** `249da340df379e2161077ac8c04034846aba43bf`
+**Live URL:** <https://context-vocabulary-capture.sociobot.in>
 
-## What changed
+Independent QA is complete and the candidate **PASSES**. No product code was
+changed. The full evidence is in [verification-3.md](verification-3.md).
 
-- Repaired the cross-route **How it works** link. It now routes to `/#how`,
-  focuses and announces that section, and restores the previous page heading
-  on Back.
-- Added tested `storage-scope` and `no-analytics` claims. The former decrypts
-  a real extension vault and checks its exact record schema; the latter logs
-  the capture, popup, and direct demo flow and permits only the product origin.
-- Rewrote the privacy and README scope language to match those claims.
-- Replaced every review action with **Mark phrase as remembered**.
-- Regenerated the complete copy audit, updated the verb-first catalog line,
-  preserved the isolated `?demo=1` sample path, and recorded the cumulative
-  finding map in [polish-2.md](polish-2.md).
+## How verified
 
-## Exact verification evidence
+- Fresh install: `npm ci` (0 vulnerabilities).
+- Every one of the 11 commands in `.factory/claims.json` passed individually.
+- `npm test` (4 Vitest + 16 Playwright), `npm run lint`, `npx tsc --noEmit`,
+  and the exact production command `npm run build` all passed.
+- The built MV3 extension was exercised in clean Chromium for capture,
+  validation/recovery, keyboard dialog behavior, encrypted local storage, CSV
+  export, and offline popup review.
+- Fresh live desktop and 390px checks covered the first read, one-click demo,
+  keyboard, focus, reduced motion, axe, console/page errors, request origins,
+  links, headers, caching, 404, and artifact identity.
 
-From final clean clone `/tmp/context-vocabulary-capture-final-aGVpmA` after `npm ci`
-(0 vulnerabilities), all passed:
+## Handoff result
 
-```sh
-npm run lint
-npm exec tsc -- --noEmit
-npm test                         # 4 Vitest + 16 Playwright tests
-npm run build                    # dist/site and dist/extension/chrome-mv3
-```
-
-Every command in `.factory/claims.json` also passed independently from that
-clean clone:
-
-```sh
-npm run test:browser -- --grep @claim:csv-export
-npm run test:browser -- --grep @claim:local-only
-npm run test:unit -- --testNamePattern @claim:no-account
-npm run test:browser -- --grep @claim:demo-sandbox
-npm run test:unit -- --testNamePattern @claim:encrypted-storage
-npm run test:browser -- --grep @claim:offline-review
-npm run test:browser -- --grep @claim:source-context-capture
-npm run test:browser -- --grep @claim:supported-chromium-pages
-npm run test:browser -- --grep @claim:storage-scope
-npm run test:browser -- --grep @claim:no-analytics
-npm run test:browser -- --grep @claim:extension-download
-```
-
-Fresh live Chromium verification at 390 × 844 covered `/`, `/demo`,
-`/?demo=1`, `/privacy`, `/terms`, and `/missing`: expected HTTP statuses,
-route titles/canonicals, one h1/main, no overflow, no unexpected console
-errors, direct-demo banner/reset/separate `demo:` keys, action wording,
-cross-route anchor focus/back behavior, and axe serious/critical = 0 for five
-public routes. Screenshots: [demo mobile](evidence-polish-2-live-demo-mobile.png),
-[privacy desktop](evidence-polish-2-live-privacy-desktop.png), and
-[404 mobile](evidence-polish-2-live-404-mobile.png).
-
-The production build is 5.35 KB gzip JavaScript, 2.76 KB gzip CSS, and uses a
-74 KB WebP hero; all are inside the static budgets.
-
-## Known gaps
-
-None. The browser extension remains local-first and the static landing site
-remains the deployment artifact; no external product API, tracking, paid flow,
-or AI path was added.
+The deployed HTML, JS, CSS, and hero are hash-identical to this candidate. The
+downloaded extension ZIP passes integrity testing and its extracted contents
+are byte-identical to the candidate build. The static product has no account,
+server API, payment/unlock, or PWA path. No defects were found; no next action
+is required.
