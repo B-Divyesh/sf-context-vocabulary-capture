@@ -1,41 +1,60 @@
-# Verification 5 handoff — PASS
+# Adversarial review 4 handoff — FAIL
 
-**Candidate verified:** `ac6cb3f281391b7c9f78c093421519a90cab6929`
+**Work order:** `context-vocabulary-capture-review-4`
+
+**Reviewed candidate:** `d45b2a9d71d46f93593bab8412dc709f3a757a2f`
 
 **Live URL:** <https://context-vocabulary-capture.sociobot.in>
 
+## What was done
+
+Performed the required cold mobile/desktop review, complete landing/README
+copy audit, live demo and storage-isolation exercise, all registered claim
+tests from a clean clone, history regression check, route/link/metadata review,
+light/dark accessibility scan, and missed-leverage assessment. No product code
+was changed. The full result is in `.factory/review-4.md`.
+
 ## Result
 
-**PASS — release approved.** This independent verification made no product-code
-changes. Fresh local and live evidence confirms the deployed static site and
-extension package match the candidate build and satisfy the researched
-browser-extension brief.
+**FAIL.** One blocking and four minor findings remain:
 
-## How verified
+- `F-4-1` — changed demo data survives leaving through the header, contradicting
+  the Privacy sentence that it is discarded when the visitor leaves. The
+  general discard promise is also absent from `claims.json`.
+- `F-4-2` — the How-it-works h2 is a slogan rather than a section name.
+- `F-4-3` — “What it does not do” does not name the privacy/export content.
+- `F-4-4` — the README heading “Try it” is unclear out of context.
+- `F-4-5` — the 404 h1 uses an unexplained notebook metaphor.
 
-- Installed cleanly with `npm ci`.
-- Ran all 11 exact claim commands in `.factory/claims.json`; all passed.
-- Ran `npm test` (8 unit/contract + 22 browser tests), `npm run test:copy`,
-  `npm run lint`, `npx tsc --noEmit`, and `npm run build`; all passed.
-- Exercised the built MV3 capture/recovery/save/review/export/offline flow in
-  Chromium through the extension’s real message path.
-- Cold-read the live first screen and one-click demo. It plainly identifies
-  the job, audience, and first action, and the demo remains isolated in the
-  `demo:` storage namespace.
-- Compared live/static SHA-256 bytes against the fresh build; extracted live
-  extension files exactly match the local package. The download is HTTP 200
-  and passes `unzip -t`.
-- Logged live demo requests: only same-origin document, JS, and CSS requests;
-  no analytics or product-data requests.
-- Checked live headers/caching/404/link crawl, desktop and 390px layouts,
-  keyboard and focus, reduced motion, and Axe. No serious/critical Axe issues.
-- Live Lighthouse `/demo`: Performance 100, Accessibility 100, Best Practices
-  100, SEO 100; LCP 0.9 s, CLS 0, TBT 10 ms.
+The cold first screen, one-click sample view, Reset, Start-for-real isolation,
+real-data preservation, claim suite, prior review repairs, routing, metadata,
+link crawl, visual identity, and accessibility checks otherwise passed.
 
-See `.factory/verification-5.md` for exact evidence and applicability notes.
+## How to verify
 
-## Known gaps and next steps
+From a clean clone:
 
-None. There are no product API endpoints, account flow, paid unlock, AI flow,
-or web-PWA service worker; rate-limit, Entra, billing, and PWA-update checks
-do not apply.
+```sh
+npm ci
+npm test
+npm run test:copy
+npm run lint
+npx tsc --noEmit
+npm run build
+PLAYWRIGHT_BASE_URL=https://context-vocabulary-capture.sociobot.in npx playwright test tests/browser/demo.spec.ts tests/browser/copy-audit.spec.ts
+```
+
+All commands above passed in this review. Each of the 11 exact commands in
+`.factory/claims.json` also passed independently.
+
+To reproduce the blocker, open `/demo` in a fresh context, mark the first
+phrase as remembered, use the header Privacy link, then use the header Demo
+link. The demo returns on the second phrase because the changed `demo:` vault
+was never cleared.
+
+## Next steps
+
+Clear ephemeral demo state on every exit path, add and test the missing
+discard-on-exit claim, apply the four proposed heading rewrites, and rerun the
+same clean and live matrices. `.factory/brief.json` is absent; restore it if
+future scope or missed-leverage reviews need the researched opportunity.
