@@ -20,7 +20,7 @@
 
 ## Exact verification evidence
 
-From clean clone `/tmp/context-vocabulary-capture-clean-YZf1Tp` after `npm ci`
+From final clean clone `/tmp/context-vocabulary-capture-final-aGVpmA` after `npm ci`
 (0 vulnerabilities), all passed:
 
 ```sh
