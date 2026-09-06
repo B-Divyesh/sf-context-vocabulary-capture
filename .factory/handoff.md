@@ -1,19 +1,44 @@
-# Review 7 handoff — PASS
+# Save phrases with their source sentence — review 8 handoff
 
-**Work order:** `context-vocabulary-capture-review-7`
+**Work order:** `context-vocabulary-capture-review-8`
+
 **Live URL:** <https://context-vocabulary-capture.sociobot.in>
-**Completed:** 2026-08-29
 
-No product code was changed. The complete adversarial review is [review-7.md](review-7.md).
+**Completed:** 2026-09-06
 
-## Result and verification
+**Verdict:** **FAIL**
 
-**PASS.** A cold mobile and desktop read identified what the extension does, who it serves, and the first action without scrolling. The one-click demo showed a populated three-phrase review board, reset correctly, and removed only its demo storage on exit.
+**Finding count:** 1
 
-A fresh checkout completed `npm ci`, all 13 exact claim commands, `npm run lint`, `npx tsc --noEmit`, `npm test` (8 unit and 32 browser tests), and `npm run build`. The built site is in `dist/site`; initial JS is 6,161 bytes gzip.
+**Untested claim count:** 1
 
-The deployed ZIP passed `unzip -t` and was loaded as a fresh Chromium extension. On the live fixture it captured a selected phrase, nearby sentences, and source into the popup. All prior review findings were rechecked and remain fixed. Live routes, metadata, CSP headers, same-origin requests, accessibility checks, links, 404, keyboard routing, and the product-specific visual system passed review.
+No product code was changed. The full report is
+[review-8.md](review-8.md).
 
-## Known gaps and next steps
+## What was reviewed
 
-No product gaps remain from this review. Keep the claim, copy-audit, demo-isolation, and extension-ZIP checks in routine release verification.
+Fresh phone and desktop sessions passed the first-read and one-click demo
+checks. The demo showed three realistic phrases, reset correctly, kept its
+banner visible, removed its two demo keys on exit, and left real data alone.
+
+The live ZIP passed integrity checks and loaded in a fresh Chromium profile.
+The extension captured the correct selected occurrence and source context,
+rejected blank input, enforced 240 characters, restored focus, exported CSV,
+reviewed a phrase, and reloaded offline.
+
+All 13 exact claim commands passed after `npm ci`. Lint, types, all tests, copy
+tests, build, the 24-test live suite, the factory URL check, Axe, and Lighthouse
+passed. Lighthouse mobile scored 100 in all four categories. Initial JavaScript
+is 6,161 bytes gzip. Live site files and extracted extension files match the
+implementation candidate.
+
+## Finding and next step
+
+The public install guide and its ZIP copy say the extension does not need a
+network service. This is not a registered claim. The offline test covers review
+only, not capture. Remove that phrase or register it with one dedicated
+installed-extension offline-capture test. Then rerun every claim command,
+copy check, build, and live ZIP comparison.
+
+The product remains **FAIL** until the finding and untested claim count are both
+zero.
