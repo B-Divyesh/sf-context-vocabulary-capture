@@ -1,0 +1,138 @@
+[
+  {
+    "file": "404.css",
+    "status": 200,
+    "bytes": 3338,
+    "match": true,
+    "localSha256": "c3ebe6ddc2bd94feb7b06bd7a6ae72398745265e44b2cf06e41983b4f27d8493",
+    "liveSha256": "c3ebe6ddc2bd94feb7b06bd7a6ae72398745265e44b2cf06e41983b4f27d8493"
+  },
+  {
+    "file": "404.html",
+    "status": 200,
+    "bytes": 2052,
+    "match": true,
+    "localSha256": "28e44712d710692c0f6f6c46db4a00ffe3045bc076601d6c9d45a558e3d879e2",
+    "liveSha256": "28e44712d710692c0f6f6c46db4a00ffe3045bc076601d6c9d45a558e3d879e2"
+  },
+  {
+    "file": "apple-touch-icon.png",
+    "status": 200,
+    "bytes": 49106,
+    "match": true,
+    "localSha256": "86c409c80126919650f346f9a045ba9bcb6fae163ddbe4d94dbbd9ec40f1709e",
+    "liveSha256": "86c409c80126919650f346f9a045ba9bcb6fae163ddbe4d94dbbd9ec40f1709e"
+  },
+  {
+    "file": "assets/dithered-reading-margin.webp",
+    "status": 200,
+    "bytes": 74024,
+    "match": true,
+    "localSha256": "577133a35f72431ea15e1da1b77dfcbc2594f7a0da679258b74258a7eabef029",
+    "liveSha256": "577133a35f72431ea15e1da1b77dfcbc2594f7a0da679258b74258a7eabef029"
+  },
+  {
+    "file": "assets/index-96Xc5cvM.js",
+    "status": 200,
+    "bytes": 16591,
+    "match": true,
+    "localSha256": "124376049837c8c3b08cc5285e897221582232eb6bcb2c2fbe20fd3efdca0db0",
+    "liveSha256": "124376049837c8c3b08cc5285e897221582232eb6bcb2c2fbe20fd3efdca0db0"
+  },
+  {
+    "file": "assets/index-DIQ-UEVh.css",
+    "status": 200,
+    "bytes": 9693,
+    "match": true,
+    "localSha256": "5012c52d3276ab5ad82796f6f6dd72f659eac51db9dfa6fe4d42e2f2ed181f03",
+    "liveSha256": "5012c52d3276ab5ad82796f6f6dd72f659eac51db9dfa6fe4d42e2f2ed181f03"
+  },
+  {
+    "file": "assets/social.png",
+    "status": 200,
+    "bytes": 1279061,
+    "match": true,
+    "localSha256": "8b1a555e6f89f3606fd39168dec120811cd28b83ebb8daf424db0d36164c74ff",
+    "liveSha256": "8b1a555e6f89f3606fd39168dec120811cd28b83ebb8daf424db0d36164c74ff"
+  },
+  {
+    "file": "demo-sources/conversation.html",
+    "status": 200,
+    "bytes": 371,
+    "match": true,
+    "localSha256": "911be763ef3cefd7f67e7b9315bdd5ed2587c0fd689a52d135637e90660fd135",
+    "liveSha256": "911be763ef3cefd7f67e7b9315bdd5ed2587c0fd689a52d135637e90660fd135"
+  },
+  {
+    "file": "demo-sources/harbour.html",
+    "status": 200,
+    "bytes": 365,
+    "match": true,
+    "localSha256": "ae75a33b2a139d3740389974649dc10d7d185ac96220814da37c7217b1346013",
+    "liveSha256": "ae75a33b2a139d3740389974649dc10d7d185ac96220814da37c7217b1346013"
+  },
+  {
+    "file": "demo-sources/wald.html",
+    "status": 200,
+    "bytes": 358,
+    "match": true,
+    "localSha256": "aa45090475f932623002fed4782c26218ee0e62e5a69f27bec5caefcc11fd4f2",
+    "liveSha256": "aa45090475f932623002fed4782c26218ee0e62e5a69f27bec5caefcc11fd4f2"
+  },
+  {
+    "file": "downloads/INSTALL.md",
+    "status": 200,
+    "bytes": 562,
+    "match": true,
+    "localSha256": "223d6b4e36ea5d4f0a48de77992d5c40d1deff7e7ae2755fdaac9445280b022d",
+    "liveSha256": "223d6b4e36ea5d4f0a48de77992d5c40d1deff7e7ae2755fdaac9445280b022d"
+  },
+  {
+    "file": "downloads/keep-the-sentence-extension.zip",
+    "status": 200,
+    "bytes": 10914,
+    "match": false,
+    "localSha256": "7a91c062d8096f55288aa0880a061607292f7724b61a7272a19782f0cd5aa464",
+    "liveSha256": "9ebf7bf765afd33a5a4c663d29dc550aaefe1ec9a955d3553a9d6bb3cab5782b"
+  },
+  {
+    "file": "extension-fixture.html",
+    "status": 200,
+    "bytes": 591,
+    "match": true,
+    "localSha256": "100231c06741caa943466923500471ec2ab956cf1e01a50e958355d2d3b5ae6a",
+    "liveSha256": "100231c06741caa943466923500471ec2ab956cf1e01a50e958355d2d3b5ae6a"
+  },
+  {
+    "file": "favicon.svg",
+    "status": 200,
+    "bytes": 239,
+    "match": true,
+    "localSha256": "3ae9886d9b6c53359aa5300a6c4994c0f56ec0038d1e84a05868c68d8f468879",
+    "liveSha256": "3ae9886d9b6c53359aa5300a6c4994c0f56ec0038d1e84a05868c68d8f468879"
+  },
+  {
+    "file": "index.html",
+    "status": 200,
+    "bytes": 1596,
+    "match": true,
+    "localSha256": "d0d5a624042872e159f5675c5bdab8574498f69e22de35e1c00897d69207b06e",
+    "liveSha256": "d0d5a624042872e159f5675c5bdab8574498f69e22de35e1c00897d69207b06e"
+  },
+  {
+    "file": "robots.txt",
+    "status": 200,
+    "bytes": 91,
+    "match": true,
+    "localSha256": "97026a620b0c3c56deb81a73860890825abc26d21af85a1092a5d39b5bab504c",
+    "liveSha256": "97026a620b0c3c56deb81a73860890825abc26d21af85a1092a5d39b5bab504c"
+  },
+  {
+    "file": "sitemap.xml",
+    "status": 200,
+    "bytes": 400,
+    "match": true,
+    "localSha256": "35740423bce0736e85e25ae6d75c2592f9301808679c76dba4826e2912361ed1",
+    "liveSha256": "35740423bce0736e85e25ae6d75c2592f9301808679c76dba4826e2912361ed1"
+  }
+]

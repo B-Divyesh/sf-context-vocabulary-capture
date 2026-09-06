@@ -1,0 +1,62 @@
+[
+  {
+    "scheme": "light",
+    "path": "/",
+    "status": 200,
+    "violations": []
+  },
+  {
+    "scheme": "light",
+    "path": "/demo",
+    "status": 200,
+    "violations": []
+  },
+  {
+    "scheme": "light",
+    "path": "/privacy",
+    "status": 200,
+    "violations": []
+  },
+  {
+    "scheme": "light",
+    "path": "/terms",
+    "status": 200,
+    "violations": []
+  },
+  {
+    "scheme": "light",
+    "path": "/missing",
+    "status": 404,
+    "violations": []
+  },
+  {
+    "scheme": "dark",
+    "path": "/",
+    "status": 200,
+    "violations": []
+  },
+  {
+    "scheme": "dark",
+    "path": "/demo",
+    "status": 200,
+    "violations": []
+  },
+  {
+    "scheme": "dark",
+    "path": "/privacy",
+    "status": 200,
+    "violations": []
+  },
+  {
+    "scheme": "dark",
+    "path": "/terms",
+    "status": 200,
+    "violations": []
+  },
+  {
+    "scheme": "dark",
+    "path": "/missing",
+    "status": 404,
+    "violations": []
+  }
+]

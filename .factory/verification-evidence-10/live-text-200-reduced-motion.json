@@ -1,0 +1,67 @@
+[
+  {
+    "path": "/",
+    "title": "Keep the Sentence — save phrases in context",
+    "width": 390,
+    "scrollWidth": 390,
+    "overflow": 0,
+    "h1": "Save phrases with their source sentence.",
+    "main": 1,
+    "undersized": [],
+    "scrollBehavior": "auto",
+    "primaryTransform": "none",
+    "httpStatus": 200
+  },
+  {
+    "path": "/demo",
+    "title": "Demo — Keep the Sentence",
+    "width": 390,
+    "scrollWidth": 390,
+    "overflow": 0,
+    "h1": "Review a saved phrase in context.",
+    "main": 1,
+    "undersized": [],
+    "scrollBehavior": "auto",
+    "primaryTransform": "none",
+    "httpStatus": 200
+  },
+  {
+    "path": "/privacy",
+    "title": "Privacy — Keep the Sentence",
+    "width": 390,
+    "scrollWidth": 390,
+    "overflow": 0,
+    "h1": "Your reading notes stay on your device.",
+    "main": 1,
+    "undersized": [],
+    "scrollBehavior": "auto",
+    "primaryTransform": "none",
+    "httpStatus": 200
+  },
+  {
+    "path": "/terms",
+    "title": "Terms — Keep the Sentence",
+    "width": 390,
+    "scrollWidth": 390,
+    "overflow": 0,
+    "h1": "Terms for Keep the Sentence.",
+    "main": 1,
+    "undersized": [],
+    "scrollBehavior": "auto",
+    "primaryTransform": "none",
+    "httpStatus": 200
+  },
+  {
+    "path": "/missing",
+    "title": "Page not found — Keep the Sentence",
+    "width": 390,
+    "scrollWidth": 390,
+    "overflow": 0,
+    "h1": "This page could not be found.",
+    "main": 1,
+    "undersized": [],
+    "scrollBehavior": "auto",
+    "primaryTransform": "none",
+    "httpStatus": 404
+  }
+]

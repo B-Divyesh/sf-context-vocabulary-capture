@@ -1,0 +1,18 @@
+{
+  "focusOnOpen": true,
+  "invalidStatus": "Write a short meaning, then save it.",
+  "shiftTabWrap": true,
+  "tabWrap": true,
+  "closedOnEscape": true,
+  "focusReturned": true,
+  "boundaryLength": 240,
+  "popupState": {
+    "title": "Keep the Sentence",
+    "h1": "quietly held",
+    "saved": "1 saved locally",
+    "mainCount": 1
+  },
+  "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 404 (Not Found)"
+  ]
+}

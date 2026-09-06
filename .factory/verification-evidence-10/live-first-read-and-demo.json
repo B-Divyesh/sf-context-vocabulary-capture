@@ -1,0 +1,190 @@
+{
+  "desktop": {
+    "status": 200,
+    "home": {
+      "lang": "en",
+      "title": "Keep the Sentence — save phrases in context",
+      "h1": [
+        "Save phrases with their source sentence."
+      ],
+      "mainCount": 1,
+      "audience": "For language learners reading web pages who want to remember a phrase and its context.",
+      "firstAction": "Try it with sample data",
+      "facts": [
+        "Saved phrases stay on your device",
+        "Works without an account",
+        "Review saved phrases offline",
+        "Free to download and use"
+      ],
+      "scrollY": 0,
+      "h1Box": {
+        "top": 163.390625,
+        "bottom": 389.09375,
+        "left": 158,
+        "right": 715.28125
+      },
+      "audienceBox": {
+        "top": 411.09375,
+        "bottom": 473.09375,
+        "left": 158,
+        "right": 715.28125
+      },
+      "actionBox": {
+        "top": 503.09375,
+        "bottom": 553.4375,
+        "left": 158,
+        "right": 376.328125
+      },
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "overflow": 0
+    },
+    "demo": {
+      "url": "https://context-vocabulary-capture.sociobot.in/demo",
+      "banner": "Demo — sample data, nothing is savedReset demoStart for real",
+      "bannerPosition": "sticky",
+      "h1": "Review a saved phrase in context.",
+      "total": [
+        "3 total"
+      ],
+      "phrases": [
+        "quietly held",
+        "quietly held",
+        "recoger el hilo",
+        "auf jeden Fall"
+      ],
+      "meanings": [
+        "Your meaning: remained still and calm",
+        "Your meaning: remained still and calm",
+        "Your meaning: to pick up the thread again",
+        "Your meaning: in any case; definitely"
+      ],
+      "sourceLinks": [
+        {
+          "text": "A morning at the harbour (opens source)",
+          "href": "https://context-vocabulary-capture.sociobot.in/demo-sources/harbour.html"
+        },
+        {
+          "text": "A morning at the harbour (opens source)",
+          "href": "https://context-vocabulary-capture.sociobot.in/demo-sources/harbour.html"
+        },
+        {
+          "text": "La conversación (opens source)",
+          "href": "https://context-vocabulary-capture.sociobot.in/demo-sources/conversation.html"
+        },
+        {
+          "text": "Der Waldweg (opens source)",
+          "href": "https://context-vocabulary-capture.sociobot.in/demo-sources/wald.html"
+        }
+      ],
+      "keys": [
+        "demo:keep-the-sentence:device-key",
+        "demo:keep-the-sentence:vault"
+      ]
+    },
+    "afterReview": "Can you recall what recoger el hilo means here?\n\nShow your meaning\nMark phrase as remembered\n\nThis records one review today.",
+    "afterReset": "Can you recall what quietly held means here?\n\nShow your meaning\nMark phrase as remembered\n\nThis records one review today.",
+    "resetKeys": [
+      "demo:keep-the-sentence:device-key",
+      "demo:keep-the-sentence:vault"
+    ],
+    "consoleErrors": [],
+    "pageErrors": []
+  },
+  "phone": {
+    "status": 200,
+    "home": {
+      "lang": "en",
+      "title": "Keep the Sentence — save phrases in context",
+      "h1": [
+        "Save phrases with their source sentence."
+      ],
+      "mainCount": 1,
+      "audience": "For language learners reading web pages who want to remember a phrase and its context.",
+      "firstAction": "Try it with sample data",
+      "facts": [
+        "Saved phrases stay on your device",
+        "Works without an account",
+        "Review saved phrases offline",
+        "Free to download and use"
+      ],
+      "scrollY": 0,
+      "h1Box": {
+        "top": 185.390625,
+        "bottom": 324.9375,
+        "left": 18,
+        "right": 372
+      },
+      "audienceBox": {
+        "top": 346.9375,
+        "bottom": 439.9375,
+        "left": 18,
+        "right": 372
+      },
+      "actionBox": {
+        "top": 469.9375,
+        "bottom": 518.734375,
+        "left": 18,
+        "right": 225.609375
+      },
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "overflow": 0
+    },
+    "demo": {
+      "url": "https://context-vocabulary-capture.sociobot.in/demo",
+      "banner": "Demo — sample data, nothing is savedReset demoStart for real",
+      "bannerPosition": "sticky",
+      "h1": "Review a saved phrase in context.",
+      "total": [
+        "3 total"
+      ],
+      "phrases": [
+        "quietly held",
+        "quietly held",
+        "recoger el hilo",
+        "auf jeden Fall"
+      ],
+      "meanings": [
+        "Your meaning: remained still and calm",
+        "Your meaning: remained still and calm",
+        "Your meaning: to pick up the thread again",
+        "Your meaning: in any case; definitely"
+      ],
+      "sourceLinks": [
+        {
+          "text": "A morning at the harbour (opens source)",
+          "href": "https://context-vocabulary-capture.sociobot.in/demo-sources/harbour.html"
+        },
+        {
+          "text": "A morning at the harbour (opens source)",
+          "href": "https://context-vocabulary-capture.sociobot.in/demo-sources/harbour.html"
+        },
+        {
+          "text": "La conversación (opens source)",
+          "href": "https://context-vocabulary-capture.sociobot.in/demo-sources/conversation.html"
+        },
+        {
+          "text": "Der Waldweg (opens source)",
+          "href": "https://context-vocabulary-capture.sociobot.in/demo-sources/wald.html"
+        }
+      ],
+      "keys": [
+        "demo:keep-the-sentence:device-key",
+        "demo:keep-the-sentence:vault"
+      ]
+    },
+    "afterReview": "Can you recall what recoger el hilo means here?\n\nShow your meaning\nMark phrase as remembered\n\nThis records one review today.",
+    "afterReset": "Can you recall what quietly held means here?\n\nShow your meaning\nMark phrase as remembered\n\nThis records one review today.",
+    "resetKeys": [
+      "demo:keep-the-sentence:device-key",
+      "demo:keep-the-sentence:vault"
+    ],
+    "consoleErrors": [],
+    "pageErrors": []
+  }
+}
