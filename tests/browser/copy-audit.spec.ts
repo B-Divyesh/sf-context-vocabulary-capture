@@ -13,24 +13,37 @@ function auditRows() {
   }));
 }
 
-function readmeUnits() {
-  const lines = readFileSync('README.md', 'utf8').split('\n');
+function markdownUnits(path: string) {
+  const lines = readFileSync(path, 'utf8').split('\n');
   const units: string[] = [];
+  let paragraph = '';
   let code = false;
+  const flush = () => {
+    if (!paragraph) return;
+    units.push(...sentences(paragraph));
+    paragraph = '';
+  };
   for (const raw of lines) {
-    if (raw.trim().startsWith('```')) { code = !code; continue; }
-    if (code || !raw.trim()) continue;
+    if (raw.trim().startsWith('```')) { flush(); code = !code; continue; }
+    if (code) continue;
+    if (!raw.trim()) { flush(); continue; }
     const plain = raw
       .replace(/^#{1,6}\s+/, '')
       .replace(/^\d+\.\s+/, '')
       .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
       .replace(/[*_`]/g, '');
-    units.push(...sentences(plain));
+    if (/^(?:#{1,6}\s+|\d+\.\s+)/u.test(raw)) {
+      flush();
+      units.push(...sentences(plain));
+    } else {
+      paragraph = `${paragraph} ${plain}`.trim();
+    }
   }
+  flush();
   return [...new Set(units)];
 }
 
-test('copy audit matches every rendered landing label and every README prose line', async ({ page }) => {
+test('copy audit matches every rendered landing label and every public document', async ({ page }) => {
   await page.goto('/');
   const landingUnits = await page.locator('a, button, h1, h2, h3, p, li, strong, span:not([aria-hidden]), img[alt]').evaluateAll((elements) => {
     const normalizeText = (value: string) => value.replace(/\s+/g, ' ').trim();
@@ -54,7 +67,8 @@ test('copy audit matches every rendered landing label and every README prose lin
 
   const rows = auditRows();
   const audited = new Set(rows.map((row) => row.text));
-  for (const unit of [...landingUnits, ...readmeUnits()]) expect(audited, `missing copy-audit row: ${unit}`).toContain(unit);
+  const publicDocs = [...markdownUnits('README.md'), ...markdownUnits('public/downloads/INSTALL.md')];
+  for (const unit of [...landingUnits, ...publicDocs]) expect(audited, `missing copy-audit row: ${unit}`).toContain(unit);
   for (const row of rows) expect(row.count, `wrong word count: ${row.text}`).toBe(wordCount(row.text));
   expect(Math.max(...rows.map((row) => row.count))).toBeLessThanOrEqual(22);
 });

@@ -44,7 +44,7 @@ async function openExtension(): Promise<ExtensionSession> {
   };
 }
 
-async function saveFixtureCapture(session: ExtensionSession) {
+async function saveFixtureCapture(session: ExtensionSession, beforeCapture?: () => Promise<void>) {
   const pageErrors: string[] = [];
   session.page.on('console', (message) => { if (message.type() === 'error') pageErrors.push(message.text()); });
   await session.page.goto(`${sourceOrigin}/extension-fixture.html`);
@@ -58,6 +58,7 @@ async function saveFixtureCapture(session: ExtensionSession) {
     selection.removeAllRanges(); selection.addRange(range);
   });
   await expect.poll(() => session.page.evaluate(() => window.getSelection()?.toString())).toBe('quietly held');
+  await beforeCapture?.();
   const messageResult = await session.worker.evaluate(async () => {
     const [tab] = await chrome.tabs.query({ url: 'http://127.0.0.1:4173/extension-fixture.html' });
     if (!tab?.id) throw new Error('The reading fixture tab was not found.');
@@ -132,6 +133,32 @@ test('@claim:offline-review captures a phrase and reopens its review offline', a
     await session.context.setOffline(true);
     await popup.reload();
     await expect(popup.getByRole('heading', { name: 'quietly held' })).toBeVisible();
+  } finally { await session.close(); }
+});
+
+test('@claim:offline-capture captures, reviews, and exports an open page without a network service', async () => {
+  const session = await openExtension();
+  const requestsAfterGoingOffline: string[] = [];
+  try {
+    await saveFixtureCapture(session, async () => {
+      session.context.on('request', (request) => {
+        if (/^https?:/u.test(request.url())) requestsAfterGoingOffline.push(request.url());
+      });
+      await session.context.setOffline(true);
+    });
+
+    const popup = await openPopup(session);
+    const download = popup.waitForEvent('download');
+    await popup.getByRole('button', { name: 'Export CSV' }).click();
+    const stream = await (await download).createReadStream();
+    let content = ''; for await (const chunk of stream!) content += chunk;
+    expect(content).toContain('quietly held');
+    expect(content).toContain('Nora quietly held the door.');
+    expect(content).toContain(`${sourceOrigin}/extension-fixture.html`);
+
+    await popup.getByRole('button', { name: 'Mark phrase as remembered' }).click();
+    await expect(popup.getByRole('heading', { name: 'No phrases due today' })).toBeVisible();
+    expect(requestsAfterGoingOffline).toEqual([]);
   } finally { await session.close(); }
 });
 

@@ -10,4 +10,5 @@ The extension now appears in Chromium. On a regular web page, select a phrase
 and choose **Keep this sentence** from the right-click menu.
 
 Keep the Sentence stores your saved phrases in this browser. It does not need
-an account or a network service.
+an account. On a page that is already open, capture, review, and CSV export
+work without a network service.

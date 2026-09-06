@@ -2,9 +2,10 @@
 
 Every visible landing-page heading, sentence, fact, control, link, empty state,
 footer line, meaningful alt text, and extension control appears below. README
-prose and headings are also complete. `npm run test:copy` extracts the landing
-and README, checks the extension terminology source, recounts every row,
-enforces the 22-word cap, and fails when copy drifts.
+and install-guide prose and headings are also complete. `npm run test:copy`
+extracts the landing and public documents, checks the extension terminology
+source, recounts every row, enforces the 22-word cap, and fails when copy
+drifts.
 
 No audited text uses a banned marketing word. **Phrase** is the single name for
 selected and saved vocabulary.
@@ -197,6 +198,22 @@ selected and saved vocabulary.
 | 1 | License |
 | 1 | MIT. |
 | 2 | See LICENSE. |
+
+## Install guide headings and prose
+
+| Words | Text |
+| ---: | --- |
+| 6 | Install Keep the Sentence in Chromium |
+| 4 | Download and extract keep-the-sentence-extension.zip. |
+| 4 | Open chrome://extensions in Chromium. |
+| 4 | Turn on Developer mode. |
+| 3 | Choose Load unpacked. |
+| 4 | Select the extracted folder. |
+| 6 | The extension now appears in Chromium. |
+| 17 | On a regular web page, select a phrase and choose Keep this sentence from the right-click menu. |
+| 10 | Keep the Sentence stores your saved phrases in this browser. |
+| 6 | It does not need an account. |
+| 17 | On a page that is already open, capture, review, and CSV export work without a network service. |
 
 ## Terminology
 
